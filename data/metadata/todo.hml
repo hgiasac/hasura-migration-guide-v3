@@ -1,0 +1,181 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: todo
+  fields:
+    - name: completed
+      type: Boolean!
+    - name: id
+      type: int4!
+    - name: task
+      type: String!
+    - name: user_id
+      type: uuid!
+    - name: bit
+      type: bit
+    - name: bpchar
+      type: bpchar
+    - name: date
+      type: date
+    - name: float4
+      type: float8
+    - name: float8
+      type: float8
+    - name: numeric
+      type: numeric
+    - name: text
+      type: String
+  graphql:
+    typeName: todo
+    inputTypeName: todo_input
+  dataConnectorTypeMapping:
+    - dataConnectorName: data
+      dataConnectorObjectType: todo
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: todo
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - completed
+          - id
+          - task
+          - user_id
+          - bit
+          - bpchar
+          - date
+          - float4
+          - float8
+          - numeric
+          - text
+
+---
+kind: ObjectBooleanExpressionType
+version: v1
+definition:
+  name: todo_bool_exp
+  objectType: todo
+  dataConnectorName: data
+  dataConnectorObjectType: todo
+  comparableFields:
+    - fieldName: completed
+      operators:
+        enableAll: true
+    - fieldName: id
+      operators:
+        enableAll: true
+    - fieldName: task
+      operators:
+        enableAll: true
+    - fieldName: user_id
+      operators:
+        enableAll: true
+    - fieldName: bit
+      operators:
+        enableAll: true
+    - fieldName: bpchar
+      operators:
+        enableAll: true
+    - fieldName: date
+      operators:
+        enableAll: true
+    - fieldName: float4
+      operators:
+        enableAll: true
+    - fieldName: float8
+      operators:
+        enableAll: true
+    - fieldName: numeric
+      operators:
+        enableAll: true
+    - fieldName: text
+      operators:
+        enableAll: true
+  graphql:
+    typeName: todo_bool_exp
+
+---
+kind: Model
+version: v1
+definition:
+  name: todo
+  objectType: todo
+  source:
+    dataConnectorName: data
+    collection: todo
+  filterExpressionType: todo_bool_exp
+  orderableFields:
+    - fieldName: completed
+      orderByDirections:
+        enableAll: true
+    - fieldName: id
+      orderByDirections:
+        enableAll: true
+    - fieldName: task
+      orderByDirections:
+        enableAll: true
+    - fieldName: user_id
+      orderByDirections:
+        enableAll: true
+    - fieldName: bit
+      orderByDirections:
+        enableAll: true
+    - fieldName: bpchar
+      orderByDirections:
+        enableAll: true
+    - fieldName: date
+      orderByDirections:
+        enableAll: true
+    - fieldName: float4
+      orderByDirections:
+        enableAll: true
+    - fieldName: float8
+      orderByDirections:
+        enableAll: true
+    - fieldName: numeric
+      orderByDirections:
+        enableAll: true
+    - fieldName: text
+      orderByDirections:
+        enableAll: true
+  graphql:
+    selectMany:
+      queryRootField: todo
+    selectUniques:
+      - queryRootField: todo_by_id
+        uniqueIdentifier:
+          - id
+    orderByExpressionType: todo_order_by
+
+---
+kind: ModelPermissions
+version: v1
+definition:
+  modelName: todo
+  permissions:
+    - role: admin
+      select:
+        filter: null
+
+---
+kind: Relationship
+version: v1
+definition:
+  name: user
+  sourceType: todo
+  target:
+    model:
+      name: users
+      relationshipType: Object
+  mapping:
+    - source:
+        fieldPath:
+          - fieldName: user_id
+      target:
+        modelField:
+          - fieldName: id

@@ -1,0 +1,155 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: update_column_Genre_GenreId
+  description: Update the 'GenreId' column in the 'Genre' collection
+  fields:
+    - name: _set
+      type: int4!
+      description: Set the column to this value
+  graphql:
+    typeName: chinook_update_column_Genre_GenreId
+    inputTypeName: chinook_update_column_Genre_GenreId_input
+  dataConnectorTypeMapping:
+    - dataConnectorName: chinook
+      dataConnectorObjectType: update_column_Genre_GenreId
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: update_column_Genre_GenreId
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - _set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: update_column_Genre_Name
+  description: Update the 'Name' column in the 'Genre' collection
+  fields:
+    - name: _set
+      type: varchar
+      description: Set the column to this value
+  graphql:
+    typeName: chinook_update_column_Genre_Name
+    inputTypeName: chinook_update_column_Genre_Name_input
+  dataConnectorTypeMapping:
+    - dataConnectorName: chinook
+      dataConnectorObjectType: update_column_Genre_Name
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: update_column_Genre_Name
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - _set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: v2_update_Genre_by_GenreId_update_columns
+  description: Update the columns of the 'Genre' collection
+  fields:
+    - name: GenreId
+      type: update_column_Genre_GenreId
+      description: Update the 'GenreId' column in the 'Genre' collection.
+    - name: Name
+      type: update_column_Genre_Name
+      description: Update the 'Name' column in the 'Genre' collection.
+  graphql:
+    typeName: chinook_v2_update_Genre_by_GenreId_update_columns
+    inputTypeName: chinook_v2_update_Genre_by_GenreId_update_columns_input
+  dataConnectorTypeMapping:
+    - dataConnectorName: chinook
+      dataConnectorObjectType: v2_update_Genre_by_GenreId_update_columns
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: v2_update_Genre_by_GenreId_update_columns
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - GenreId
+          - Name
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: v2_update_Genre_by_GenreId_response
+  description: Responses from the 'v2_update_Genre_by_GenreId' procedure
+  fields:
+    - name: affected_rows
+      type: int4!
+      description: The number of rows affected by the mutation
+    - name: returning
+      type: "[Genre!]!"
+      description: Data from rows affected by the mutation
+  graphql:
+    typeName: chinook_v2_update_Genre_by_GenreId_response
+    inputTypeName: chinook_v2_update_Genre_by_GenreId_response_input
+  dataConnectorTypeMapping:
+    - dataConnectorName: chinook
+      dataConnectorObjectType: v2_update_Genre_by_GenreId_response
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: v2_update_Genre_by_GenreId_response
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - affected_rows
+          - returning
+
+---
+kind: Command
+version: v1
+definition:
+  name: v2_update_Genre_by_GenreId
+  outputType: v2_update_Genre_by_GenreId_response!
+  arguments:
+    - name: key_GenreId
+      type: int4!
+    - name: post_check
+      type: Genre_bool_exp!
+      description: Update permission post-condition predicate over the 'Genre' collection
+    - name: pre_check
+      type: Genre_bool_exp!
+      description: Update permission pre-condition predicate over the 'Genre' collection
+    - name: update_columns
+      type: v2_update_Genre_by_GenreId_update_columns!
+  source:
+    dataConnectorName: chinook
+    dataConnectorCommand:
+      procedure: v2_update_Genre_by_GenreId
+  graphql:
+    rootFieldName: v2_update_Genre_by_GenreId
+    rootFieldKind: Mutation
+  description: Update any row on the 'Genre' collection using the 'GenreId' key
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: v2_update_Genre_by_GenreId
+  permissions:
+    - role: admin
+      allowExecution: true
+

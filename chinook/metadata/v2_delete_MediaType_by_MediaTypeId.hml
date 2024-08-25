@@ -1,0 +1,62 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: v2_delete_MediaType_by_MediaTypeId_response
+  description: Responses from the 'v2_delete_MediaType_by_MediaTypeId' procedure
+  fields:
+    - name: affected_rows
+      type: int4!
+      description: The number of rows affected by the mutation
+    - name: returning
+      type: "[MediaType!]!"
+      description: Data from rows affected by the mutation
+  graphql:
+    typeName: chinook_v2_delete_MediaType_by_MediaTypeId_response
+    inputTypeName: chinook_v2_delete_MediaType_by_MediaTypeId_response_input
+  dataConnectorTypeMapping:
+    - dataConnectorName: chinook
+      dataConnectorObjectType: v2_delete_MediaType_by_MediaTypeId_response
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: v2_delete_MediaType_by_MediaTypeId_response
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - affected_rows
+          - returning
+
+---
+kind: Command
+version: v1
+definition:
+  name: v2_delete_MediaType_by_MediaTypeId
+  outputType: v2_delete_MediaType_by_MediaTypeId_response!
+  arguments:
+    - name: key_MediaTypeId
+      type: int4!
+    - name: pre_check
+      type: MediaType_bool_exp!
+      description: Delete permission predicate over the 'MediaType' collection
+  source:
+    dataConnectorName: chinook
+    dataConnectorCommand:
+      procedure: v2_delete_MediaType_by_MediaTypeId
+  graphql:
+    rootFieldName: v2_delete_MediaType_by_MediaTypeId
+    rootFieldKind: Mutation
+  description: Delete any row on the 'MediaType' collection using the 'MediaTypeId' key
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: v2_delete_MediaType_by_MediaTypeId
+  permissions:
+    - role: admin
+      allowExecution: true
+

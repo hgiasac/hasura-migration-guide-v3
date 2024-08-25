@@ -1,0 +1,186 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: update_column_article_id
+  description: Update the 'id' column in the 'article' collection
+  fields:
+    - name: _set
+      type: int4!
+      description: Set the column to this value
+  graphql:
+    typeName: update_column_article_id
+    inputTypeName: update_column_article_id_input
+  dataConnectorTypeMapping:
+    - dataConnectorName: data
+      dataConnectorObjectType: update_column_article_id
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: update_column_article_id
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - _set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: update_column_article_title
+  description: Update the 'title' column in the 'article' collection
+  fields:
+    - name: _set
+      type: String!
+      description: Set the column to this value
+  graphql:
+    typeName: update_column_article_title
+    inputTypeName: update_column_article_title_input
+  dataConnectorTypeMapping:
+    - dataConnectorName: data
+      dataConnectorObjectType: update_column_article_title
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: update_column_article_title
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - _set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: update_column_article_user_id
+  description: Update the 'user_id' column in the 'article' collection
+  fields:
+    - name: _set
+      type: uuid!
+      description: Set the column to this value
+  graphql:
+    typeName: update_column_article_user_id
+    inputTypeName: update_column_article_user_id_input
+  dataConnectorTypeMapping:
+    - dataConnectorName: data
+      dataConnectorObjectType: update_column_article_user_id
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: update_column_article_user_id
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - _set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: v2_update_article_by_id_update_columns
+  description: Update the columns of the 'article' collection
+  fields:
+    - name: id
+      type: update_column_article_id
+      description: Update the 'id' column in the 'article' collection.
+    - name: title
+      type: update_column_article_title
+      description: Update the 'title' column in the 'article' collection.
+    - name: user_id
+      type: update_column_article_user_id
+      description: Update the 'user_id' column in the 'article' collection.
+  graphql:
+    typeName: v2_update_article_by_id_update_columns
+    inputTypeName: v2_update_article_by_id_update_columns_input
+  dataConnectorTypeMapping:
+    - dataConnectorName: data
+      dataConnectorObjectType: v2_update_article_by_id_update_columns
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: v2_update_article_by_id_update_columns
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - id
+          - title
+          - user_id
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: v2_update_article_by_id_response
+  description: Responses from the 'v2_update_article_by_id' procedure
+  fields:
+    - name: affected_rows
+      type: int4!
+      description: The number of rows affected by the mutation
+    - name: returning
+      type: "[article!]!"
+      description: Data from rows affected by the mutation
+  graphql:
+    typeName: v2_update_article_by_id_response
+    inputTypeName: v2_update_article_by_id_response_input
+  dataConnectorTypeMapping:
+    - dataConnectorName: data
+      dataConnectorObjectType: v2_update_article_by_id_response
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: v2_update_article_by_id_response
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - affected_rows
+          - returning
+
+---
+kind: Command
+version: v1
+definition:
+  name: v2_update_article_by_id
+  outputType: v2_update_article_by_id_response!
+  arguments:
+    - name: key_id
+      type: int4!
+    - name: post_check
+      type: article_bool_exp!
+      description: Update permission post-condition predicate over the 'article' collection
+    - name: pre_check
+      type: article_bool_exp!
+      description: Update permission pre-condition predicate over the 'article' collection
+    - name: update_columns
+      type: v2_update_article_by_id_update_columns!
+  source:
+    dataConnectorName: data
+    dataConnectorCommand:
+      procedure: v2_update_article_by_id
+  graphql:
+    rootFieldName: v2_update_article_by_id
+    rootFieldKind: Mutation
+  description: Update any row on the 'article' collection using the 'id' key
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: v2_update_article_by_id
+  permissions:
+    - role: admin
+      allowExecution: true

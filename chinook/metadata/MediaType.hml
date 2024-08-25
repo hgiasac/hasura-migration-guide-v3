@@ -1,0 +1,101 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: MediaType
+  fields:
+    - name: MediaTypeId
+      type: int4!
+    - name: Name
+      type: varchar
+  graphql:
+    typeName: chinook_MediaType
+    inputTypeName: chinook_MediaType_input
+  dataConnectorTypeMapping:
+    - dataConnectorName: chinook
+      dataConnectorObjectType: MediaType
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: MediaType
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - MediaTypeId
+          - Name
+
+---
+kind: ObjectBooleanExpressionType
+version: v1
+definition:
+  name: MediaType_bool_exp
+  objectType: MediaType
+  dataConnectorName: chinook
+  dataConnectorObjectType: MediaType
+  comparableFields:
+    - fieldName: MediaTypeId
+      operators:
+        enableAll: true
+    - fieldName: Name
+      operators:
+        enableAll: true
+  graphql:
+    typeName: chinook_MediaType_bool_exp
+
+---
+kind: Model
+version: v1
+definition:
+  name: MediaType
+  objectType: MediaType
+  source:
+    dataConnectorName: chinook
+    collection: MediaType
+  filterExpressionType: MediaType_bool_exp
+  orderableFields:
+    - fieldName: MediaTypeId
+      orderByDirections:
+        enableAll: true
+    - fieldName: Name
+      orderByDirections:
+        enableAll: true
+  graphql:
+    selectMany:
+      queryRootField: MediaType
+    selectUniques:
+      - queryRootField: MediaType_by_MediaTypeId
+        uniqueIdentifier:
+          - MediaTypeId
+    orderByExpressionType: chinook_MediaType_order_by
+
+---
+kind: ModelPermissions
+version: v1
+definition:
+  modelName: MediaType
+  permissions:
+    - role: admin
+      select:
+        filter: null
+
+---
+kind: Relationship
+version: v1
+definition:
+  name: Tracks
+  sourceType: MediaType
+  target:
+    model:
+      name: Track
+      relationshipType: Array
+  mapping:
+    - source:
+        fieldPath:
+          - fieldName: MediaTypeId
+      target:
+        modelField:
+          - fieldName: MediaTypeId
+

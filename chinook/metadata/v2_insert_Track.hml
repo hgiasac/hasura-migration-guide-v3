@@ -1,0 +1,112 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: v2_insert_Track_object
+  fields:
+    - name: AlbumId
+      type: int4
+    - name: Bytes
+      type: int4
+    - name: Composer
+      type: varchar
+    - name: GenreId
+      type: int4
+    - name: MediaTypeId
+      type: int4!
+    - name: Milliseconds
+      type: int4!
+    - name: Name
+      type: varchar!
+    - name: TrackId
+      type: int4
+    - name: UnitPrice
+      type: numeric!
+  graphql:
+    typeName: chinook_v2_insert_Track_object
+    inputTypeName: chinook_v2_insert_Track_object_input
+  dataConnectorTypeMapping:
+    - dataConnectorName: chinook
+      dataConnectorObjectType: v2_insert_Track_object
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: v2_insert_Track_object
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - AlbumId
+          - Bytes
+          - Composer
+          - GenreId
+          - MediaTypeId
+          - Milliseconds
+          - Name
+          - TrackId
+          - UnitPrice
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: v2_insert_Track_response
+  description: Responses from the 'v2_insert_Track' procedure
+  fields:
+    - name: affected_rows
+      type: int4!
+      description: The number of rows affected by the mutation
+    - name: returning
+      type: "[Track!]!"
+      description: Data from rows affected by the mutation
+  graphql:
+    typeName: chinook_v2_insert_Track_response
+    inputTypeName: chinook_v2_insert_Track_response_input
+  dataConnectorTypeMapping:
+    - dataConnectorName: chinook
+      dataConnectorObjectType: v2_insert_Track_response
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: v2_insert_Track_response
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - affected_rows
+          - returning
+
+---
+kind: Command
+version: v1
+definition:
+  name: v2_insert_Track
+  outputType: v2_insert_Track_response!
+  arguments:
+    - name: objects
+      type: "[v2_insert_Track_object!]!"
+    - name: post_check
+      type: Track_bool_exp!
+      description: Insert permission predicate over the 'Track' collection
+  source:
+    dataConnectorName: chinook
+    dataConnectorCommand:
+      procedure: v2_insert_Track
+  graphql:
+    rootFieldName: v2_insert_Track
+    rootFieldKind: Mutation
+  description: Insert into the Track table
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: v2_insert_Track
+  permissions:
+    - role: admin
+      allowExecution: true
+

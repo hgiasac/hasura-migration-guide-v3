@@ -1,0 +1,218 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: Customer
+  fields:
+    - name: Address
+      type: varchar
+    - name: City
+      type: varchar
+    - name: Company
+      type: varchar
+    - name: Country
+      type: varchar
+    - name: CustomerId
+      type: int4!
+    - name: Email
+      type: varchar!
+    - name: Fax
+      type: varchar
+    - name: FirstName
+      type: varchar!
+    - name: LastName
+      type: varchar!
+    - name: Phone
+      type: varchar
+    - name: PostalCode
+      type: varchar
+    - name: State
+      type: varchar
+    - name: SupportRepId
+      type: int4
+  graphql:
+    typeName: chinook_Customer
+    inputTypeName: chinook_Customer_input
+  dataConnectorTypeMapping:
+    - dataConnectorName: chinook
+      dataConnectorObjectType: Customer
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: Customer
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - Address
+          - City
+          - Company
+          - Country
+          - CustomerId
+          - Email
+          - Fax
+          - FirstName
+          - LastName
+          - Phone
+          - PostalCode
+          - State
+          - SupportRepId
+
+---
+kind: ObjectBooleanExpressionType
+version: v1
+definition:
+  name: Customer_bool_exp
+  objectType: Customer
+  dataConnectorName: chinook
+  dataConnectorObjectType: Customer
+  comparableFields:
+    - fieldName: Address
+      operators:
+        enableAll: true
+    - fieldName: City
+      operators:
+        enableAll: true
+    - fieldName: Company
+      operators:
+        enableAll: true
+    - fieldName: Country
+      operators:
+        enableAll: true
+    - fieldName: CustomerId
+      operators:
+        enableAll: true
+    - fieldName: Email
+      operators:
+        enableAll: true
+    - fieldName: Fax
+      operators:
+        enableAll: true
+    - fieldName: FirstName
+      operators:
+        enableAll: true
+    - fieldName: LastName
+      operators:
+        enableAll: true
+    - fieldName: Phone
+      operators:
+        enableAll: true
+    - fieldName: PostalCode
+      operators:
+        enableAll: true
+    - fieldName: State
+      operators:
+        enableAll: true
+    - fieldName: SupportRepId
+      operators:
+        enableAll: true
+  graphql:
+    typeName: chinook_Customer_bool_exp
+
+---
+kind: Model
+version: v1
+definition:
+  name: Customer
+  objectType: Customer
+  source:
+    dataConnectorName: chinook
+    collection: Customer
+  filterExpressionType: Customer_bool_exp
+  orderableFields:
+    - fieldName: Address
+      orderByDirections:
+        enableAll: true
+    - fieldName: City
+      orderByDirections:
+        enableAll: true
+    - fieldName: Company
+      orderByDirections:
+        enableAll: true
+    - fieldName: Country
+      orderByDirections:
+        enableAll: true
+    - fieldName: CustomerId
+      orderByDirections:
+        enableAll: true
+    - fieldName: Email
+      orderByDirections:
+        enableAll: true
+    - fieldName: Fax
+      orderByDirections:
+        enableAll: true
+    - fieldName: FirstName
+      orderByDirections:
+        enableAll: true
+    - fieldName: LastName
+      orderByDirections:
+        enableAll: true
+    - fieldName: Phone
+      orderByDirections:
+        enableAll: true
+    - fieldName: PostalCode
+      orderByDirections:
+        enableAll: true
+    - fieldName: State
+      orderByDirections:
+        enableAll: true
+    - fieldName: SupportRepId
+      orderByDirections:
+        enableAll: true
+  graphql:
+    selectMany:
+      queryRootField: Customer
+    selectUniques:
+      - queryRootField: Customer_by_CustomerId
+        uniqueIdentifier:
+          - CustomerId
+    orderByExpressionType: chinook_Customer_order_by
+
+---
+kind: ModelPermissions
+version: v1
+definition:
+  modelName: Customer
+  permissions:
+    - role: admin
+      select:
+        filter: null
+
+---
+kind: Relationship
+version: v1
+definition:
+  name: Employee
+  sourceType: Customer
+  target:
+    model:
+      name: Employee
+      relationshipType: Object
+  mapping:
+    - source:
+        fieldPath:
+          - fieldName: SupportRepId
+      target:
+        modelField:
+          - fieldName: EmployeeId
+
+---
+kind: Relationship
+version: v1
+definition:
+  name: Invoices
+  sourceType: Customer
+  target:
+    model:
+      name: Invoice
+      relationshipType: Array
+  mapping:
+    - source:
+        fieldPath:
+          - fieldName: CustomerId
+      target:
+        modelField:
+          - fieldName: CustomerId
+

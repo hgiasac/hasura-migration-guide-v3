@@ -1,0 +1,379 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: update_column_Invoice_BillingAddress
+  description: Update the 'BillingAddress' column in the 'Invoice' collection
+  fields:
+    - name: _set
+      type: varchar
+      description: Set the column to this value
+  graphql:
+    typeName: chinook_update_column_Invoice_BillingAddress
+    inputTypeName: chinook_update_column_Invoice_BillingAddress_input
+  dataConnectorTypeMapping:
+    - dataConnectorName: chinook
+      dataConnectorObjectType: update_column_Invoice_BillingAddress
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: update_column_Invoice_BillingAddress
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - _set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: update_column_Invoice_BillingCity
+  description: Update the 'BillingCity' column in the 'Invoice' collection
+  fields:
+    - name: _set
+      type: varchar
+      description: Set the column to this value
+  graphql:
+    typeName: chinook_update_column_Invoice_BillingCity
+    inputTypeName: chinook_update_column_Invoice_BillingCity_input
+  dataConnectorTypeMapping:
+    - dataConnectorName: chinook
+      dataConnectorObjectType: update_column_Invoice_BillingCity
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: update_column_Invoice_BillingCity
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - _set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: update_column_Invoice_BillingCountry
+  description: Update the 'BillingCountry' column in the 'Invoice' collection
+  fields:
+    - name: _set
+      type: varchar
+      description: Set the column to this value
+  graphql:
+    typeName: chinook_update_column_Invoice_BillingCountry
+    inputTypeName: chinook_update_column_Invoice_BillingCountry_input
+  dataConnectorTypeMapping:
+    - dataConnectorName: chinook
+      dataConnectorObjectType: update_column_Invoice_BillingCountry
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: update_column_Invoice_BillingCountry
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - _set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: update_column_Invoice_BillingPostalCode
+  description: Update the 'BillingPostalCode' column in the 'Invoice' collection
+  fields:
+    - name: _set
+      type: varchar
+      description: Set the column to this value
+  graphql:
+    typeName: chinook_update_column_Invoice_BillingPostalCode
+    inputTypeName: chinook_update_column_Invoice_BillingPostalCode_input
+  dataConnectorTypeMapping:
+    - dataConnectorName: chinook
+      dataConnectorObjectType: update_column_Invoice_BillingPostalCode
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: update_column_Invoice_BillingPostalCode
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - _set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: update_column_Invoice_BillingState
+  description: Update the 'BillingState' column in the 'Invoice' collection
+  fields:
+    - name: _set
+      type: varchar
+      description: Set the column to this value
+  graphql:
+    typeName: chinook_update_column_Invoice_BillingState
+    inputTypeName: chinook_update_column_Invoice_BillingState_input
+  dataConnectorTypeMapping:
+    - dataConnectorName: chinook
+      dataConnectorObjectType: update_column_Invoice_BillingState
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: update_column_Invoice_BillingState
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - _set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: update_column_Invoice_CustomerId
+  description: Update the 'CustomerId' column in the 'Invoice' collection
+  fields:
+    - name: _set
+      type: int4!
+      description: Set the column to this value
+  graphql:
+    typeName: chinook_update_column_Invoice_CustomerId
+    inputTypeName: chinook_update_column_Invoice_CustomerId_input
+  dataConnectorTypeMapping:
+    - dataConnectorName: chinook
+      dataConnectorObjectType: update_column_Invoice_CustomerId
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: update_column_Invoice_CustomerId
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - _set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: update_column_Invoice_InvoiceDate
+  description: Update the 'InvoiceDate' column in the 'Invoice' collection
+  fields:
+    - name: _set
+      type: timestamp!
+      description: Set the column to this value
+  graphql:
+    typeName: chinook_update_column_Invoice_InvoiceDate
+    inputTypeName: chinook_update_column_Invoice_InvoiceDate_input
+  dataConnectorTypeMapping:
+    - dataConnectorName: chinook
+      dataConnectorObjectType: update_column_Invoice_InvoiceDate
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: update_column_Invoice_InvoiceDate
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - _set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: update_column_Invoice_InvoiceId
+  description: Update the 'InvoiceId' column in the 'Invoice' collection
+  fields:
+    - name: _set
+      type: int4!
+      description: Set the column to this value
+  graphql:
+    typeName: chinook_update_column_Invoice_InvoiceId
+    inputTypeName: chinook_update_column_Invoice_InvoiceId_input
+  dataConnectorTypeMapping:
+    - dataConnectorName: chinook
+      dataConnectorObjectType: update_column_Invoice_InvoiceId
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: update_column_Invoice_InvoiceId
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - _set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: update_column_Invoice_Total
+  description: Update the 'Total' column in the 'Invoice' collection
+  fields:
+    - name: _set
+      type: numeric!
+      description: Set the column to this value
+  graphql:
+    typeName: chinook_update_column_Invoice_Total
+    inputTypeName: chinook_update_column_Invoice_Total_input
+  dataConnectorTypeMapping:
+    - dataConnectorName: chinook
+      dataConnectorObjectType: update_column_Invoice_Total
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: update_column_Invoice_Total
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - _set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: v2_update_Invoice_by_InvoiceId_update_columns
+  description: Update the columns of the 'Invoice' collection
+  fields:
+    - name: BillingAddress
+      type: update_column_Invoice_BillingAddress
+      description: Update the 'BillingAddress' column in the 'Invoice' collection.
+    - name: BillingCity
+      type: update_column_Invoice_BillingCity
+      description: Update the 'BillingCity' column in the 'Invoice' collection.
+    - name: BillingCountry
+      type: update_column_Invoice_BillingCountry
+      description: Update the 'BillingCountry' column in the 'Invoice' collection.
+    - name: BillingPostalCode
+      type: update_column_Invoice_BillingPostalCode
+      description: Update the 'BillingPostalCode' column in the 'Invoice' collection.
+    - name: BillingState
+      type: update_column_Invoice_BillingState
+      description: Update the 'BillingState' column in the 'Invoice' collection.
+    - name: CustomerId
+      type: update_column_Invoice_CustomerId
+      description: Update the 'CustomerId' column in the 'Invoice' collection.
+    - name: InvoiceDate
+      type: update_column_Invoice_InvoiceDate
+      description: Update the 'InvoiceDate' column in the 'Invoice' collection.
+    - name: InvoiceId
+      type: update_column_Invoice_InvoiceId
+      description: Update the 'InvoiceId' column in the 'Invoice' collection.
+    - name: Total
+      type: update_column_Invoice_Total
+      description: Update the 'Total' column in the 'Invoice' collection.
+  graphql:
+    typeName: chinook_v2_update_Invoice_by_InvoiceId_update_columns
+    inputTypeName: chinook_v2_update_Invoice_by_InvoiceId_update_columns_input
+  dataConnectorTypeMapping:
+    - dataConnectorName: chinook
+      dataConnectorObjectType: v2_update_Invoice_by_InvoiceId_update_columns
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: v2_update_Invoice_by_InvoiceId_update_columns
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - BillingAddress
+          - BillingCity
+          - BillingCountry
+          - BillingPostalCode
+          - BillingState
+          - CustomerId
+          - InvoiceDate
+          - InvoiceId
+          - Total
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: v2_update_Invoice_by_InvoiceId_response
+  description: Responses from the 'v2_update_Invoice_by_InvoiceId' procedure
+  fields:
+    - name: affected_rows
+      type: int4!
+      description: The number of rows affected by the mutation
+    - name: returning
+      type: "[Invoice!]!"
+      description: Data from rows affected by the mutation
+  graphql:
+    typeName: chinook_v2_update_Invoice_by_InvoiceId_response
+    inputTypeName: chinook_v2_update_Invoice_by_InvoiceId_response_input
+  dataConnectorTypeMapping:
+    - dataConnectorName: chinook
+      dataConnectorObjectType: v2_update_Invoice_by_InvoiceId_response
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: v2_update_Invoice_by_InvoiceId_response
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - affected_rows
+          - returning
+
+---
+kind: Command
+version: v1
+definition:
+  name: v2_update_Invoice_by_InvoiceId
+  outputType: v2_update_Invoice_by_InvoiceId_response!
+  arguments:
+    - name: key_InvoiceId
+      type: int4!
+    - name: post_check
+      type: Invoice_bool_exp!
+      description: Update permission post-condition predicate over the 'Invoice' collection
+    - name: pre_check
+      type: Invoice_bool_exp!
+      description: Update permission pre-condition predicate over the 'Invoice' collection
+    - name: update_columns
+      type: v2_update_Invoice_by_InvoiceId_update_columns!
+  source:
+    dataConnectorName: chinook
+    dataConnectorCommand:
+      procedure: v2_update_Invoice_by_InvoiceId
+  graphql:
+    rootFieldName: v2_update_Invoice_by_InvoiceId
+    rootFieldKind: Mutation
+  description: Update any row on the 'Invoice' collection using the 'InvoiceId' key
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: v2_update_Invoice_by_InvoiceId
+  permissions:
+    - role: admin
+      allowExecution: true
+

@@ -1,0 +1,16 @@
+kind: Connector
+version: v2
+definition:
+  name: data
+  subgraph: data
+  source: hasura/postgres:v1.1.0
+  context: .
+  envMapping:
+    CONNECTION_URI:
+      fromEnv: DATA_DATA_CONNECTION_URI
+    HASURA_SERVICE_TOKEN_SECRET:
+      fromEnv: DATA_DATA_HASURA_SERVICE_TOKEN_SECRET
+    OTEL_EXPORTER_OTLP_TRACES_ENDPOINT:
+      fromEnv: DATA_DATA_OTEL_EXPORTER_OTLP_TRACES_ENDPOINT
+    OTEL_SERVICE_NAME:
+      fromEnv: DATA_DATA_OTEL_SERVICE_NAME

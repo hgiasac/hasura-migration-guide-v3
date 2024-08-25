@@ -1,0 +1,62 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: v2_delete_Playlist_by_PlaylistId_response
+  description: Responses from the 'v2_delete_Playlist_by_PlaylistId' procedure
+  fields:
+    - name: affected_rows
+      type: int4!
+      description: The number of rows affected by the mutation
+    - name: returning
+      type: "[Playlist!]!"
+      description: Data from rows affected by the mutation
+  graphql:
+    typeName: chinook_v2_delete_Playlist_by_PlaylistId_response
+    inputTypeName: chinook_v2_delete_Playlist_by_PlaylistId_response_input
+  dataConnectorTypeMapping:
+    - dataConnectorName: chinook
+      dataConnectorObjectType: v2_delete_Playlist_by_PlaylistId_response
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: v2_delete_Playlist_by_PlaylistId_response
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - affected_rows
+          - returning
+
+---
+kind: Command
+version: v1
+definition:
+  name: v2_delete_Playlist_by_PlaylistId
+  outputType: v2_delete_Playlist_by_PlaylistId_response!
+  arguments:
+    - name: key_PlaylistId
+      type: int4!
+    - name: pre_check
+      type: Playlist_bool_exp!
+      description: Delete permission predicate over the 'Playlist' collection
+  source:
+    dataConnectorName: chinook
+    dataConnectorCommand:
+      procedure: v2_delete_Playlist_by_PlaylistId
+  graphql:
+    rootFieldName: v2_delete_Playlist_by_PlaylistId
+    rootFieldKind: Mutation
+  description: Delete any row on the 'Playlist' collection using the 'PlaylistId' key
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: v2_delete_Playlist_by_PlaylistId
+  permissions:
+    - role: admin
+      allowExecution: true
+

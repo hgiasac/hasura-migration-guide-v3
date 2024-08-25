@@ -1,0 +1,20 @@
+kind: Subgraph
+version: v2
+definition:
+  name: chinook
+  generator:
+    rootPath: .
+    namingConvention: none
+    graphqlTypeNamePrefix: chinook_
+  includePaths:
+    - metadata
+  envMapping:
+    CHINOOK_CHINOOK_AUTHORIZATION_HEADER:
+      fromEnv: CHINOOK_CHINOOK_AUTHORIZATION_HEADER
+    CHINOOK_CHINOOK_READ_URL:
+      fromEnv: CHINOOK_CHINOOK_READ_URL
+    CHINOOK_CHINOOK_WRITE_URL:
+      fromEnv: CHINOOK_CHINOOK_WRITE_URL
+  connectors:
+    - path: connector/chinook/connector.yaml
+      connectorLinkName: chinook

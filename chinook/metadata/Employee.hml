@@ -1,0 +1,254 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: Employee
+  fields:
+    - name: Address
+      type: varchar
+    - name: BirthDate
+      type: timestamp
+    - name: City
+      type: varchar
+    - name: Country
+      type: varchar
+    - name: Email
+      type: varchar
+    - name: EmployeeId
+      type: int4!
+    - name: Fax
+      type: varchar
+    - name: FirstName
+      type: varchar!
+    - name: HireDate
+      type: timestamp
+    - name: LastName
+      type: varchar!
+    - name: Phone
+      type: varchar
+    - name: PostalCode
+      type: varchar
+    - name: ReportsTo
+      type: int4
+    - name: State
+      type: varchar
+    - name: Title
+      type: varchar
+  graphql:
+    typeName: chinook_Employee
+    inputTypeName: chinook_Employee_input
+  dataConnectorTypeMapping:
+    - dataConnectorName: chinook
+      dataConnectorObjectType: Employee
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: Employee
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - Address
+          - BirthDate
+          - City
+          - Country
+          - Email
+          - EmployeeId
+          - Fax
+          - FirstName
+          - HireDate
+          - LastName
+          - Phone
+          - PostalCode
+          - ReportsTo
+          - State
+          - Title
+
+---
+kind: ObjectBooleanExpressionType
+version: v1
+definition:
+  name: Employee_bool_exp
+  objectType: Employee
+  dataConnectorName: chinook
+  dataConnectorObjectType: Employee
+  comparableFields:
+    - fieldName: Address
+      operators:
+        enableAll: true
+    - fieldName: BirthDate
+      operators:
+        enableAll: true
+    - fieldName: City
+      operators:
+        enableAll: true
+    - fieldName: Country
+      operators:
+        enableAll: true
+    - fieldName: Email
+      operators:
+        enableAll: true
+    - fieldName: EmployeeId
+      operators:
+        enableAll: true
+    - fieldName: Fax
+      operators:
+        enableAll: true
+    - fieldName: FirstName
+      operators:
+        enableAll: true
+    - fieldName: HireDate
+      operators:
+        enableAll: true
+    - fieldName: LastName
+      operators:
+        enableAll: true
+    - fieldName: Phone
+      operators:
+        enableAll: true
+    - fieldName: PostalCode
+      operators:
+        enableAll: true
+    - fieldName: ReportsTo
+      operators:
+        enableAll: true
+    - fieldName: State
+      operators:
+        enableAll: true
+    - fieldName: Title
+      operators:
+        enableAll: true
+  graphql:
+    typeName: chinook_Employee_bool_exp
+
+---
+kind: Model
+version: v1
+definition:
+  name: Employee
+  objectType: Employee
+  source:
+    dataConnectorName: chinook
+    collection: Employee
+  filterExpressionType: Employee_bool_exp
+  orderableFields:
+    - fieldName: Address
+      orderByDirections:
+        enableAll: true
+    - fieldName: BirthDate
+      orderByDirections:
+        enableAll: true
+    - fieldName: City
+      orderByDirections:
+        enableAll: true
+    - fieldName: Country
+      orderByDirections:
+        enableAll: true
+    - fieldName: Email
+      orderByDirections:
+        enableAll: true
+    - fieldName: EmployeeId
+      orderByDirections:
+        enableAll: true
+    - fieldName: Fax
+      orderByDirections:
+        enableAll: true
+    - fieldName: FirstName
+      orderByDirections:
+        enableAll: true
+    - fieldName: HireDate
+      orderByDirections:
+        enableAll: true
+    - fieldName: LastName
+      orderByDirections:
+        enableAll: true
+    - fieldName: Phone
+      orderByDirections:
+        enableAll: true
+    - fieldName: PostalCode
+      orderByDirections:
+        enableAll: true
+    - fieldName: ReportsTo
+      orderByDirections:
+        enableAll: true
+    - fieldName: State
+      orderByDirections:
+        enableAll: true
+    - fieldName: Title
+      orderByDirections:
+        enableAll: true
+  graphql:
+    selectMany:
+      queryRootField: Employee
+    selectUniques:
+      - queryRootField: Employee_by_EmployeeId
+        uniqueIdentifier:
+          - EmployeeId
+    orderByExpressionType: chinook_Employee_order_by
+
+---
+kind: ModelPermissions
+version: v1
+definition:
+  modelName: Employee
+  permissions:
+    - role: admin
+      select:
+        filter: null
+
+---
+kind: Relationship
+version: v1
+definition:
+  name: Customers
+  sourceType: Employee
+  target:
+    model:
+      name: Customer
+      relationshipType: Array
+  mapping:
+    - source:
+        fieldPath:
+          - fieldName: EmployeeId
+      target:
+        modelField:
+          - fieldName: SupportRepId
+
+---
+kind: Relationship
+version: v1
+definition:
+  name: Employee
+  sourceType: Employee
+  target:
+    model:
+      name: Employee
+      relationshipType: Object
+  mapping:
+    - source:
+        fieldPath:
+          - fieldName: ReportsTo
+      target:
+        modelField:
+          - fieldName: EmployeeId
+
+---
+kind: Relationship
+version: v1
+definition:
+  name: Employees
+  sourceType: Employee
+  target:
+    model:
+      name: Employee
+      relationshipType: Array
+  mapping:
+    - source:
+        fieldPath:
+          - fieldName: EmployeeId
+      target:
+        modelField:
+          - fieldName: ReportsTo
+

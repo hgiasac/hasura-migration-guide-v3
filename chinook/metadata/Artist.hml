@@ -1,0 +1,101 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: Artist
+  fields:
+    - name: ArtistId
+      type: int4!
+    - name: Name
+      type: varchar
+  graphql:
+    typeName: chinook_Artist
+    inputTypeName: chinook_Artist_input
+  dataConnectorTypeMapping:
+    - dataConnectorName: chinook
+      dataConnectorObjectType: Artist
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: Artist
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - ArtistId
+          - Name
+
+---
+kind: ObjectBooleanExpressionType
+version: v1
+definition:
+  name: Artist_bool_exp
+  objectType: Artist
+  dataConnectorName: chinook
+  dataConnectorObjectType: Artist
+  comparableFields:
+    - fieldName: ArtistId
+      operators:
+        enableAll: true
+    - fieldName: Name
+      operators:
+        enableAll: true
+  graphql:
+    typeName: chinook_Artist_bool_exp
+
+---
+kind: Model
+version: v1
+definition:
+  name: Artist
+  objectType: Artist
+  source:
+    dataConnectorName: chinook
+    collection: Artist
+  filterExpressionType: Artist_bool_exp
+  orderableFields:
+    - fieldName: ArtistId
+      orderByDirections:
+        enableAll: true
+    - fieldName: Name
+      orderByDirections:
+        enableAll: true
+  graphql:
+    selectMany:
+      queryRootField: Artist
+    selectUniques:
+      - queryRootField: Artist_by_ArtistId
+        uniqueIdentifier:
+          - ArtistId
+    orderByExpressionType: chinook_Artist_order_by
+
+---
+kind: ModelPermissions
+version: v1
+definition:
+  modelName: Artist
+  permissions:
+    - role: admin
+      select:
+        filter: null
+
+---
+kind: Relationship
+version: v1
+definition:
+  name: Albums
+  sourceType: Artist
+  target:
+    model:
+      name: Album
+      relationshipType: Array
+  mapping:
+    - source:
+        fieldPath:
+          - fieldName: ArtistId
+      target:
+        modelField:
+          - fieldName: ArtistId
+

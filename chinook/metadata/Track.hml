@@ -1,0 +1,236 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: Track
+  fields:
+    - name: AlbumId
+      type: int4
+    - name: Bytes
+      type: int4
+    - name: Composer
+      type: varchar
+    - name: GenreId
+      type: int4
+    - name: MediaTypeId
+      type: int4!
+    - name: Milliseconds
+      type: int4!
+    - name: Name
+      type: varchar!
+    - name: TrackId
+      type: int4!
+    - name: UnitPrice
+      type: numeric!
+  graphql:
+    typeName: chinook_Track
+    inputTypeName: chinook_Track_input
+  dataConnectorTypeMapping:
+    - dataConnectorName: chinook
+      dataConnectorObjectType: Track
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: Track
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - AlbumId
+          - Bytes
+          - Composer
+          - GenreId
+          - MediaTypeId
+          - Milliseconds
+          - Name
+          - TrackId
+          - UnitPrice
+
+---
+kind: ObjectBooleanExpressionType
+version: v1
+definition:
+  name: Track_bool_exp
+  objectType: Track
+  dataConnectorName: chinook
+  dataConnectorObjectType: Track
+  comparableFields:
+    - fieldName: AlbumId
+      operators:
+        enableAll: true
+    - fieldName: Bytes
+      operators:
+        enableAll: true
+    - fieldName: Composer
+      operators:
+        enableAll: true
+    - fieldName: GenreId
+      operators:
+        enableAll: true
+    - fieldName: MediaTypeId
+      operators:
+        enableAll: true
+    - fieldName: Milliseconds
+      operators:
+        enableAll: true
+    - fieldName: Name
+      operators:
+        enableAll: true
+    - fieldName: TrackId
+      operators:
+        enableAll: true
+    - fieldName: UnitPrice
+      operators:
+        enableAll: true
+  graphql:
+    typeName: chinook_Track_bool_exp
+
+---
+kind: Model
+version: v1
+definition:
+  name: Track
+  objectType: Track
+  source:
+    dataConnectorName: chinook
+    collection: Track
+  filterExpressionType: Track_bool_exp
+  orderableFields:
+    - fieldName: AlbumId
+      orderByDirections:
+        enableAll: true
+    - fieldName: Bytes
+      orderByDirections:
+        enableAll: true
+    - fieldName: Composer
+      orderByDirections:
+        enableAll: true
+    - fieldName: GenreId
+      orderByDirections:
+        enableAll: true
+    - fieldName: MediaTypeId
+      orderByDirections:
+        enableAll: true
+    - fieldName: Milliseconds
+      orderByDirections:
+        enableAll: true
+    - fieldName: Name
+      orderByDirections:
+        enableAll: true
+    - fieldName: TrackId
+      orderByDirections:
+        enableAll: true
+    - fieldName: UnitPrice
+      orderByDirections:
+        enableAll: true
+  graphql:
+    selectMany:
+      queryRootField: Track
+    selectUniques:
+      - queryRootField: Track_by_TrackId
+        uniqueIdentifier:
+          - TrackId
+    orderByExpressionType: chinook_Track_order_by
+
+---
+kind: ModelPermissions
+version: v1
+definition:
+  modelName: Track
+  permissions:
+    - role: admin
+      select:
+        filter: null
+
+---
+kind: Relationship
+version: v1
+definition:
+  name: InvoiceLines
+  sourceType: Track
+  target:
+    model:
+      name: InvoiceLine
+      relationshipType: Array
+  mapping:
+    - source:
+        fieldPath:
+          - fieldName: TrackId
+      target:
+        modelField:
+          - fieldName: TrackId
+
+---
+kind: Relationship
+version: v1
+definition:
+  name: PlaylistTracks
+  sourceType: Track
+  target:
+    model:
+      name: PlaylistTrack
+      relationshipType: Array
+  mapping:
+    - source:
+        fieldPath:
+          - fieldName: TrackId
+      target:
+        modelField:
+          - fieldName: TrackId
+
+---
+kind: Relationship
+version: v1
+definition:
+  name: Album
+  sourceType: Track
+  target:
+    model:
+      name: Album
+      relationshipType: Object
+  mapping:
+    - source:
+        fieldPath:
+          - fieldName: AlbumId
+      target:
+        modelField:
+          - fieldName: AlbumId
+
+---
+kind: Relationship
+version: v1
+definition:
+  name: Genre
+  sourceType: Track
+  target:
+    model:
+      name: Genre
+      relationshipType: Object
+  mapping:
+    - source:
+        fieldPath:
+          - fieldName: GenreId
+      target:
+        modelField:
+          - fieldName: GenreId
+
+---
+kind: Relationship
+version: v1
+definition:
+  name: MediaType
+  sourceType: Track
+  target:
+    model:
+      name: MediaType
+      relationshipType: Object
+  mapping:
+    - source:
+        fieldPath:
+          - fieldName: MediaTypeId
+      target:
+        modelField:
+          - fieldName: MediaTypeId
+

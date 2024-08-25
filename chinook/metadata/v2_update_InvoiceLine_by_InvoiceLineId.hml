@@ -1,0 +1,253 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: update_column_InvoiceLine_InvoiceId
+  description: Update the 'InvoiceId' column in the 'InvoiceLine' collection
+  fields:
+    - name: _set
+      type: int4!
+      description: Set the column to this value
+  graphql:
+    typeName: chinook_update_column_InvoiceLine_InvoiceId
+    inputTypeName: chinook_update_column_InvoiceLine_InvoiceId_input
+  dataConnectorTypeMapping:
+    - dataConnectorName: chinook
+      dataConnectorObjectType: update_column_InvoiceLine_InvoiceId
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: update_column_InvoiceLine_InvoiceId
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - _set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: update_column_InvoiceLine_InvoiceLineId
+  description: Update the 'InvoiceLineId' column in the 'InvoiceLine' collection
+  fields:
+    - name: _set
+      type: int4!
+      description: Set the column to this value
+  graphql:
+    typeName: chinook_update_column_InvoiceLine_InvoiceLineId
+    inputTypeName: chinook_update_column_InvoiceLine_InvoiceLineId_input
+  dataConnectorTypeMapping:
+    - dataConnectorName: chinook
+      dataConnectorObjectType: update_column_InvoiceLine_InvoiceLineId
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: update_column_InvoiceLine_InvoiceLineId
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - _set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: update_column_InvoiceLine_Quantity
+  description: Update the 'Quantity' column in the 'InvoiceLine' collection
+  fields:
+    - name: _set
+      type: int4!
+      description: Set the column to this value
+  graphql:
+    typeName: chinook_update_column_InvoiceLine_Quantity
+    inputTypeName: chinook_update_column_InvoiceLine_Quantity_input
+  dataConnectorTypeMapping:
+    - dataConnectorName: chinook
+      dataConnectorObjectType: update_column_InvoiceLine_Quantity
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: update_column_InvoiceLine_Quantity
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - _set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: update_column_InvoiceLine_TrackId
+  description: Update the 'TrackId' column in the 'InvoiceLine' collection
+  fields:
+    - name: _set
+      type: int4!
+      description: Set the column to this value
+  graphql:
+    typeName: chinook_update_column_InvoiceLine_TrackId
+    inputTypeName: chinook_update_column_InvoiceLine_TrackId_input
+  dataConnectorTypeMapping:
+    - dataConnectorName: chinook
+      dataConnectorObjectType: update_column_InvoiceLine_TrackId
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: update_column_InvoiceLine_TrackId
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - _set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: update_column_InvoiceLine_UnitPrice
+  description: Update the 'UnitPrice' column in the 'InvoiceLine' collection
+  fields:
+    - name: _set
+      type: numeric!
+      description: Set the column to this value
+  graphql:
+    typeName: chinook_update_column_InvoiceLine_UnitPrice
+    inputTypeName: chinook_update_column_InvoiceLine_UnitPrice_input
+  dataConnectorTypeMapping:
+    - dataConnectorName: chinook
+      dataConnectorObjectType: update_column_InvoiceLine_UnitPrice
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: update_column_InvoiceLine_UnitPrice
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - _set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: v2_update_InvoiceLine_by_InvoiceLineId_update_columns
+  description: Update the columns of the 'InvoiceLine' collection
+  fields:
+    - name: InvoiceId
+      type: update_column_InvoiceLine_InvoiceId
+      description: Update the 'InvoiceId' column in the 'InvoiceLine' collection.
+    - name: InvoiceLineId
+      type: update_column_InvoiceLine_InvoiceLineId
+      description: Update the 'InvoiceLineId' column in the 'InvoiceLine' collection.
+    - name: Quantity
+      type: update_column_InvoiceLine_Quantity
+      description: Update the 'Quantity' column in the 'InvoiceLine' collection.
+    - name: TrackId
+      type: update_column_InvoiceLine_TrackId
+      description: Update the 'TrackId' column in the 'InvoiceLine' collection.
+    - name: UnitPrice
+      type: update_column_InvoiceLine_UnitPrice
+      description: Update the 'UnitPrice' column in the 'InvoiceLine' collection.
+  graphql:
+    typeName: chinook_v2_update_InvoiceLine_by_InvoiceLineId_update_columns
+    inputTypeName: chinook_v2_update_InvoiceLine_by_InvoiceLineId_update_columns_input
+  dataConnectorTypeMapping:
+    - dataConnectorName: chinook
+      dataConnectorObjectType: v2_update_InvoiceLine_by_InvoiceLineId_update_columns
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: v2_update_InvoiceLine_by_InvoiceLineId_update_columns
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - InvoiceId
+          - InvoiceLineId
+          - Quantity
+          - TrackId
+          - UnitPrice
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: v2_update_InvoiceLine_by_InvoiceLineId_response
+  description: Responses from the 'v2_update_InvoiceLine_by_InvoiceLineId' procedure
+  fields:
+    - name: affected_rows
+      type: int4!
+      description: The number of rows affected by the mutation
+    - name: returning
+      type: "[InvoiceLine!]!"
+      description: Data from rows affected by the mutation
+  graphql:
+    typeName: chinook_v2_update_InvoiceLine_by_InvoiceLineId_response
+    inputTypeName: chinook_v2_update_InvoiceLine_by_InvoiceLineId_response_input
+  dataConnectorTypeMapping:
+    - dataConnectorName: chinook
+      dataConnectorObjectType: v2_update_InvoiceLine_by_InvoiceLineId_response
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: v2_update_InvoiceLine_by_InvoiceLineId_response
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - affected_rows
+          - returning
+
+---
+kind: Command
+version: v1
+definition:
+  name: v2_update_InvoiceLine_by_InvoiceLineId
+  outputType: v2_update_InvoiceLine_by_InvoiceLineId_response!
+  arguments:
+    - name: key_InvoiceLineId
+      type: int4!
+    - name: post_check
+      type: InvoiceLine_bool_exp!
+      description: Update permission post-condition predicate over the 'InvoiceLine'
+        collection
+    - name: pre_check
+      type: InvoiceLine_bool_exp!
+      description: Update permission pre-condition predicate over the 'InvoiceLine'
+        collection
+    - name: update_columns
+      type: v2_update_InvoiceLine_by_InvoiceLineId_update_columns!
+  source:
+    dataConnectorName: chinook
+    dataConnectorCommand:
+      procedure: v2_update_InvoiceLine_by_InvoiceLineId
+  graphql:
+    rootFieldName: v2_update_InvoiceLine_by_InvoiceLineId
+    rootFieldKind: Mutation
+  description: Update any row on the 'InvoiceLine' collection using the 'InvoiceLineId' key
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: v2_update_InvoiceLine_by_InvoiceLineId
+  permissions:
+    - role: admin
+      allowExecution: true
+

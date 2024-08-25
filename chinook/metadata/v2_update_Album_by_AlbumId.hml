@@ -1,0 +1,187 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: update_column_Album_AlbumId
+  description: Update the 'AlbumId' column in the 'Album' collection
+  fields:
+    - name: _set
+      type: int4!
+      description: Set the column to this value
+  graphql:
+    typeName: chinook_update_column_Album_AlbumId
+    inputTypeName: chinook_update_column_Album_AlbumId_input
+  dataConnectorTypeMapping:
+    - dataConnectorName: chinook
+      dataConnectorObjectType: update_column_Album_AlbumId
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: update_column_Album_AlbumId
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - _set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: update_column_Album_ArtistId
+  description: Update the 'ArtistId' column in the 'Album' collection
+  fields:
+    - name: _set
+      type: int4!
+      description: Set the column to this value
+  graphql:
+    typeName: chinook_update_column_Album_ArtistId
+    inputTypeName: chinook_update_column_Album_ArtistId_input
+  dataConnectorTypeMapping:
+    - dataConnectorName: chinook
+      dataConnectorObjectType: update_column_Album_ArtistId
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: update_column_Album_ArtistId
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - _set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: update_column_Album_Title
+  description: Update the 'Title' column in the 'Album' collection
+  fields:
+    - name: _set
+      type: varchar!
+      description: Set the column to this value
+  graphql:
+    typeName: chinook_update_column_Album_Title
+    inputTypeName: chinook_update_column_Album_Title_input
+  dataConnectorTypeMapping:
+    - dataConnectorName: chinook
+      dataConnectorObjectType: update_column_Album_Title
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: update_column_Album_Title
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - _set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: v2_update_Album_by_AlbumId_update_columns
+  description: Update the columns of the 'Album' collection
+  fields:
+    - name: AlbumId
+      type: update_column_Album_AlbumId
+      description: Update the 'AlbumId' column in the 'Album' collection.
+    - name: ArtistId
+      type: update_column_Album_ArtistId
+      description: Update the 'ArtistId' column in the 'Album' collection.
+    - name: Title
+      type: update_column_Album_Title
+      description: Update the 'Title' column in the 'Album' collection.
+  graphql:
+    typeName: chinook_v2_update_Album_by_AlbumId_update_columns
+    inputTypeName: chinook_v2_update_Album_by_AlbumId_update_columns_input
+  dataConnectorTypeMapping:
+    - dataConnectorName: chinook
+      dataConnectorObjectType: v2_update_Album_by_AlbumId_update_columns
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: v2_update_Album_by_AlbumId_update_columns
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - AlbumId
+          - ArtistId
+          - Title
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: v2_update_Album_by_AlbumId_response
+  description: Responses from the 'v2_update_Album_by_AlbumId' procedure
+  fields:
+    - name: affected_rows
+      type: int4!
+      description: The number of rows affected by the mutation
+    - name: returning
+      type: "[Album!]!"
+      description: Data from rows affected by the mutation
+  graphql:
+    typeName: chinook_v2_update_Album_by_AlbumId_response
+    inputTypeName: chinook_v2_update_Album_by_AlbumId_response_input
+  dataConnectorTypeMapping:
+    - dataConnectorName: chinook
+      dataConnectorObjectType: v2_update_Album_by_AlbumId_response
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: v2_update_Album_by_AlbumId_response
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - affected_rows
+          - returning
+
+---
+kind: Command
+version: v1
+definition:
+  name: v2_update_Album_by_AlbumId
+  outputType: v2_update_Album_by_AlbumId_response!
+  arguments:
+    - name: key_AlbumId
+      type: int4!
+    - name: post_check
+      type: Album_bool_exp!
+      description: Update permission post-condition predicate over the 'Album' collection
+    - name: pre_check
+      type: Album_bool_exp!
+      description: Update permission pre-condition predicate over the 'Album' collection
+    - name: update_columns
+      type: v2_update_Album_by_AlbumId_update_columns!
+  source:
+    dataConnectorName: chinook
+    dataConnectorCommand:
+      procedure: v2_update_Album_by_AlbumId
+  graphql:
+    rootFieldName: v2_update_Album_by_AlbumId
+    rootFieldKind: Mutation
+  description: Update any row on the 'Album' collection using the 'AlbumId' key
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: v2_update_Album_by_AlbumId
+  permissions:
+    - role: admin
+      allowExecution: true
+

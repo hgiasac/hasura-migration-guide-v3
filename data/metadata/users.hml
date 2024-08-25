@@ -1,0 +1,127 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: users
+  fields:
+    - name: created_at
+      type: timestamptz!
+    - name: id
+      type: uuid!
+    - name: name
+      type: String!
+  graphql:
+    typeName: users
+    inputTypeName: users_input
+  dataConnectorTypeMapping:
+    - dataConnectorName: data
+      dataConnectorObjectType: users
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: users
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - created_at
+          - id
+          - name
+
+---
+kind: ObjectBooleanExpressionType
+version: v1
+definition:
+  name: users_bool_exp
+  objectType: users
+  dataConnectorName: data
+  dataConnectorObjectType: users
+  comparableFields:
+    - fieldName: created_at
+      operators:
+        enableAll: true
+    - fieldName: id
+      operators:
+        enableAll: true
+    - fieldName: name
+      operators:
+        enableAll: true
+  graphql:
+    typeName: users_bool_exp
+
+---
+kind: Model
+version: v1
+definition:
+  name: users
+  objectType: users
+  source:
+    dataConnectorName: data
+    collection: users
+  filterExpressionType: users_bool_exp
+  orderableFields:
+    - fieldName: created_at
+      orderByDirections:
+        enableAll: true
+    - fieldName: id
+      orderByDirections:
+        enableAll: true
+    - fieldName: name
+      orderByDirections:
+        enableAll: true
+  graphql:
+    selectMany:
+      queryRootField: users
+    selectUniques:
+      - queryRootField: users_by_id
+        uniqueIdentifier:
+          - id
+    orderByExpressionType: users_order_by
+
+---
+kind: ModelPermissions
+version: v1
+definition:
+  modelName: users
+  permissions:
+    - role: admin
+      select:
+        filter: null
+
+---
+kind: Relationship
+version: v1
+definition:
+  name: articles
+  sourceType: users
+  target:
+    model:
+      name: article
+      relationshipType: Array
+  mapping:
+    - source:
+        fieldPath:
+          - fieldName: id
+      target:
+        modelField:
+          - fieldName: user_id
+
+---
+kind: Relationship
+version: v1
+definition:
+  name: todos
+  sourceType: users
+  target:
+    model:
+      name: todo
+      relationshipType: Array
+  mapping:
+    - source:
+        fieldPath:
+          - fieldName: id
+      target:
+        modelField:
+          - fieldName: user_id

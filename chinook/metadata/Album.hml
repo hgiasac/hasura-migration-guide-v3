@@ -1,0 +1,128 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: Album
+  fields:
+    - name: AlbumId
+      type: int4!
+    - name: ArtistId
+      type: int4!
+    - name: Title
+      type: varchar!
+  graphql:
+    typeName: chinook_Album
+    inputTypeName: chinook_Album_input
+  dataConnectorTypeMapping:
+    - dataConnectorName: chinook
+      dataConnectorObjectType: Album
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: Album
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - AlbumId
+          - ArtistId
+          - Title
+
+---
+kind: ObjectBooleanExpressionType
+version: v1
+definition:
+  name: Album_bool_exp
+  objectType: Album
+  dataConnectorName: chinook
+  dataConnectorObjectType: Album
+  comparableFields:
+    - fieldName: AlbumId
+      operators:
+        enableAll: true
+    - fieldName: ArtistId
+      operators:
+        enableAll: true
+    - fieldName: Title
+      operators:
+        enableAll: true
+  graphql:
+    typeName: chinook_Album_bool_exp
+
+---
+kind: Model
+version: v1
+definition:
+  name: Album
+  objectType: Album
+  source:
+    dataConnectorName: chinook
+    collection: Album
+  filterExpressionType: Album_bool_exp
+  orderableFields:
+    - fieldName: AlbumId
+      orderByDirections:
+        enableAll: true
+    - fieldName: ArtistId
+      orderByDirections:
+        enableAll: true
+    - fieldName: Title
+      orderByDirections:
+        enableAll: true
+  graphql:
+    selectMany:
+      queryRootField: Album
+    selectUniques:
+      - queryRootField: Album_by_AlbumId
+        uniqueIdentifier:
+          - AlbumId
+    orderByExpressionType: chinook_Album_order_by
+
+---
+kind: ModelPermissions
+version: v1
+definition:
+  modelName: Album
+  permissions:
+    - role: admin
+      select:
+        filter: null
+
+---
+kind: Relationship
+version: v1
+definition:
+  name: Artist
+  sourceType: Album
+  target:
+    model:
+      name: Artist
+      relationshipType: Object
+  mapping:
+    - source:
+        fieldPath:
+          - fieldName: ArtistId
+      target:
+        modelField:
+          - fieldName: ArtistId
+
+---
+kind: Relationship
+version: v1
+definition:
+  name: Tracks
+  sourceType: Album
+  target:
+    model:
+      name: Track
+      relationshipType: Array
+  mapping:
+    - source:
+        fieldPath:
+          - fieldName: AlbumId
+      target:
+        modelField:
+          - fieldName: AlbumId
+

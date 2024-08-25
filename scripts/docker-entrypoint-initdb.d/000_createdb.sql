@@ -1,0 +1,2 @@
+CREATE DATABASE metadata;
+CREATE DATABASE chinook;

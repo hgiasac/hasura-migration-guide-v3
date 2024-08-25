@@ -1,0 +1,186 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: update_column_users_created_at
+  description: Update the 'created_at' column in the 'users' collection
+  fields:
+    - name: _set
+      type: timestamptz!
+      description: Set the column to this value
+  graphql:
+    typeName: update_column_users_created_at
+    inputTypeName: update_column_users_created_at_input
+  dataConnectorTypeMapping:
+    - dataConnectorName: data
+      dataConnectorObjectType: update_column_users_created_at
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: update_column_users_created_at
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - _set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: update_column_users_id
+  description: Update the 'id' column in the 'users' collection
+  fields:
+    - name: _set
+      type: uuid!
+      description: Set the column to this value
+  graphql:
+    typeName: update_column_users_id
+    inputTypeName: update_column_users_id_input
+  dataConnectorTypeMapping:
+    - dataConnectorName: data
+      dataConnectorObjectType: update_column_users_id
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: update_column_users_id
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - _set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: update_column_users_name
+  description: Update the 'name' column in the 'users' collection
+  fields:
+    - name: _set
+      type: String!
+      description: Set the column to this value
+  graphql:
+    typeName: update_column_users_name
+    inputTypeName: update_column_users_name_input
+  dataConnectorTypeMapping:
+    - dataConnectorName: data
+      dataConnectorObjectType: update_column_users_name
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: update_column_users_name
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - _set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: v2_update_users_by_id_update_columns
+  description: Update the columns of the 'users' collection
+  fields:
+    - name: created_at
+      type: update_column_users_created_at
+      description: Update the 'created_at' column in the 'users' collection.
+    - name: id
+      type: update_column_users_id
+      description: Update the 'id' column in the 'users' collection.
+    - name: name
+      type: update_column_users_name
+      description: Update the 'name' column in the 'users' collection.
+  graphql:
+    typeName: v2_update_users_by_id_update_columns
+    inputTypeName: v2_update_users_by_id_update_columns_input
+  dataConnectorTypeMapping:
+    - dataConnectorName: data
+      dataConnectorObjectType: v2_update_users_by_id_update_columns
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: v2_update_users_by_id_update_columns
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - created_at
+          - id
+          - name
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: v2_update_users_by_id_response
+  description: Responses from the 'v2_update_users_by_id' procedure
+  fields:
+    - name: affected_rows
+      type: int4!
+      description: The number of rows affected by the mutation
+    - name: returning
+      type: "[users!]!"
+      description: Data from rows affected by the mutation
+  graphql:
+    typeName: v2_update_users_by_id_response
+    inputTypeName: v2_update_users_by_id_response_input
+  dataConnectorTypeMapping:
+    - dataConnectorName: data
+      dataConnectorObjectType: v2_update_users_by_id_response
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: v2_update_users_by_id_response
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - affected_rows
+          - returning
+
+---
+kind: Command
+version: v1
+definition:
+  name: v2_update_users_by_id
+  outputType: v2_update_users_by_id_response!
+  arguments:
+    - name: key_id
+      type: uuid!
+    - name: post_check
+      type: users_bool_exp!
+      description: Update permission post-condition predicate over the 'users' collection
+    - name: pre_check
+      type: users_bool_exp!
+      description: Update permission pre-condition predicate over the 'users' collection
+    - name: update_columns
+      type: v2_update_users_by_id_update_columns!
+  source:
+    dataConnectorName: data
+    dataConnectorCommand:
+      procedure: v2_update_users_by_id
+  graphql:
+    rootFieldName: v2_update_users_by_id
+    rootFieldKind: Mutation
+  description: Update any row on the 'users' collection using the 'id' key
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: v2_update_users_by_id
+  permissions:
+    - role: admin
+      allowExecution: true

@@ -1,0 +1,507 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: update_column_Customer_Address
+  description: Update the 'Address' column in the 'Customer' collection
+  fields:
+    - name: _set
+      type: varchar
+      description: Set the column to this value
+  graphql:
+    typeName: chinook_update_column_Customer_Address
+    inputTypeName: chinook_update_column_Customer_Address_input
+  dataConnectorTypeMapping:
+    - dataConnectorName: chinook
+      dataConnectorObjectType: update_column_Customer_Address
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: update_column_Customer_Address
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - _set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: update_column_Customer_City
+  description: Update the 'City' column in the 'Customer' collection
+  fields:
+    - name: _set
+      type: varchar
+      description: Set the column to this value
+  graphql:
+    typeName: chinook_update_column_Customer_City
+    inputTypeName: chinook_update_column_Customer_City_input
+  dataConnectorTypeMapping:
+    - dataConnectorName: chinook
+      dataConnectorObjectType: update_column_Customer_City
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: update_column_Customer_City
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - _set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: update_column_Customer_Company
+  description: Update the 'Company' column in the 'Customer' collection
+  fields:
+    - name: _set
+      type: varchar
+      description: Set the column to this value
+  graphql:
+    typeName: chinook_update_column_Customer_Company
+    inputTypeName: chinook_update_column_Customer_Company_input
+  dataConnectorTypeMapping:
+    - dataConnectorName: chinook
+      dataConnectorObjectType: update_column_Customer_Company
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: update_column_Customer_Company
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - _set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: update_column_Customer_Country
+  description: Update the 'Country' column in the 'Customer' collection
+  fields:
+    - name: _set
+      type: varchar
+      description: Set the column to this value
+  graphql:
+    typeName: chinook_update_column_Customer_Country
+    inputTypeName: chinook_update_column_Customer_Country_input
+  dataConnectorTypeMapping:
+    - dataConnectorName: chinook
+      dataConnectorObjectType: update_column_Customer_Country
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: update_column_Customer_Country
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - _set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: update_column_Customer_CustomerId
+  description: Update the 'CustomerId' column in the 'Customer' collection
+  fields:
+    - name: _set
+      type: int4!
+      description: Set the column to this value
+  graphql:
+    typeName: chinook_update_column_Customer_CustomerId
+    inputTypeName: chinook_update_column_Customer_CustomerId_input
+  dataConnectorTypeMapping:
+    - dataConnectorName: chinook
+      dataConnectorObjectType: update_column_Customer_CustomerId
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: update_column_Customer_CustomerId
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - _set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: update_column_Customer_Email
+  description: Update the 'Email' column in the 'Customer' collection
+  fields:
+    - name: _set
+      type: varchar!
+      description: Set the column to this value
+  graphql:
+    typeName: chinook_update_column_Customer_Email
+    inputTypeName: chinook_update_column_Customer_Email_input
+  dataConnectorTypeMapping:
+    - dataConnectorName: chinook
+      dataConnectorObjectType: update_column_Customer_Email
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: update_column_Customer_Email
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - _set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: update_column_Customer_Fax
+  description: Update the 'Fax' column in the 'Customer' collection
+  fields:
+    - name: _set
+      type: varchar
+      description: Set the column to this value
+  graphql:
+    typeName: chinook_update_column_Customer_Fax
+    inputTypeName: chinook_update_column_Customer_Fax_input
+  dataConnectorTypeMapping:
+    - dataConnectorName: chinook
+      dataConnectorObjectType: update_column_Customer_Fax
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: update_column_Customer_Fax
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - _set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: update_column_Customer_FirstName
+  description: Update the 'FirstName' column in the 'Customer' collection
+  fields:
+    - name: _set
+      type: varchar!
+      description: Set the column to this value
+  graphql:
+    typeName: chinook_update_column_Customer_FirstName
+    inputTypeName: chinook_update_column_Customer_FirstName_input
+  dataConnectorTypeMapping:
+    - dataConnectorName: chinook
+      dataConnectorObjectType: update_column_Customer_FirstName
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: update_column_Customer_FirstName
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - _set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: update_column_Customer_LastName
+  description: Update the 'LastName' column in the 'Customer' collection
+  fields:
+    - name: _set
+      type: varchar!
+      description: Set the column to this value
+  graphql:
+    typeName: chinook_update_column_Customer_LastName
+    inputTypeName: chinook_update_column_Customer_LastName_input
+  dataConnectorTypeMapping:
+    - dataConnectorName: chinook
+      dataConnectorObjectType: update_column_Customer_LastName
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: update_column_Customer_LastName
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - _set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: update_column_Customer_Phone
+  description: Update the 'Phone' column in the 'Customer' collection
+  fields:
+    - name: _set
+      type: varchar
+      description: Set the column to this value
+  graphql:
+    typeName: chinook_update_column_Customer_Phone
+    inputTypeName: chinook_update_column_Customer_Phone_input
+  dataConnectorTypeMapping:
+    - dataConnectorName: chinook
+      dataConnectorObjectType: update_column_Customer_Phone
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: update_column_Customer_Phone
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - _set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: update_column_Customer_PostalCode
+  description: Update the 'PostalCode' column in the 'Customer' collection
+  fields:
+    - name: _set
+      type: varchar
+      description: Set the column to this value
+  graphql:
+    typeName: chinook_update_column_Customer_PostalCode
+    inputTypeName: chinook_update_column_Customer_PostalCode_input
+  dataConnectorTypeMapping:
+    - dataConnectorName: chinook
+      dataConnectorObjectType: update_column_Customer_PostalCode
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: update_column_Customer_PostalCode
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - _set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: update_column_Customer_State
+  description: Update the 'State' column in the 'Customer' collection
+  fields:
+    - name: _set
+      type: varchar
+      description: Set the column to this value
+  graphql:
+    typeName: chinook_update_column_Customer_State
+    inputTypeName: chinook_update_column_Customer_State_input
+  dataConnectorTypeMapping:
+    - dataConnectorName: chinook
+      dataConnectorObjectType: update_column_Customer_State
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: update_column_Customer_State
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - _set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: update_column_Customer_SupportRepId
+  description: Update the 'SupportRepId' column in the 'Customer' collection
+  fields:
+    - name: _set
+      type: int4
+      description: Set the column to this value
+  graphql:
+    typeName: chinook_update_column_Customer_SupportRepId
+    inputTypeName: chinook_update_column_Customer_SupportRepId_input
+  dataConnectorTypeMapping:
+    - dataConnectorName: chinook
+      dataConnectorObjectType: update_column_Customer_SupportRepId
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: update_column_Customer_SupportRepId
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - _set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: v2_update_Customer_by_CustomerId_update_columns
+  description: Update the columns of the 'Customer' collection
+  fields:
+    - name: Address
+      type: update_column_Customer_Address
+      description: Update the 'Address' column in the 'Customer' collection.
+    - name: City
+      type: update_column_Customer_City
+      description: Update the 'City' column in the 'Customer' collection.
+    - name: Company
+      type: update_column_Customer_Company
+      description: Update the 'Company' column in the 'Customer' collection.
+    - name: Country
+      type: update_column_Customer_Country
+      description: Update the 'Country' column in the 'Customer' collection.
+    - name: CustomerId
+      type: update_column_Customer_CustomerId
+      description: Update the 'CustomerId' column in the 'Customer' collection.
+    - name: Email
+      type: update_column_Customer_Email
+      description: Update the 'Email' column in the 'Customer' collection.
+    - name: Fax
+      type: update_column_Customer_Fax
+      description: Update the 'Fax' column in the 'Customer' collection.
+    - name: FirstName
+      type: update_column_Customer_FirstName
+      description: Update the 'FirstName' column in the 'Customer' collection.
+    - name: LastName
+      type: update_column_Customer_LastName
+      description: Update the 'LastName' column in the 'Customer' collection.
+    - name: Phone
+      type: update_column_Customer_Phone
+      description: Update the 'Phone' column in the 'Customer' collection.
+    - name: PostalCode
+      type: update_column_Customer_PostalCode
+      description: Update the 'PostalCode' column in the 'Customer' collection.
+    - name: State
+      type: update_column_Customer_State
+      description: Update the 'State' column in the 'Customer' collection.
+    - name: SupportRepId
+      type: update_column_Customer_SupportRepId
+      description: Update the 'SupportRepId' column in the 'Customer' collection.
+  graphql:
+    typeName: chinook_v2_update_Customer_by_CustomerId_update_columns
+    inputTypeName: chinook_v2_update_Customer_by_CustomerId_update_columns_input
+  dataConnectorTypeMapping:
+    - dataConnectorName: chinook
+      dataConnectorObjectType: v2_update_Customer_by_CustomerId_update_columns
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: v2_update_Customer_by_CustomerId_update_columns
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - Address
+          - City
+          - Company
+          - Country
+          - CustomerId
+          - Email
+          - Fax
+          - FirstName
+          - LastName
+          - Phone
+          - PostalCode
+          - State
+          - SupportRepId
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: v2_update_Customer_by_CustomerId_response
+  description: Responses from the 'v2_update_Customer_by_CustomerId' procedure
+  fields:
+    - name: affected_rows
+      type: int4!
+      description: The number of rows affected by the mutation
+    - name: returning
+      type: "[Customer!]!"
+      description: Data from rows affected by the mutation
+  graphql:
+    typeName: chinook_v2_update_Customer_by_CustomerId_response
+    inputTypeName: chinook_v2_update_Customer_by_CustomerId_response_input
+  dataConnectorTypeMapping:
+    - dataConnectorName: chinook
+      dataConnectorObjectType: v2_update_Customer_by_CustomerId_response
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: v2_update_Customer_by_CustomerId_response
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - affected_rows
+          - returning
+
+---
+kind: Command
+version: v1
+definition:
+  name: v2_update_Customer_by_CustomerId
+  outputType: v2_update_Customer_by_CustomerId_response!
+  arguments:
+    - name: key_CustomerId
+      type: int4!
+    - name: post_check
+      type: Customer_bool_exp!
+      description: Update permission post-condition predicate over the 'Customer' collection
+    - name: pre_check
+      type: Customer_bool_exp!
+      description: Update permission pre-condition predicate over the 'Customer' collection
+    - name: update_columns
+      type: v2_update_Customer_by_CustomerId_update_columns!
+  source:
+    dataConnectorName: chinook
+    dataConnectorCommand:
+      procedure: v2_update_Customer_by_CustomerId
+  graphql:
+    rootFieldName: v2_update_Customer_by_CustomerId
+    rootFieldKind: Mutation
+  description: Update any row on the 'Customer' collection using the 'CustomerId' key
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: v2_update_Customer_by_CustomerId
+  permissions:
+    - role: admin
+      allowExecution: true
+

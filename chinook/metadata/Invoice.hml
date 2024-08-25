@@ -1,0 +1,182 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: Invoice
+  fields:
+    - name: BillingAddress
+      type: varchar
+    - name: BillingCity
+      type: varchar
+    - name: BillingCountry
+      type: varchar
+    - name: BillingPostalCode
+      type: varchar
+    - name: BillingState
+      type: varchar
+    - name: CustomerId
+      type: int4!
+    - name: InvoiceDate
+      type: timestamp!
+    - name: InvoiceId
+      type: int4!
+    - name: Total
+      type: numeric!
+  graphql:
+    typeName: chinook_Invoice
+    inputTypeName: chinook_Invoice_input
+  dataConnectorTypeMapping:
+    - dataConnectorName: chinook
+      dataConnectorObjectType: Invoice
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: Invoice
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - BillingAddress
+          - BillingCity
+          - BillingCountry
+          - BillingPostalCode
+          - BillingState
+          - CustomerId
+          - InvoiceDate
+          - InvoiceId
+          - Total
+
+---
+kind: ObjectBooleanExpressionType
+version: v1
+definition:
+  name: Invoice_bool_exp
+  objectType: Invoice
+  dataConnectorName: chinook
+  dataConnectorObjectType: Invoice
+  comparableFields:
+    - fieldName: BillingAddress
+      operators:
+        enableAll: true
+    - fieldName: BillingCity
+      operators:
+        enableAll: true
+    - fieldName: BillingCountry
+      operators:
+        enableAll: true
+    - fieldName: BillingPostalCode
+      operators:
+        enableAll: true
+    - fieldName: BillingState
+      operators:
+        enableAll: true
+    - fieldName: CustomerId
+      operators:
+        enableAll: true
+    - fieldName: InvoiceDate
+      operators:
+        enableAll: true
+    - fieldName: InvoiceId
+      operators:
+        enableAll: true
+    - fieldName: Total
+      operators:
+        enableAll: true
+  graphql:
+    typeName: chinook_Invoice_bool_exp
+
+---
+kind: Model
+version: v1
+definition:
+  name: Invoice
+  objectType: Invoice
+  source:
+    dataConnectorName: chinook
+    collection: Invoice
+  filterExpressionType: Invoice_bool_exp
+  orderableFields:
+    - fieldName: BillingAddress
+      orderByDirections:
+        enableAll: true
+    - fieldName: BillingCity
+      orderByDirections:
+        enableAll: true
+    - fieldName: BillingCountry
+      orderByDirections:
+        enableAll: true
+    - fieldName: BillingPostalCode
+      orderByDirections:
+        enableAll: true
+    - fieldName: BillingState
+      orderByDirections:
+        enableAll: true
+    - fieldName: CustomerId
+      orderByDirections:
+        enableAll: true
+    - fieldName: InvoiceDate
+      orderByDirections:
+        enableAll: true
+    - fieldName: InvoiceId
+      orderByDirections:
+        enableAll: true
+    - fieldName: Total
+      orderByDirections:
+        enableAll: true
+  graphql:
+    selectMany:
+      queryRootField: Invoice
+    selectUniques:
+      - queryRootField: Invoice_by_InvoiceId
+        uniqueIdentifier:
+          - InvoiceId
+    orderByExpressionType: chinook_Invoice_order_by
+
+---
+kind: ModelPermissions
+version: v1
+definition:
+  modelName: Invoice
+  permissions:
+    - role: admin
+      select:
+        filter: null
+
+---
+kind: Relationship
+version: v1
+definition:
+  name: Customer
+  sourceType: Invoice
+  target:
+    model:
+      name: Customer
+      relationshipType: Object
+  mapping:
+    - source:
+        fieldPath:
+          - fieldName: CustomerId
+      target:
+        modelField:
+          - fieldName: CustomerId
+
+---
+kind: Relationship
+version: v1
+definition:
+  name: InvoiceLines
+  sourceType: Invoice
+  target:
+    model:
+      name: InvoiceLine
+      relationshipType: Array
+  mapping:
+    - source:
+        fieldPath:
+          - fieldName: InvoiceId
+      target:
+        modelField:
+          - fieldName: InvoiceId
+

@@ -1,0 +1,223 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: data_types
+  fields:
+    - name: bit
+      type: bit
+    - name: bool
+      type: Boolean
+    - name: bpchar
+      type: bpchar
+    - name: char
+      type: bpchar
+    - name: date
+      type: date
+    - name: float4
+      type: float4
+    - name: float8
+      type: float8
+    - name: int2
+      type: int2
+    - name: int4
+      type: int4
+    - name: int8
+      type: int8
+    - name: numeric
+      type: numeric
+    - name: text
+      type: String
+    - name: time
+      type: time
+    - name: timestamp
+      type: timestamp
+    - name: timestamptz
+      type: timestamptz
+    - name: timetz
+      type: timetz
+    - name: uuid
+      type: uuid
+    - name: varchar
+      type: varchar
+  graphql:
+    typeName: data_types
+    inputTypeName: data_types_input
+  dataConnectorTypeMapping:
+    - dataConnectorName: data
+      dataConnectorObjectType: data_types
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: data_types
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - bit
+          - bool
+          - bpchar
+          - char
+          - date
+          - float4
+          - float8
+          - int2
+          - int4
+          - int8
+          - numeric
+          - text
+          - time
+          - timestamp
+          - timestamptz
+          - timetz
+          - uuid
+          - varchar
+
+---
+kind: ObjectBooleanExpressionType
+version: v1
+definition:
+  name: data_types_bool_exp
+  objectType: data_types
+  dataConnectorName: data
+  dataConnectorObjectType: data_types
+  comparableFields:
+    - fieldName: bit
+      operators:
+        enableAll: true
+    - fieldName: bool
+      operators:
+        enableAll: true
+    - fieldName: bpchar
+      operators:
+        enableAll: true
+    - fieldName: char
+      operators:
+        enableAll: true
+    - fieldName: date
+      operators:
+        enableAll: true
+    - fieldName: float4
+      operators:
+        enableAll: true
+    - fieldName: float8
+      operators:
+        enableAll: true
+    - fieldName: int2
+      operators:
+        enableAll: true
+    - fieldName: int4
+      operators:
+        enableAll: true
+    - fieldName: int8
+      operators:
+        enableAll: true
+    - fieldName: numeric
+      operators:
+        enableAll: true
+    - fieldName: text
+      operators:
+        enableAll: true
+    - fieldName: time
+      operators:
+        enableAll: true
+    - fieldName: timestamp
+      operators:
+        enableAll: true
+    - fieldName: timestamptz
+      operators:
+        enableAll: true
+    - fieldName: timetz
+      operators:
+        enableAll: true
+    - fieldName: uuid
+      operators:
+        enableAll: true
+    - fieldName: varchar
+      operators:
+        enableAll: true
+  graphql:
+    typeName: data_types_bool_exp
+
+---
+kind: Model
+version: v1
+definition:
+  name: data_types
+  objectType: data_types
+  source:
+    dataConnectorName: data
+    collection: data_types
+  filterExpressionType: data_types_bool_exp
+  orderableFields:
+    - fieldName: bit
+      orderByDirections:
+        enableAll: true
+    - fieldName: bool
+      orderByDirections:
+        enableAll: true
+    - fieldName: bpchar
+      orderByDirections:
+        enableAll: true
+    - fieldName: char
+      orderByDirections:
+        enableAll: true
+    - fieldName: date
+      orderByDirections:
+        enableAll: true
+    - fieldName: float4
+      orderByDirections:
+        enableAll: true
+    - fieldName: float8
+      orderByDirections:
+        enableAll: true
+    - fieldName: int2
+      orderByDirections:
+        enableAll: true
+    - fieldName: int4
+      orderByDirections:
+        enableAll: true
+    - fieldName: int8
+      orderByDirections:
+        enableAll: true
+    - fieldName: numeric
+      orderByDirections:
+        enableAll: true
+    - fieldName: text
+      orderByDirections:
+        enableAll: true
+    - fieldName: time
+      orderByDirections:
+        enableAll: true
+    - fieldName: timestamp
+      orderByDirections:
+        enableAll: true
+    - fieldName: timestamptz
+      orderByDirections:
+        enableAll: true
+    - fieldName: timetz
+      orderByDirections:
+        enableAll: true
+    - fieldName: uuid
+      orderByDirections:
+        enableAll: true
+    - fieldName: varchar
+      orderByDirections:
+        enableAll: true
+  graphql:
+    selectMany:
+      queryRootField: data_types
+    selectUniques: []
+    orderByExpressionType: data_types_order_by
+
+---
+kind: ModelPermissions
+version: v1
+definition:
+  modelName: data_types
+  permissions:
+    - role: admin
+      select:
+        filter: null

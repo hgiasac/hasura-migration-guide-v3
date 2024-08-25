@@ -1,0 +1,44 @@
+services:
+  postgres:
+    image: postgres:15
+    restart: always
+    ports:
+      - "5432:5432"
+    extra_hosts:
+      - local.hasura.dev=host-gateway
+    volumes:
+      - db_data:/var/lib/postgresql/data
+      - ./scripts/docker-entrypoint-initdb.d/000_createdb.sql:/docker-entrypoint-initdb.d/000_createdb.sql
+    environment:
+      POSTGRES_PASSWORD: postgrespassword
+  engine-v2:
+    image: hasura/graphql-engine:v2.42.0.cli-migrations-v3
+    ports:
+      - "8080:8080"
+    restart: always
+    volumes:
+      - ./v2/migrations:/hasura-migrations
+      - ./v2/metadata:/hasura-metadata
+    environment:
+      ## postgres database to store Hasura metadata
+      HASURA_GRAPHQL_METADATA_DATABASE_URL: postgres://postgres:postgrespassword@postgres:5432/metadata
+      DATA_DATABASE_URL: postgres://postgres:postgrespassword@postgres:5432/postgres
+      CHINOOK_DATABASE_URL: postgres://postgres:postgrespassword@postgres:5432/chinook
+      ## enable the console served by server
+      HASURA_GRAPHQL_ENABLE_CONSOLE: "true" # set to "false" to disable console
+      ## enable debugging mode. It is recommended to disable this in production
+      HASURA_GRAPHQL_DEV_MODE: "true"
+      HASURA_GRAPHQL_ENABLED_LOG_TYPES: startup, http-log, webhook-log, websocket-log, query-log
+      ## uncomment next line to run console offline (i.e load console assets from server instead of CDN)
+      # HASURA_GRAPHQL_CONSOLE_ASSETS_DIR: /srv/console-assets
+      ## uncomment next line to set an admin secret
+      HASURA_GRAPHQL_ADMIN_SECRET: ${HASURA_GRAPHQL_ADMIN_SECRET}
+
+  auth-hook:
+    build:
+      context: auth-hook
+    environment:
+      HASURA_GRAPHQL_ADMIN_SECRET: ${HASURA_GRAPHQL_ADMIN_SECRET}
+
+volumes:
+  db_data:

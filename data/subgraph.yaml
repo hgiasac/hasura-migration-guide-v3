@@ -1,0 +1,19 @@
+kind: Subgraph
+version: v2
+definition:
+  name: data
+  generator:
+    rootPath: .
+    namingConvention: none
+  includePaths:
+    - metadata
+  envMapping:
+    DATA_DATA_AUTHORIZATION_HEADER:
+      fromEnv: DATA_DATA_AUTHORIZATION_HEADER
+    DATA_DATA_READ_URL:
+      fromEnv: DATA_DATA_READ_URL
+    DATA_DATA_WRITE_URL:
+      fromEnv: DATA_DATA_WRITE_URL
+  connectors:
+    - path: connector/data/connector.yaml
+      connectorLinkName: data

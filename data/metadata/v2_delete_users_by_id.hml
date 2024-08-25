@@ -1,0 +1,62 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: v2_delete_users_by_id_response
+  description: Responses from the 'v2_delete_users_by_id' procedure
+  fields:
+    - name: affected_rows
+      type: int4!
+      description: The number of rows affected by the mutation
+    - name: returning
+      type: "[users!]!"
+      description: Data from rows affected by the mutation
+  graphql:
+    typeName: v2_delete_users_by_id_response
+    inputTypeName: v2_delete_users_by_id_response_input
+  dataConnectorTypeMapping:
+    - dataConnectorName: data
+      dataConnectorObjectType: v2_delete_users_by_id_response
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: v2_delete_users_by_id_response
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - affected_rows
+          - returning
+
+---
+kind: Command
+version: v1
+definition:
+  name: v2_delete_users_by_id
+  outputType: v2_delete_users_by_id_response!
+  arguments:
+    - name: key_id
+      type: uuid!
+    - name: pre_check
+      type: users_bool_exp!
+      description: Delete permission predicate over the 'users' collection
+  source:
+    dataConnectorName: data
+    dataConnectorCommand:
+      procedure: v2_delete_users_by_id
+  graphql:
+    rootFieldName: v2_delete_users_by_id
+    rootFieldKind: Mutation
+  description: Delete any row on the 'users' collection using the 'id' key
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: v2_delete_users_by_id
+  permissions:
+    - role: admin
+      allowExecution: true
+

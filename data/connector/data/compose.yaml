@@ -1,0 +1,24 @@
+services:
+  data_data:
+    build:
+      context: .
+      dockerfile_inline: |-
+        FROM ghcr.io/hasura/ndc-postgres:v1.1.0
+        COPY ./ /etc/connector
+    develop:
+      watch:
+        - path: ./
+          action: sync+restart
+          target: /etc/connector
+    environment:
+      CONNECTION_URI: $DATA_DATA_CONNECTION_URI
+      HASURA_SERVICE_TOKEN_SECRET: $DATA_DATA_HASURA_SERVICE_TOKEN_SECRET
+      OTEL_EXPORTER_OTLP_TRACES_ENDPOINT: $DATA_DATA_OTEL_EXPORTER_OTLP_TRACES_ENDPOINT
+      OTEL_SERVICE_NAME: $DATA_DATA_OTEL_SERVICE_NAME
+    extra_hosts:
+      - local.hasura.dev=host-gateway
+    ports:
+      - mode: ingress
+        target: 8080
+        published: "5997"
+        protocol: tcp

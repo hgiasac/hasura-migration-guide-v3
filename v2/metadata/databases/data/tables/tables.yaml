@@ -1,0 +1,4 @@
+- "!include public_article.yaml"
+- "!include public_data_types.yaml"
+- "!include public_todo.yaml"
+- "!include public_users.yaml"

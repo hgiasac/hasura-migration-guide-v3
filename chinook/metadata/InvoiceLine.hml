@@ -1,0 +1,146 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: InvoiceLine
+  fields:
+    - name: InvoiceId
+      type: int4!
+    - name: InvoiceLineId
+      type: int4!
+    - name: Quantity
+      type: int4!
+    - name: TrackId
+      type: int4!
+    - name: UnitPrice
+      type: numeric!
+  graphql:
+    typeName: chinook_InvoiceLine
+    inputTypeName: chinook_InvoiceLine_input
+  dataConnectorTypeMapping:
+    - dataConnectorName: chinook
+      dataConnectorObjectType: InvoiceLine
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: InvoiceLine
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - InvoiceId
+          - InvoiceLineId
+          - Quantity
+          - TrackId
+          - UnitPrice
+
+---
+kind: ObjectBooleanExpressionType
+version: v1
+definition:
+  name: InvoiceLine_bool_exp
+  objectType: InvoiceLine
+  dataConnectorName: chinook
+  dataConnectorObjectType: InvoiceLine
+  comparableFields:
+    - fieldName: InvoiceId
+      operators:
+        enableAll: true
+    - fieldName: InvoiceLineId
+      operators:
+        enableAll: true
+    - fieldName: Quantity
+      operators:
+        enableAll: true
+    - fieldName: TrackId
+      operators:
+        enableAll: true
+    - fieldName: UnitPrice
+      operators:
+        enableAll: true
+  graphql:
+    typeName: chinook_InvoiceLine_bool_exp
+
+---
+kind: Model
+version: v1
+definition:
+  name: InvoiceLine
+  objectType: InvoiceLine
+  source:
+    dataConnectorName: chinook
+    collection: InvoiceLine
+  filterExpressionType: InvoiceLine_bool_exp
+  orderableFields:
+    - fieldName: InvoiceId
+      orderByDirections:
+        enableAll: true
+    - fieldName: InvoiceLineId
+      orderByDirections:
+        enableAll: true
+    - fieldName: Quantity
+      orderByDirections:
+        enableAll: true
+    - fieldName: TrackId
+      orderByDirections:
+        enableAll: true
+    - fieldName: UnitPrice
+      orderByDirections:
+        enableAll: true
+  graphql:
+    selectMany:
+      queryRootField: InvoiceLine
+    selectUniques:
+      - queryRootField: InvoiceLine_by_InvoiceLineId
+        uniqueIdentifier:
+          - InvoiceLineId
+    orderByExpressionType: chinook_InvoiceLine_order_by
+
+---
+kind: ModelPermissions
+version: v1
+definition:
+  modelName: InvoiceLine
+  permissions:
+    - role: admin
+      select:
+        filter: null
+
+---
+kind: Relationship
+version: v1
+definition:
+  name: Invoice
+  sourceType: InvoiceLine
+  target:
+    model:
+      name: Invoice
+      relationshipType: Object
+  mapping:
+    - source:
+        fieldPath:
+          - fieldName: InvoiceId
+      target:
+        modelField:
+          - fieldName: InvoiceId
+
+---
+kind: Relationship
+version: v1
+definition:
+  name: Track
+  sourceType: InvoiceLine
+  target:
+    model:
+      name: Track
+      relationshipType: Object
+  mapping:
+    - source:
+        fieldPath:
+          - fieldName: TrackId
+      target:
+        modelField:
+          - fieldName: TrackId
+

@@ -1,0 +1,93 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: v2_insert_article_object
+  fields:
+    - name: id
+      type: int4
+    - name: title
+      type: String!
+    - name: user_id
+      type: uuid!
+  graphql:
+    typeName: v2_insert_article_object
+    inputTypeName: v2_insert_article_object_input
+  dataConnectorTypeMapping:
+    - dataConnectorName: data
+      dataConnectorObjectType: v2_insert_article_object
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: v2_insert_article_object
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - id
+          - title
+          - user_id
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: v2_insert_article_response
+  description: Responses from the 'v2_insert_article' procedure
+  fields:
+    - name: affected_rows
+      type: int4!
+      description: The number of rows affected by the mutation
+    - name: returning
+      type: "[article!]!"
+      description: Data from rows affected by the mutation
+  graphql:
+    typeName: v2_insert_article_response
+    inputTypeName: v2_insert_article_response_input
+  dataConnectorTypeMapping:
+    - dataConnectorName: data
+      dataConnectorObjectType: v2_insert_article_response
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: v2_insert_article_response
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - affected_rows
+          - returning
+
+---
+kind: Command
+version: v1
+definition:
+  name: v2_insert_article
+  outputType: v2_insert_article_response!
+  arguments:
+    - name: objects
+      type: "[v2_insert_article_object!]!"
+    - name: post_check
+      type: article_bool_exp!
+      description: Insert permission predicate over the 'article' collection
+  source:
+    dataConnectorName: data
+    dataConnectorCommand:
+      procedure: v2_insert_article
+  graphql:
+    rootFieldName: v2_insert_article
+    rootFieldKind: Mutation
+  description: Insert into the article table
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: v2_insert_article
+  permissions:
+    - role: admin
+      allowExecution: true

@@ -1,0 +1,101 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: Genre
+  fields:
+    - name: GenreId
+      type: int4!
+    - name: Name
+      type: varchar
+  graphql:
+    typeName: chinook_Genre
+    inputTypeName: chinook_Genre_input
+  dataConnectorTypeMapping:
+    - dataConnectorName: chinook
+      dataConnectorObjectType: Genre
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: Genre
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - GenreId
+          - Name
+
+---
+kind: ObjectBooleanExpressionType
+version: v1
+definition:
+  name: Genre_bool_exp
+  objectType: Genre
+  dataConnectorName: chinook
+  dataConnectorObjectType: Genre
+  comparableFields:
+    - fieldName: GenreId
+      operators:
+        enableAll: true
+    - fieldName: Name
+      operators:
+        enableAll: true
+  graphql:
+    typeName: chinook_Genre_bool_exp
+
+---
+kind: Model
+version: v1
+definition:
+  name: Genre
+  objectType: Genre
+  source:
+    dataConnectorName: chinook
+    collection: Genre
+  filterExpressionType: Genre_bool_exp
+  orderableFields:
+    - fieldName: GenreId
+      orderByDirections:
+        enableAll: true
+    - fieldName: Name
+      orderByDirections:
+        enableAll: true
+  graphql:
+    selectMany:
+      queryRootField: Genre
+    selectUniques:
+      - queryRootField: Genre_by_GenreId
+        uniqueIdentifier:
+          - GenreId
+    orderByExpressionType: chinook_Genre_order_by
+
+---
+kind: ModelPermissions
+version: v1
+definition:
+  modelName: Genre
+  permissions:
+    - role: admin
+      select:
+        filter: null
+
+---
+kind: Relationship
+version: v1
+definition:
+  name: Tracks
+  sourceType: Genre
+  target:
+    model:
+      name: Track
+      relationshipType: Array
+  mapping:
+    - source:
+        fieldPath:
+          - fieldName: GenreId
+      target:
+        modelField:
+          - fieldName: GenreId
+

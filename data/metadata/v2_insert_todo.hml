@@ -1,0 +1,117 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: v2_insert_todo_object
+  fields:
+    - name: completed
+      type: Boolean!
+    - name: id
+      type: int4
+    - name: task
+      type: String!
+    - name: user_id
+      type: uuid!
+    - name: bit
+      type: bit
+    - name: bpchar
+      type: bpchar
+    - name: date
+      type: date
+    - name: float4
+      type: float8
+    - name: float8
+      type: float8
+    - name: numeric
+      type: numeric
+    - name: text
+      type: String
+  graphql:
+    typeName: v2_insert_todo_object
+    inputTypeName: v2_insert_todo_object_input
+  dataConnectorTypeMapping:
+    - dataConnectorName: data
+      dataConnectorObjectType: v2_insert_todo_object
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: v2_insert_todo_object
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - completed
+          - id
+          - task
+          - user_id
+          - bit
+          - bpchar
+          - date
+          - float4
+          - float8
+          - numeric
+          - text
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: v2_insert_todo_response
+  description: Responses from the 'v2_insert_todo' procedure
+  fields:
+    - name: affected_rows
+      type: int4!
+      description: The number of rows affected by the mutation
+    - name: returning
+      type: "[todo!]!"
+      description: Data from rows affected by the mutation
+  graphql:
+    typeName: v2_insert_todo_response
+    inputTypeName: v2_insert_todo_response_input
+  dataConnectorTypeMapping:
+    - dataConnectorName: data
+      dataConnectorObjectType: v2_insert_todo_response
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: v2_insert_todo_response
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - affected_rows
+          - returning
+
+---
+kind: Command
+version: v1
+definition:
+  name: v2_insert_todo
+  outputType: v2_insert_todo_response!
+  arguments:
+    - name: objects
+      type: "[v2_insert_todo_object!]!"
+    - name: post_check
+      type: todo_bool_exp!
+      description: Insert permission predicate over the 'todo' collection
+  source:
+    dataConnectorName: data
+    dataConnectorCommand:
+      procedure: v2_insert_todo
+  graphql:
+    rootFieldName: v2_insert_todo
+    rootFieldKind: Mutation
+  description: Insert into the todo table
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: v2_insert_todo
+  permissions:
+    - role: admin
+      allowExecution: true

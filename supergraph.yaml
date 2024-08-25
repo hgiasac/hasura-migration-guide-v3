@@ -1,0 +1,7 @@
+kind: Supergraph
+version: v2
+definition:
+  subgraphs:
+    - globals/subgraph.yaml
+    - data/subgraph.yaml
+    - chinook/subgraph.yaml

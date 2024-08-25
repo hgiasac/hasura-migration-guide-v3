@@ -1,0 +1,571 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: update_column_Employee_Address
+  description: Update the 'Address' column in the 'Employee' collection
+  fields:
+    - name: _set
+      type: varchar
+      description: Set the column to this value
+  graphql:
+    typeName: chinook_update_column_Employee_Address
+    inputTypeName: chinook_update_column_Employee_Address_input
+  dataConnectorTypeMapping:
+    - dataConnectorName: chinook
+      dataConnectorObjectType: update_column_Employee_Address
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: update_column_Employee_Address
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - _set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: update_column_Employee_BirthDate
+  description: Update the 'BirthDate' column in the 'Employee' collection
+  fields:
+    - name: _set
+      type: timestamp
+      description: Set the column to this value
+  graphql:
+    typeName: chinook_update_column_Employee_BirthDate
+    inputTypeName: chinook_update_column_Employee_BirthDate_input
+  dataConnectorTypeMapping:
+    - dataConnectorName: chinook
+      dataConnectorObjectType: update_column_Employee_BirthDate
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: update_column_Employee_BirthDate
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - _set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: update_column_Employee_City
+  description: Update the 'City' column in the 'Employee' collection
+  fields:
+    - name: _set
+      type: varchar
+      description: Set the column to this value
+  graphql:
+    typeName: chinook_update_column_Employee_City
+    inputTypeName: chinook_update_column_Employee_City_input
+  dataConnectorTypeMapping:
+    - dataConnectorName: chinook
+      dataConnectorObjectType: update_column_Employee_City
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: update_column_Employee_City
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - _set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: update_column_Employee_Country
+  description: Update the 'Country' column in the 'Employee' collection
+  fields:
+    - name: _set
+      type: varchar
+      description: Set the column to this value
+  graphql:
+    typeName: chinook_update_column_Employee_Country
+    inputTypeName: chinook_update_column_Employee_Country_input
+  dataConnectorTypeMapping:
+    - dataConnectorName: chinook
+      dataConnectorObjectType: update_column_Employee_Country
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: update_column_Employee_Country
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - _set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: update_column_Employee_Email
+  description: Update the 'Email' column in the 'Employee' collection
+  fields:
+    - name: _set
+      type: varchar
+      description: Set the column to this value
+  graphql:
+    typeName: chinook_update_column_Employee_Email
+    inputTypeName: chinook_update_column_Employee_Email_input
+  dataConnectorTypeMapping:
+    - dataConnectorName: chinook
+      dataConnectorObjectType: update_column_Employee_Email
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: update_column_Employee_Email
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - _set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: update_column_Employee_EmployeeId
+  description: Update the 'EmployeeId' column in the 'Employee' collection
+  fields:
+    - name: _set
+      type: int4!
+      description: Set the column to this value
+  graphql:
+    typeName: chinook_update_column_Employee_EmployeeId
+    inputTypeName: chinook_update_column_Employee_EmployeeId_input
+  dataConnectorTypeMapping:
+    - dataConnectorName: chinook
+      dataConnectorObjectType: update_column_Employee_EmployeeId
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: update_column_Employee_EmployeeId
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - _set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: update_column_Employee_Fax
+  description: Update the 'Fax' column in the 'Employee' collection
+  fields:
+    - name: _set
+      type: varchar
+      description: Set the column to this value
+  graphql:
+    typeName: chinook_update_column_Employee_Fax
+    inputTypeName: chinook_update_column_Employee_Fax_input
+  dataConnectorTypeMapping:
+    - dataConnectorName: chinook
+      dataConnectorObjectType: update_column_Employee_Fax
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: update_column_Employee_Fax
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - _set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: update_column_Employee_FirstName
+  description: Update the 'FirstName' column in the 'Employee' collection
+  fields:
+    - name: _set
+      type: varchar!
+      description: Set the column to this value
+  graphql:
+    typeName: chinook_update_column_Employee_FirstName
+    inputTypeName: chinook_update_column_Employee_FirstName_input
+  dataConnectorTypeMapping:
+    - dataConnectorName: chinook
+      dataConnectorObjectType: update_column_Employee_FirstName
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: update_column_Employee_FirstName
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - _set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: update_column_Employee_HireDate
+  description: Update the 'HireDate' column in the 'Employee' collection
+  fields:
+    - name: _set
+      type: timestamp
+      description: Set the column to this value
+  graphql:
+    typeName: chinook_update_column_Employee_HireDate
+    inputTypeName: chinook_update_column_Employee_HireDate_input
+  dataConnectorTypeMapping:
+    - dataConnectorName: chinook
+      dataConnectorObjectType: update_column_Employee_HireDate
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: update_column_Employee_HireDate
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - _set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: update_column_Employee_LastName
+  description: Update the 'LastName' column in the 'Employee' collection
+  fields:
+    - name: _set
+      type: varchar!
+      description: Set the column to this value
+  graphql:
+    typeName: chinook_update_column_Employee_LastName
+    inputTypeName: chinook_update_column_Employee_LastName_input
+  dataConnectorTypeMapping:
+    - dataConnectorName: chinook
+      dataConnectorObjectType: update_column_Employee_LastName
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: update_column_Employee_LastName
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - _set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: update_column_Employee_Phone
+  description: Update the 'Phone' column in the 'Employee' collection
+  fields:
+    - name: _set
+      type: varchar
+      description: Set the column to this value
+  graphql:
+    typeName: chinook_update_column_Employee_Phone
+    inputTypeName: chinook_update_column_Employee_Phone_input
+  dataConnectorTypeMapping:
+    - dataConnectorName: chinook
+      dataConnectorObjectType: update_column_Employee_Phone
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: update_column_Employee_Phone
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - _set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: update_column_Employee_PostalCode
+  description: Update the 'PostalCode' column in the 'Employee' collection
+  fields:
+    - name: _set
+      type: varchar
+      description: Set the column to this value
+  graphql:
+    typeName: chinook_update_column_Employee_PostalCode
+    inputTypeName: chinook_update_column_Employee_PostalCode_input
+  dataConnectorTypeMapping:
+    - dataConnectorName: chinook
+      dataConnectorObjectType: update_column_Employee_PostalCode
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: update_column_Employee_PostalCode
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - _set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: update_column_Employee_ReportsTo
+  description: Update the 'ReportsTo' column in the 'Employee' collection
+  fields:
+    - name: _set
+      type: int4
+      description: Set the column to this value
+  graphql:
+    typeName: chinook_update_column_Employee_ReportsTo
+    inputTypeName: chinook_update_column_Employee_ReportsTo_input
+  dataConnectorTypeMapping:
+    - dataConnectorName: chinook
+      dataConnectorObjectType: update_column_Employee_ReportsTo
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: update_column_Employee_ReportsTo
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - _set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: update_column_Employee_State
+  description: Update the 'State' column in the 'Employee' collection
+  fields:
+    - name: _set
+      type: varchar
+      description: Set the column to this value
+  graphql:
+    typeName: chinook_update_column_Employee_State
+    inputTypeName: chinook_update_column_Employee_State_input
+  dataConnectorTypeMapping:
+    - dataConnectorName: chinook
+      dataConnectorObjectType: update_column_Employee_State
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: update_column_Employee_State
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - _set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: update_column_Employee_Title
+  description: Update the 'Title' column in the 'Employee' collection
+  fields:
+    - name: _set
+      type: varchar
+      description: Set the column to this value
+  graphql:
+    typeName: chinook_update_column_Employee_Title
+    inputTypeName: chinook_update_column_Employee_Title_input
+  dataConnectorTypeMapping:
+    - dataConnectorName: chinook
+      dataConnectorObjectType: update_column_Employee_Title
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: update_column_Employee_Title
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - _set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: v2_update_Employee_by_EmployeeId_update_columns
+  description: Update the columns of the 'Employee' collection
+  fields:
+    - name: Address
+      type: update_column_Employee_Address
+      description: Update the 'Address' column in the 'Employee' collection.
+    - name: BirthDate
+      type: update_column_Employee_BirthDate
+      description: Update the 'BirthDate' column in the 'Employee' collection.
+    - name: City
+      type: update_column_Employee_City
+      description: Update the 'City' column in the 'Employee' collection.
+    - name: Country
+      type: update_column_Employee_Country
+      description: Update the 'Country' column in the 'Employee' collection.
+    - name: Email
+      type: update_column_Employee_Email
+      description: Update the 'Email' column in the 'Employee' collection.
+    - name: EmployeeId
+      type: update_column_Employee_EmployeeId
+      description: Update the 'EmployeeId' column in the 'Employee' collection.
+    - name: Fax
+      type: update_column_Employee_Fax
+      description: Update the 'Fax' column in the 'Employee' collection.
+    - name: FirstName
+      type: update_column_Employee_FirstName
+      description: Update the 'FirstName' column in the 'Employee' collection.
+    - name: HireDate
+      type: update_column_Employee_HireDate
+      description: Update the 'HireDate' column in the 'Employee' collection.
+    - name: LastName
+      type: update_column_Employee_LastName
+      description: Update the 'LastName' column in the 'Employee' collection.
+    - name: Phone
+      type: update_column_Employee_Phone
+      description: Update the 'Phone' column in the 'Employee' collection.
+    - name: PostalCode
+      type: update_column_Employee_PostalCode
+      description: Update the 'PostalCode' column in the 'Employee' collection.
+    - name: ReportsTo
+      type: update_column_Employee_ReportsTo
+      description: Update the 'ReportsTo' column in the 'Employee' collection.
+    - name: State
+      type: update_column_Employee_State
+      description: Update the 'State' column in the 'Employee' collection.
+    - name: Title
+      type: update_column_Employee_Title
+      description: Update the 'Title' column in the 'Employee' collection.
+  graphql:
+    typeName: chinook_v2_update_Employee_by_EmployeeId_update_columns
+    inputTypeName: chinook_v2_update_Employee_by_EmployeeId_update_columns_input
+  dataConnectorTypeMapping:
+    - dataConnectorName: chinook
+      dataConnectorObjectType: v2_update_Employee_by_EmployeeId_update_columns
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: v2_update_Employee_by_EmployeeId_update_columns
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - Address
+          - BirthDate
+          - City
+          - Country
+          - Email
+          - EmployeeId
+          - Fax
+          - FirstName
+          - HireDate
+          - LastName
+          - Phone
+          - PostalCode
+          - ReportsTo
+          - State
+          - Title
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: v2_update_Employee_by_EmployeeId_response
+  description: Responses from the 'v2_update_Employee_by_EmployeeId' procedure
+  fields:
+    - name: affected_rows
+      type: int4!
+      description: The number of rows affected by the mutation
+    - name: returning
+      type: "[Employee!]!"
+      description: Data from rows affected by the mutation
+  graphql:
+    typeName: chinook_v2_update_Employee_by_EmployeeId_response
+    inputTypeName: chinook_v2_update_Employee_by_EmployeeId_response_input
+  dataConnectorTypeMapping:
+    - dataConnectorName: chinook
+      dataConnectorObjectType: v2_update_Employee_by_EmployeeId_response
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: v2_update_Employee_by_EmployeeId_response
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - affected_rows
+          - returning
+
+---
+kind: Command
+version: v1
+definition:
+  name: v2_update_Employee_by_EmployeeId
+  outputType: v2_update_Employee_by_EmployeeId_response!
+  arguments:
+    - name: key_EmployeeId
+      type: int4!
+    - name: post_check
+      type: Employee_bool_exp!
+      description: Update permission post-condition predicate over the 'Employee' collection
+    - name: pre_check
+      type: Employee_bool_exp!
+      description: Update permission pre-condition predicate over the 'Employee' collection
+    - name: update_columns
+      type: v2_update_Employee_by_EmployeeId_update_columns!
+  source:
+    dataConnectorName: chinook
+    dataConnectorCommand:
+      procedure: v2_update_Employee_by_EmployeeId
+  graphql:
+    rootFieldName: v2_update_Employee_by_EmployeeId
+    rootFieldKind: Mutation
+  description: Update any row on the 'Employee' collection using the 'EmployeeId' key
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: v2_update_Employee_by_EmployeeId
+  permissions:
+    - role: admin
+      allowExecution: true
+

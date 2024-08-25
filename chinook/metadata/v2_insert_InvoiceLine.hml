@@ -1,0 +1,100 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: v2_insert_InvoiceLine_object
+  fields:
+    - name: InvoiceId
+      type: int4!
+    - name: InvoiceLineId
+      type: int4!
+    - name: Quantity
+      type: int4!
+    - name: TrackId
+      type: int4!
+    - name: UnitPrice
+      type: numeric!
+  graphql:
+    typeName: chinook_v2_insert_InvoiceLine_object
+    inputTypeName: chinook_v2_insert_InvoiceLine_object_input
+  dataConnectorTypeMapping:
+    - dataConnectorName: chinook
+      dataConnectorObjectType: v2_insert_InvoiceLine_object
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: v2_insert_InvoiceLine_object
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - InvoiceId
+          - InvoiceLineId
+          - Quantity
+          - TrackId
+          - UnitPrice
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: v2_insert_InvoiceLine_response
+  description: Responses from the 'v2_insert_InvoiceLine' procedure
+  fields:
+    - name: affected_rows
+      type: int4!
+      description: The number of rows affected by the mutation
+    - name: returning
+      type: "[InvoiceLine!]!"
+      description: Data from rows affected by the mutation
+  graphql:
+    typeName: chinook_v2_insert_InvoiceLine_response
+    inputTypeName: chinook_v2_insert_InvoiceLine_response_input
+  dataConnectorTypeMapping:
+    - dataConnectorName: chinook
+      dataConnectorObjectType: v2_insert_InvoiceLine_response
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: v2_insert_InvoiceLine_response
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - affected_rows
+          - returning
+
+---
+kind: Command
+version: v1
+definition:
+  name: v2_insert_InvoiceLine
+  outputType: v2_insert_InvoiceLine_response!
+  arguments:
+    - name: objects
+      type: "[v2_insert_InvoiceLine_object!]!"
+    - name: post_check
+      type: InvoiceLine_bool_exp!
+      description: Insert permission predicate over the 'InvoiceLine' collection
+  source:
+    dataConnectorName: chinook
+    dataConnectorCommand:
+      procedure: v2_insert_InvoiceLine
+  graphql:
+    rootFieldName: v2_insert_InvoiceLine
+    rootFieldKind: Mutation
+  description: Insert into the InvoiceLine table
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: v2_insert_InvoiceLine
+  permissions:
+    - role: admin
+      allowExecution: true
+

@@ -1,0 +1,91 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: v2_insert_Genre_object
+  fields:
+    - name: GenreId
+      type: int4!
+    - name: Name
+      type: varchar
+  graphql:
+    typeName: chinook_v2_insert_Genre_object
+    inputTypeName: chinook_v2_insert_Genre_object_input
+  dataConnectorTypeMapping:
+    - dataConnectorName: chinook
+      dataConnectorObjectType: v2_insert_Genre_object
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: v2_insert_Genre_object
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - GenreId
+          - Name
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: v2_insert_Genre_response
+  description: Responses from the 'v2_insert_Genre' procedure
+  fields:
+    - name: affected_rows
+      type: int4!
+      description: The number of rows affected by the mutation
+    - name: returning
+      type: "[Genre!]!"
+      description: Data from rows affected by the mutation
+  graphql:
+    typeName: chinook_v2_insert_Genre_response
+    inputTypeName: chinook_v2_insert_Genre_response_input
+  dataConnectorTypeMapping:
+    - dataConnectorName: chinook
+      dataConnectorObjectType: v2_insert_Genre_response
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: v2_insert_Genre_response
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - affected_rows
+          - returning
+
+---
+kind: Command
+version: v1
+definition:
+  name: v2_insert_Genre
+  outputType: v2_insert_Genre_response!
+  arguments:
+    - name: objects
+      type: "[v2_insert_Genre_object!]!"
+    - name: post_check
+      type: Genre_bool_exp!
+      description: Insert permission predicate over the 'Genre' collection
+  source:
+    dataConnectorName: chinook
+    dataConnectorCommand:
+      procedure: v2_insert_Genre
+  graphql:
+    rootFieldName: v2_insert_Genre
+    rootFieldKind: Mutation
+  description: Insert into the Genre table
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: v2_insert_Genre
+  permissions:
+    - role: admin
+      allowExecution: true
+

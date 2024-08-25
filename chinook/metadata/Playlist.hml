@@ -1,0 +1,101 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: Playlist
+  fields:
+    - name: Name
+      type: varchar
+    - name: PlaylistId
+      type: int4!
+  graphql:
+    typeName: chinook_Playlist
+    inputTypeName: chinook_Playlist_input
+  dataConnectorTypeMapping:
+    - dataConnectorName: chinook
+      dataConnectorObjectType: Playlist
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: Playlist
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - Name
+          - PlaylistId
+
+---
+kind: ObjectBooleanExpressionType
+version: v1
+definition:
+  name: Playlist_bool_exp
+  objectType: Playlist
+  dataConnectorName: chinook
+  dataConnectorObjectType: Playlist
+  comparableFields:
+    - fieldName: Name
+      operators:
+        enableAll: true
+    - fieldName: PlaylistId
+      operators:
+        enableAll: true
+  graphql:
+    typeName: chinook_Playlist_bool_exp
+
+---
+kind: Model
+version: v1
+definition:
+  name: Playlist
+  objectType: Playlist
+  source:
+    dataConnectorName: chinook
+    collection: Playlist
+  filterExpressionType: Playlist_bool_exp
+  orderableFields:
+    - fieldName: Name
+      orderByDirections:
+        enableAll: true
+    - fieldName: PlaylistId
+      orderByDirections:
+        enableAll: true
+  graphql:
+    selectMany:
+      queryRootField: Playlist
+    selectUniques:
+      - queryRootField: Playlist_by_PlaylistId
+        uniqueIdentifier:
+          - PlaylistId
+    orderByExpressionType: chinook_Playlist_order_by
+
+---
+kind: ModelPermissions
+version: v1
+definition:
+  modelName: Playlist
+  permissions:
+    - role: admin
+      select:
+        filter: null
+
+---
+kind: Relationship
+version: v1
+definition:
+  name: PlaylistTracks
+  sourceType: Playlist
+  target:
+    model:
+      name: PlaylistTrack
+      relationshipType: Array
+  mapping:
+    - source:
+        fieldPath:
+          - fieldName: PlaylistId
+      target:
+        modelField:
+          - fieldName: PlaylistId
+

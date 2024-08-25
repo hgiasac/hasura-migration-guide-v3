@@ -1,0 +1,161 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: update_column_PlaylistTrack_PlaylistId
+  description: Update the 'PlaylistId' column in the 'PlaylistTrack' collection
+  fields:
+    - name: _set
+      type: int4!
+      description: Set the column to this value
+  graphql:
+    typeName: chinook_update_column_PlaylistTrack_PlaylistId
+    inputTypeName: chinook_update_column_PlaylistTrack_PlaylistId_input
+  dataConnectorTypeMapping:
+    - dataConnectorName: chinook
+      dataConnectorObjectType: update_column_PlaylistTrack_PlaylistId
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: update_column_PlaylistTrack_PlaylistId
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - _set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: update_column_PlaylistTrack_TrackId
+  description: Update the 'TrackId' column in the 'PlaylistTrack' collection
+  fields:
+    - name: _set
+      type: int4!
+      description: Set the column to this value
+  graphql:
+    typeName: chinook_update_column_PlaylistTrack_TrackId
+    inputTypeName: chinook_update_column_PlaylistTrack_TrackId_input
+  dataConnectorTypeMapping:
+    - dataConnectorName: chinook
+      dataConnectorObjectType: update_column_PlaylistTrack_TrackId
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: update_column_PlaylistTrack_TrackId
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - _set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: v2_update_PlaylistTrack_by_PlaylistId_and_TrackId_update_columns
+  description: Update the columns of the 'PlaylistTrack' collection
+  fields:
+    - name: PlaylistId
+      type: update_column_PlaylistTrack_PlaylistId
+      description: Update the 'PlaylistId' column in the 'PlaylistTrack' collection.
+    - name: TrackId
+      type: update_column_PlaylistTrack_TrackId
+      description: Update the 'TrackId' column in the 'PlaylistTrack' collection.
+  graphql:
+    typeName: chinook_v2_update_PlaylistTrack_by_PlaylistId_and_TrackId_update_columns
+    inputTypeName: chinook_v2_update_PlaylistTrack_by_PlaylistId_and_TrackId_update_columns_input
+  dataConnectorTypeMapping:
+    - dataConnectorName: chinook
+      dataConnectorObjectType: v2_update_PlaylistTrack_by_PlaylistId_and_TrackId_update_columns
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: v2_update_PlaylistTrack_by_PlaylistId_and_TrackId_update_columns
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - PlaylistId
+          - TrackId
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: v2_update_PlaylistTrack_by_PlaylistId_and_TrackId_response
+  description: Responses from the
+    'v2_update_PlaylistTrack_by_PlaylistId_and_TrackId' procedure
+  fields:
+    - name: affected_rows
+      type: int4!
+      description: The number of rows affected by the mutation
+    - name: returning
+      type: "[PlaylistTrack!]!"
+      description: Data from rows affected by the mutation
+  graphql:
+    typeName: chinook_v2_update_PlaylistTrack_by_PlaylistId_and_TrackId_response
+    inputTypeName: chinook_v2_update_PlaylistTrack_by_PlaylistId_and_TrackId_response_input
+  dataConnectorTypeMapping:
+    - dataConnectorName: chinook
+      dataConnectorObjectType: v2_update_PlaylistTrack_by_PlaylistId_and_TrackId_response
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: v2_update_PlaylistTrack_by_PlaylistId_and_TrackId_response
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - affected_rows
+          - returning
+
+---
+kind: Command
+version: v1
+definition:
+  name: v2_update_PlaylistTrack_by_PlaylistId_and_TrackId
+  outputType: v2_update_PlaylistTrack_by_PlaylistId_and_TrackId_response!
+  arguments:
+    - name: key_PlaylistId
+      type: int4!
+    - name: key_TrackId
+      type: int4!
+    - name: post_check
+      type: PlaylistTrack_bool_exp!
+      description: Update permission post-condition predicate over the 'PlaylistTrack'
+        collection
+    - name: pre_check
+      type: PlaylistTrack_bool_exp!
+      description: Update permission pre-condition predicate over the 'PlaylistTrack'
+        collection
+    - name: update_columns
+      type: v2_update_PlaylistTrack_by_PlaylistId_and_TrackId_update_columns!
+  source:
+    dataConnectorName: chinook
+    dataConnectorCommand:
+      procedure: v2_update_PlaylistTrack_by_PlaylistId_and_TrackId
+  graphql:
+    rootFieldName: v2_update_PlaylistTrack_by_PlaylistId_and_TrackId
+    rootFieldKind: Mutation
+  description: Update any row on the 'PlaylistTrack' collection using the
+    'PlaylistId' and 'TrackId' keys
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: v2_update_PlaylistTrack_by_PlaylistId_and_TrackId
+  permissions:
+    - role: admin
+      allowExecution: true
+

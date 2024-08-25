@@ -1,0 +1,93 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: v2_insert_users_object
+  fields:
+    - name: created_at
+      type: timestamptz
+    - name: id
+      type: uuid
+    - name: name
+      type: String!
+  graphql:
+    typeName: v2_insert_users_object
+    inputTypeName: v2_insert_users_object_input
+  dataConnectorTypeMapping:
+    - dataConnectorName: data
+      dataConnectorObjectType: v2_insert_users_object
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: v2_insert_users_object
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - created_at
+          - id
+          - name
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: v2_insert_users_response
+  description: Responses from the 'v2_insert_users' procedure
+  fields:
+    - name: affected_rows
+      type: int4!
+      description: The number of rows affected by the mutation
+    - name: returning
+      type: "[users!]!"
+      description: Data from rows affected by the mutation
+  graphql:
+    typeName: v2_insert_users_response
+    inputTypeName: v2_insert_users_response_input
+  dataConnectorTypeMapping:
+    - dataConnectorName: data
+      dataConnectorObjectType: v2_insert_users_response
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: v2_insert_users_response
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - affected_rows
+          - returning
+
+---
+kind: Command
+version: v1
+definition:
+  name: v2_insert_users
+  outputType: v2_insert_users_response!
+  arguments:
+    - name: objects
+      type: "[v2_insert_users_object!]!"
+    - name: post_check
+      type: users_bool_exp!
+      description: Insert permission predicate over the 'users' collection
+  source:
+    dataConnectorName: data
+    dataConnectorCommand:
+      procedure: v2_insert_users
+  graphql:
+    rootFieldName: v2_insert_users
+    rootFieldKind: Mutation
+  description: Insert into the users table
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: v2_insert_users
+  permissions:
+    - role: admin
+      allowExecution: true
