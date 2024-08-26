@@ -263,7 +263,7 @@ Add connectors to each subgraph:
 
 ```sh
 # initialize data connector
-ddn connector init -i --subgraph data/subgraph.yaml
+ddn connector init -i --subgraph data/subgraph.yaml --add-to-compose-file ./compose.yaml
 
 # ? Hub Connector hasura/postgres
 # ? Connector Name data
@@ -271,7 +271,7 @@ ddn connector init -i --subgraph data/subgraph.yaml
 # ? CONNECTION_URI (The PostgreSQL connection URI) postgres://postgres:postgrespassword@local.hasura.dev:5432/postgres
 
 # initialize chinook connector
-ddn connector init -i --subgraph chinook/subgraph.yaml
+ddn connector init -i --subgraph chinook/subgraph.yaml --add-to-compose-file ./compose.yaml
 
 # ? Hub Connector hasura/postgres
 # ? Connector Name chinook
@@ -673,6 +673,27 @@ definition:
                   sessionVariable: x-hasura-user-id
 ```
 
+> [!NOTE] > `pre_check` and `post_check` are required arguments. If you want to make them optional you can set empty argument presets:
+>
+> ```yaml
+> kind: CommandPermissions
+> version: v1
+> definition:
+>   commandName: v2_update_users_by_id
+>   permissions:
+>     - role: admin
+>       allowExecution: true
+>       argumentPresets:
+>         - argument: pre_check
+>           value:
+>             booleanExpression:
+>               and: []
+>         - argument: post_check
+>           value:
+>             booleanExpression:
+>               and: []
+> ```
+
 #### Column Presets
 
 ![Column Presets](./assets/column-presets.png)
@@ -740,7 +761,29 @@ definition:
 
 > See [Business Logic](https://hasura.io/docs/3.0/business-logic/overview/)
 
-TODO
+![Action](./assets/action-v2.png)
+
+You need to port action webhooks to connectors for business logic. Currently, It's easier to port your source codes to frameworks that have the same programming languages.
+
+- [NodeJS connector](https://hasura.io/docs/3.0/business-logic/typescript)
+- [Python Connector](https://hasura.io/docs/3.0/business-logic/python)
+- [NDC Go](https://github.com/hasura/ndc-sdk-go/tree/main/cmd/hasura-ndc-go)
+
+This example uses NodeJS connector. Let's create a new subgraph.
+
+```sh
+ddn subgraph init app --dir app --target-supergraph ./supergraph.yaml --add-to-compose-file ./compose.yaml
+ddn connector init -i --subgraph app/subgraph.yaml
+# ? Hub Connector hasura/nodejs
+# ? Connector Name app
+# ? Port 5646
+```
+
+NodeJS connector generates a [default function](./app/connector/app/functions.ts). Modify the response type to be similar to the `hello` action.
+
+```sh
+ddn connector introspect app --subgraph ./app/subgraph.yaml --add-all-resources
+```
 
 ### Event Trigger
 

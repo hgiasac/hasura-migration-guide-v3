@@ -1,6 +1,13 @@
-actions: []
+actions:
+  - name: hello
+    definition:
+      kind: ""
+      handler: http://api:8080/hello
+    permissions:
+      - role: user
 custom_types:
   enums: []
   input_objects: []
-  objects: []
+  objects:
+    - name: HelloOutput
   scalars: []

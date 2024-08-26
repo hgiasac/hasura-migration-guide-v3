@@ -216,3 +216,12 @@ definition:
   permissions:
     - role: admin
       allowExecution: true
+      argumentPresets:
+        - argument: pre_check
+          value:
+            booleanExpression:
+              and: []
+        - argument: post_check
+          value:
+            booleanExpression:
+              and: []

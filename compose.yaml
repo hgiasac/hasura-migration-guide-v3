@@ -1,5 +1,6 @@
 include:
   - path: compose.v2.yaml
+  - path: app/connector/app/compose.yaml
   - path: data/connector/data/compose.yaml
   - path: chinook/connector/chinook/compose.yaml
 services:
