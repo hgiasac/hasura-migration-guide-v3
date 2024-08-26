@@ -9,7 +9,7 @@ definition:
     - name: title
       type: String!
     - name: user_id
-      type: uuid!
+      type: int4!
   graphql:
     typeName: article
     inputTypeName: article_input
@@ -24,6 +24,12 @@ definition:
   typeName: article
   permissions:
     - role: admin
+      output:
+        allowedFields:
+          - id
+          - title
+          - user_id
+    - role: user
       output:
         allowedFields:
           - id
@@ -89,6 +95,14 @@ definition:
     - role: admin
       select:
         filter: null
+    - role: user
+      select:
+        filter:
+          fieldComparison:
+            field: user_id
+            operator: _eq
+            value:
+              sessionVariable: x-hasura-user-id
 
 ---
 kind: Relationship

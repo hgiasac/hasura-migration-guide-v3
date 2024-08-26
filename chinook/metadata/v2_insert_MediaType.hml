@@ -76,7 +76,7 @@ definition:
     dataConnectorCommand:
       procedure: v2_insert_MediaType
   graphql:
-    rootFieldName: v2_insert_MediaType
+    rootFieldName: insert_MediaType
     rootFieldKind: Mutation
   description: Insert into the MediaType table
 
@@ -88,4 +88,3 @@ definition:
   permissions:
     - role: admin
       allowExecution: true
-

@@ -115,7 +115,7 @@ definition:
     dataConnectorCommand:
       procedure: v2_insert_Employee
   graphql:
-    rootFieldName: v2_insert_Employee
+    rootFieldName: insert_Employee
     rootFieldKind: Mutation
   description: Insert into the Employee table
 
@@ -127,4 +127,3 @@ definition:
   permissions:
     - role: admin
       allowExecution: true
-

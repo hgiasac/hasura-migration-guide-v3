@@ -36,7 +36,7 @@ In brief,GraphQL Engine v2 is perfect if you only need developing GraphQL APIs f
 
 ### Built-in admin secret authentication
 
-Engine v3 no longer supports admin secret authentication. Fortunately, it's easy to replicate this feature via a [simple authentication webhook](./auth-hook/main.ts).
+Engine v3 no longer supports admin secret authentication. Fortunately, it's easy to replicate this authentication via a [simple authentication webhook](./auth-hook/main.ts).
 
 ## So why Hasura v3?
 
@@ -94,7 +94,7 @@ Hasura Engine v3
 
 ### Terminology
 
-> [!INFO]
+> [!NOTE]
 > See [Core Concepts](https://hasura.io/docs/3.0/basics/core-concepts) and [For Hasura v2 users](https://hasura.io/docs/3.0/basics/v3-for-v2-users) pages in Hasura docs.
 
 | Version 2                                                                    | Version 3                                            |
@@ -104,10 +104,10 @@ Hasura Engine v3
 | Data Connector, Action                                                       | [Connector, Native Data Connector (NDC)](#connector) |
 | Remote Schema                                                                | [GraphQL Connector](#remote-schema)                  |
 | Event Trigger                                                                | Plugins                                              |
-| GraphQL operation                                                            | Model                                                |
 | Table, View                                                                  | [Collection](#connector)                             |
 | Custom read only APIs for GraphQL query                                      | [Function](#connector)                               |
 | Write APIs for GraphQL mutation                                              | [Command, Procedure](#connector)                     |
+| Column Presets                                                               | [Argument Presets](#column-presets)                  |
 
 ### Features
 
@@ -132,6 +132,7 @@ Hasura Engine v3
 | OpenTelemetry   | :white_check_mark: (EE) | :white_check_mark:                           |
 
 **\*EE**: Available on Cloud and Enterprise edition only.
+
 **\*C**: Supported by the individual connector.
 
 #### Connector
@@ -255,7 +256,7 @@ If you use PostgreSQL only GraphQL Engine v2 is still an awesome tool to manage 
 
 ### Postgres connector
 
-> [!INFO]
+> [!NOTE]
 > See [PostgreSQL Connector](https://hasura.io/docs/3.0/connectors/postgresql/) page in Hasura docs v3. The latest configuration reference is [version 5](https://hasura.io/docs/3.0/connectors/postgresql/configuration-reference/version-5)
 
 Add connectors to each subgraph:
@@ -326,6 +327,10 @@ Generated get, update and delete one by primary key operations in Hasura v3 are 
 
 You may also notice that generated mutations have `v2_` prefix. That makes the default generated metadata incompatible with Hasura v2. Fortunately, the names can be edited even though it takes some manual efforts.
 
+> [!TIP]
+> Use an editor to replace `rootFieldName: v2_` with `rootFieldName: ` to remove v2 prefixes.
+> [!Replace v2 prefixes](./assets/replace-v2-prefixes.png)
+
 However, GraphQL scalar type naming is another pain point if you want to make the GraphQL schema consistent between both version. Hasura v2 tries to correlate data types of PostgreSQL to basic GraphQL scalars. In contrast, PostgreSQL connector v3 keeps scalar names to be the same with native types of PostgreSQL.
 
 | PostgreSQL Type | Version 2   | Version 3   |
@@ -351,7 +356,7 @@ However, GraphQL scalar type naming is another pain point if you want to make th
 
 It's possible to rename GraphQL types in v3 to match v2. However, it's useless if you have multiple PostgreSQL data sources. Engine v3 doesn't allow duplicated GraphQL type mappings. So even if using the same PostgreSQL connector, you still need to add suffix to GraphQL types in other subgraph via `graphqlRootFieldPrefix` setting.
 
-> [!INFO]
+> [!TIP]
 > To rename the scalar type, open `<subgraph>/metadata/data-types.yaml` -> Right click on the scalar name -> `Rename Symbol`. The Hasura extension can rename all related fields that use that scalar type.
 > ![Rename Scalar](./assets/rename-scalar.png)
 
@@ -375,16 +380,376 @@ query GetArtists($name: chinook_varchar!) {
 }
 ```
 
-### Authorization
+Generated Insert, Update and Delete mutations are also generated differently.
 
-### Permission
+**Insert**
+
+> [!NOTE] > `ON CONFLICT` hasn't been supported in PostgresSQL connector v1.1.1.
+
+```graphql
+# v2
+mutation InsertArticle {
+  insert_article(objects: [{ title: "article 1", user_id: 1 }]) {
+    affected_rows
+    returning {
+      id
+    }
+  }
+}
+
+# {
+#   "data": {
+#     "insert_article": {
+#       "affected_rows": 1,
+#       "returning": [
+#         {
+#           "id": 1
+#         }
+#       ]
+#     }
+#   }
+# }
+
+# v3
+mutation InsertArticle {
+  insert_article(
+    objects: [{ title: "article 1", user_id: 1 }]
+    post_check: {}
+  ) {
+    affected_rows
+    returning {
+      id
+    }
+  }
+}
+
+# {
+#   "data": {
+#     "insert_article": {
+#       "affected_rows": 1,
+#       "returning": [
+#         {
+#           "id": 1
+#         }
+#       ]
+#     }
+#   }
+# }
+```
+
+**Update**
+
+```graphql
+# v2
+mutation UpdateArticleByPk {
+  update_article_by_pk(pk_columns: { id: 1 }, _set: { title: "foo" }) {
+    id
+  }
+}
+
+# {
+#   "data": {
+#     "update_article_by_pk": {
+#       "id": 1
+#     }
+#   }
+# }
+
+# v3
+mutation UpdateArticleByPk {
+  update_article_by_id(
+    key_id: 1
+    pre_check: {}
+    post_check: {}
+    update_columns: { title: { _set: "foo" } }
+  ) {
+    affected_rows
+  }
+}
+
+# {
+#   "data": {
+#     "update_article_by_id": {
+#       "affected_rows": 0,
+#       "returning": []
+#     }
+#   }
+# }
+```
+
+**Delete**
+
+```graphql
+# v2
+mutation DeleteArticleByPk {
+  delete_article_by_pk(id: 1) {
+    id
+  }
+}
+
+# {
+#   "data": {
+#     "delete_article_by_pk": {
+#       "id": 1
+#     }
+#   }
+# }
+
+# v3
+mutation DeleteArticleByPk {
+  delete_article_by_id(key_id: 1, pre_check: {}) {
+    affected_rows
+    returning {
+      id
+    }
+  }
+}
+
+# {
+#   "data": {
+#     "update_article_by_id": {
+#       "affected_rows": 0,
+#       "returning": []
+#     }
+#   }
+# }
+```
+
+### Authentication
+
+Hasura v3 supports 3 authentication modes:
+
+- `noAuth`: no authentication required. It's the default mode when initializing a new project so you can easily get start with the development.
+- [webhook](https://hasura.io/docs/3.0/auth/authentication/webhook/): the concept is similar to Hasura v2.
+- [jwt](https://hasura.io/docs/3.0/auth/authentication/jwt/): similar to Hasura v2.
+
+Admin secret authentication is no longer supported in Hasura v3. However, it's easily to to replicate this authentication via a [simple authentication webhook](./auth-hook/main.ts).
+
+### Permissions
+
+> See [Permissions](https://hasura.io/docs/3.0/supergraph-modeling/permissions).
+
+Permissions in Hasura v2 are model-based designed that defines Create, read, update and delete (CRUD) rules. Meanwhile, Hasura v3 permissions to multiple separated types.
+
+| Type               | Description                                                                       |
+| ------------------ | --------------------------------------------------------------------------------- |
+| TypePermissions    | Define which fields are allowed to be accessed by a role on an output type.       |
+| ModelPermissions   | Define which objects or rows within a model are allowed to be accessed by a role. |
+| CommandPermissions | Define whether the command is executable by a role.                               |
+
+Let's see the similarity between Hasura v2 and v3.
+
+![Permission v2](./assets/permissions-v2.png)
+
+#### Filter Permissions
+
+![Filter permissions](./assets/permissions-v2-filter.png)
+
+[Filter rules of select permissions](./v2/metadata/databases/data/tables/public_article.yaml#L21) are defined in the [ModelPermissions](https://hasura.io/docs/3.0/supergraph-modeling/permissions/#modelpermissions-modelpermissions) type in Hasura v3.
+
+Hasura v2 can automatically detect session variable and literal values in `filter`. This configuration is more explicit in v3 ([source](./data/metadata/article.hml#H84)).
+
+```yaml
+# v2
+select_permissions:
+  - role: user
+    permission:
+      filter:
+        user_id:
+          _eq: x-hasura-user-
+
+# v3
+kind: ModelPermissions
+version: v1
+definition:
+  modelName: article
+  permissions:
+    - role: admin
+      select:
+        filter: null
+    - role: user
+      select:
+        filter:
+          fieldComparison:
+            field: user_id
+            operator: _eq
+            value:
+              sessionVariable: x-hasura-user-id
+```
+
+#### Column Permissions
+
+![Column select permissions](./assets/permissions-v2-columns.png)
+
+[Column permissions](./v2/metadata/databases/data/tables/public_article.yaml#L21) are defined in the [TypePermissions](https://hasura.io/docs/3.0/supergraph-modeling/permissions/#typepermissions-typepermission) type in Hasura v3.
+
+```yaml
+# v2
+select_permissions:
+  - role: user
+    permission:
+      columns:
+        - id
+        - title
+        - user_id
+
+# v3
+kind: TypePermissions
+version: v1
+definition:
+  typeName: article
+  permissions:
+    - role: user
+      output:
+        allowedFields:
+          - id
+          - title
+          - user_id
+```
+
+`TypePermissions` are also applied for input arguments in functions and commands, e.g. allowed update columns.
+
+```yaml
+kind: TypePermissions
+version: v1
+definition:
+  typeName: v2_update_article_by_id_update_columns
+  permissions:
+    - role: user
+      output:
+        allowedFields:
+          - title
+```
+
+#### Pre-check and Post-check
+
+![Pre-check and Post-check](./assets/pre-check-post-check-v2.png)
+
+> See [CommandPermissions](https://hasura.io/docs/3.0/supergraph-modeling/permissions/#commandpermissions-commandpermissions).
+
+Pre-check and Post-check permissions aren't natively supported by Hasura Engine v3. This is handled by individual connectors. PostgreSQL connector supports these checks by adding `pre_check` and `post_check` input arguments:
+
+```graphql
+mutation UpdateArticleById {
+  update_article_by_id(
+    key_id: 1
+    pre_check: { user_id: { _eq: 1 } }
+    post_check: { user_id: { _eq: 1 } }
+    update_columns: { title: { _set: "foo" } }
+  ) {
+    affected_rows
+  }
+}
+```
+
+To simulate pre-check and post-check in Hasura v3. We need to add `argumentPresets` in `CommandPermissions` of the input type:
+
+```yaml
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: v2_update_article_by_id
+  permissions:
+    - role: admin
+      allowExecution: true
+    - role: user
+      allowExecution: true
+      argumentPresets:
+        - argument: pre_check
+          value:
+            booleanExpression:
+              fieldComparison:
+                field: user_id
+                operator: _eq
+                value:
+                  sessionVariable: x-hasura-user-id
+        - argument: post_check
+          value:
+            booleanExpression:
+              fieldComparison:
+                field: user_id
+                operator: _eq
+                value:
+                  sessionVariable: x-hasura-user-id
+```
+
+#### Column Presets
+
+![Column Presets](./assets/column-presets.png)
+
+> See [Argument Presets](https://hasura.io/docs/3.0/supergraph-modeling/permissions/#argument-presets).
+
+Add `fieldPresets` input to `TypePermissions` to automatically set `user_id` to inserted objects.
+
+```yaml
+kind: TypePermissions
+version: v1
+definition:
+  typeName: v2_insert_article_object
+  permissions:
+    - role: user
+      input:
+        fieldPresets:
+          - field: user_id
+            value:
+              sessionVariable: x-hasura-user-id
+      output:
+        allowedFields:
+          - title
+```
+
+#### Aggregation queries permissions
+
+Work in progress
+
+#### Input Validation
+
+Work in progress. The input validation hook is supported by Plugins.
+
+#### Limit number of rows
+
+Not supported.
+
+### Relationships
+
+> See [Relationships](https://hasura.io/docs/3.0/supergraph-modeling/relationships).
+
+Native PostgreSQL relationships can be automatically generated by the DDN CLI. However, you need to define relationships with models in different subgraphs manually. For example, the following example add a remote relationship from `data.users` to `chinook.Album`.
+
+```yaml
+kind: Relationship
+version: v1
+definition:
+  name: albums
+  sourceType: users
+  target:
+    model:
+      subgraph: chinook
+      name: Album
+      relationshipType: Array
+  mapping:
+    - source:
+        fieldPath:
+          - fieldName: id
+      target:
+        modelField:
+          - fieldName: AlbumId
+```
 
 ### Action
 
+> See [Business Logic](https://hasura.io/docs/3.0/business-logic/overview/)
+
+TODO
+
 ### Event Trigger
+
+Work in progress.
 
 ### Cron Trigger
 
+Currently, there isn't any plan to bring the Cron Trigger feature to Hasura v3. However, there are many alternatives. If your team uses Kubernetes [Cronjob](https://kubernetes.io/docs/concepts/workloads/controllers/cron-jobs/) is a good solution.
+
 ### Remote Schema
 
-## Breaking changes
+TODO

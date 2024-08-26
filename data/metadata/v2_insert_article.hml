@@ -9,7 +9,7 @@ definition:
     - name: title
       type: String!
     - name: user_id
-      type: uuid!
+      type: int4!
   graphql:
     typeName: v2_insert_article_object
     inputTypeName: v2_insert_article_object_input
@@ -29,6 +29,15 @@ definition:
           - id
           - title
           - user_id
+    - role: user
+      input:
+        fieldPresets:
+          - field: user_id
+            value:
+              sessionVariable: x-hasura-user-id
+      output:
+        allowedFields:
+          - title
 
 ---
 kind: ObjectType
@@ -79,7 +88,7 @@ definition:
     dataConnectorCommand:
       procedure: v2_insert_article
   graphql:
-    rootFieldName: v2_insert_article
+    rootFieldName: insert_article
     rootFieldKind: Mutation
   description: Insert into the article table
 

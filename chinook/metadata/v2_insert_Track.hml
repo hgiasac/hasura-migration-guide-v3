@@ -97,7 +97,7 @@ definition:
     dataConnectorCommand:
       procedure: v2_insert_Track
   graphql:
-    rootFieldName: v2_insert_Track
+    rootFieldName: insert_Track
     rootFieldKind: Mutation
   description: Insert into the Track table
 
@@ -109,4 +109,3 @@ definition:
   permissions:
     - role: admin
       allowExecution: true
-

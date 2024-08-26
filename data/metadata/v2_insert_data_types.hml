@@ -124,7 +124,7 @@ definition:
     dataConnectorCommand:
       procedure: v2_insert_data_types
   graphql:
-    rootFieldName: v2_insert_data_types
+    rootFieldName: insert_data_types
     rootFieldKind: Mutation
   description: Insert into the data_types table
 

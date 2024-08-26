@@ -76,7 +76,7 @@ definition:
     dataConnectorCommand:
       procedure: v2_insert_Playlist
   graphql:
-    rootFieldName: v2_insert_Playlist
+    rootFieldName: insert_Playlist
     rootFieldKind: Mutation
   description: Insert into the Playlist table
 
@@ -88,4 +88,3 @@ definition:
   permissions:
     - role: admin
       allowExecution: true
-

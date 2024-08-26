@@ -5,3 +5,48 @@ object_relationships:
   - name: user
     using:
       foreign_key_constraint_on: user_id
+insert_permissions:
+  - role: user
+    permission:
+      check:
+        user_id:
+          _is_null: true
+      set:
+        user_id: x-hasura-user-id
+      columns:
+        - id
+        - user_id
+        - title
+    comment: ""
+select_permissions:
+  - role: user
+    permission:
+      columns:
+        - id
+        - title
+        - user_id
+      filter:
+        user_id:
+          _eq: x-hasura-user-id
+    comment: ""
+update_permissions:
+  - role: user
+    permission:
+      columns:
+        - id
+        - user_id
+        - title
+      filter:
+        user_id:
+          _eq: x-hasura-user-id
+      check:
+        user_id:
+          _eq: x-hasura-user-id
+    comment: ""
+delete_permissions:
+  - role: user
+    permission:
+      filter:
+        user_id:
+          _eq: x-hasura-user-id
+    comment: ""

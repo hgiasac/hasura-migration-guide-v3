@@ -47,7 +47,7 @@ definition:
     dataConnectorCommand:
       procedure: v2_delete_MediaType_by_MediaTypeId
   graphql:
-    rootFieldName: v2_delete_MediaType_by_MediaTypeId
+    rootFieldName: delete_MediaType_by_MediaTypeId
     rootFieldKind: Mutation
   description: Delete any row on the 'MediaType' collection using the 'MediaTypeId' key
 
@@ -59,4 +59,3 @@ definition:
   permissions:
     - role: admin
       allowExecution: true
-

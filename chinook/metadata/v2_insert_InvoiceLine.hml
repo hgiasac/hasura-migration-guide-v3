@@ -85,7 +85,7 @@ definition:
     dataConnectorCommand:
       procedure: v2_insert_InvoiceLine
   graphql:
-    rootFieldName: v2_insert_InvoiceLine
+    rootFieldName: insert_InvoiceLine
     rootFieldKind: Mutation
   description: Insert into the InvoiceLine table
 
@@ -97,4 +97,3 @@ definition:
   permissions:
     - role: admin
       allowExecution: true
-

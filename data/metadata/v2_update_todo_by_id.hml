@@ -90,7 +90,7 @@ definition:
   description: Update the 'user_id' column in the 'todo' collection
   fields:
     - name: _set
-      type: uuid!
+      type: int4!
       description: Set the column to this value
   graphql:
     typeName: update_column_todo_user_id
@@ -129,27 +129,6 @@ definition:
     - name: user_id
       type: update_column_todo_user_id
       description: Update the 'user_id' column in the 'todo' collection.
-    - name: bit
-      type: update_column_todo_bit
-      description: Update the 'bit' column in the 'todo' collection.
-    - name: bpchar
-      type: update_column_todo_bpchar
-      description: Update the 'bpchar' column in the 'todo' collection.
-    - name: date
-      type: update_column_todo_date
-      description: Update the 'date' column in the 'todo' collection.
-    - name: float4
-      type: update_column_todo_float4
-      description: Update the 'float4' column in the 'todo' collection.
-    - name: float8
-      type: update_column_todo_float8
-      description: Update the 'float8' column in the 'todo' collection.
-    - name: numeric
-      type: update_column_todo_numeric
-      description: Update the 'numeric' column in the 'todo' collection.
-    - name: text
-      type: update_column_todo_text
-      description: Update the 'text' column in the 'todo' collection.
   graphql:
     typeName: v2_update_todo_by_id_update_columns
     inputTypeName: v2_update_todo_by_id_update_columns_input
@@ -170,13 +149,6 @@ definition:
           - id
           - task
           - user_id
-          - bit
-          - bpchar
-          - date
-          - float4
-          - float8
-          - numeric
-          - text
 
 ---
 kind: ObjectType
@@ -232,7 +204,7 @@ definition:
     dataConnectorCommand:
       procedure: v2_update_todo_by_id
   graphql:
-    rootFieldName: v2_update_todo_by_id
+    rootFieldName: update_todo_by_id
     rootFieldKind: Mutation
   description: Update any row on the 'todo' collection using the 'id' key
 
@@ -244,199 +216,3 @@ definition:
   permissions:
     - role: admin
       allowExecution: true
-
----
-kind: ObjectType
-version: v1
-definition:
-  name: update_column_todo_bit
-  description: Update the 'bit' column in the 'todo' collection
-  fields:
-    - name: _set
-      type: bit
-      description: Set the column to this value
-  graphql:
-    typeName: update_column_todo_bit
-    inputTypeName: update_column_todo_bit_input
-  dataConnectorTypeMapping:
-    - dataConnectorName: data
-      dataConnectorObjectType: update_column_todo_bit
-
----
-kind: TypePermissions
-version: v1
-definition:
-  typeName: update_column_todo_bit
-  permissions:
-    - role: admin
-      output:
-        allowedFields:
-          - _set
-
----
-kind: ObjectType
-version: v1
-definition:
-  name: update_column_todo_bpchar
-  description: Update the 'bpchar' column in the 'todo' collection
-  fields:
-    - name: _set
-      type: bpchar
-      description: Set the column to this value
-  graphql:
-    typeName: update_column_todo_bpchar
-    inputTypeName: update_column_todo_bpchar_input
-  dataConnectorTypeMapping:
-    - dataConnectorName: data
-      dataConnectorObjectType: update_column_todo_bpchar
-
----
-kind: TypePermissions
-version: v1
-definition:
-  typeName: update_column_todo_bpchar
-  permissions:
-    - role: admin
-      output:
-        allowedFields:
-          - _set
-
----
-kind: ObjectType
-version: v1
-definition:
-  name: update_column_todo_date
-  description: Update the 'date' column in the 'todo' collection
-  fields:
-    - name: _set
-      type: date
-      description: Set the column to this value
-  graphql:
-    typeName: update_column_todo_date
-    inputTypeName: update_column_todo_date_input
-  dataConnectorTypeMapping:
-    - dataConnectorName: data
-      dataConnectorObjectType: update_column_todo_date
-
----
-kind: TypePermissions
-version: v1
-definition:
-  typeName: update_column_todo_date
-  permissions:
-    - role: admin
-      output:
-        allowedFields:
-          - _set
-
----
-kind: ObjectType
-version: v1
-definition:
-  name: update_column_todo_float4
-  description: Update the 'float4' column in the 'todo' collection
-  fields:
-    - name: _set
-      type: float8
-      description: Set the column to this value
-  graphql:
-    typeName: update_column_todo_float4
-    inputTypeName: update_column_todo_float4_input
-  dataConnectorTypeMapping:
-    - dataConnectorName: data
-      dataConnectorObjectType: update_column_todo_float4
-
----
-kind: TypePermissions
-version: v1
-definition:
-  typeName: update_column_todo_float4
-  permissions:
-    - role: admin
-      output:
-        allowedFields:
-          - _set
-
----
-kind: ObjectType
-version: v1
-definition:
-  name: update_column_todo_float8
-  description: Update the 'float8' column in the 'todo' collection
-  fields:
-    - name: _set
-      type: float8
-      description: Set the column to this value
-  graphql:
-    typeName: update_column_todo_float8
-    inputTypeName: update_column_todo_float8_input
-  dataConnectorTypeMapping:
-    - dataConnectorName: data
-      dataConnectorObjectType: update_column_todo_float8
-
----
-kind: TypePermissions
-version: v1
-definition:
-  typeName: update_column_todo_float8
-  permissions:
-    - role: admin
-      output:
-        allowedFields:
-          - _set
-
----
-kind: ObjectType
-version: v1
-definition:
-  name: update_column_todo_numeric
-  description: Update the 'numeric' column in the 'todo' collection
-  fields:
-    - name: _set
-      type: numeric
-      description: Set the column to this value
-  graphql:
-    typeName: update_column_todo_numeric
-    inputTypeName: update_column_todo_numeric_input
-  dataConnectorTypeMapping:
-    - dataConnectorName: data
-      dataConnectorObjectType: update_column_todo_numeric
-
----
-kind: TypePermissions
-version: v1
-definition:
-  typeName: update_column_todo_numeric
-  permissions:
-    - role: admin
-      output:
-        allowedFields:
-          - _set
-
----
-kind: ObjectType
-version: v1
-definition:
-  name: update_column_todo_text
-  description: Update the 'text' column in the 'todo' collection
-  fields:
-    - name: _set
-      type: String
-      description: Set the column to this value
-  graphql:
-    typeName: update_column_todo_text
-    inputTypeName: update_column_todo_text_input
-  dataConnectorTypeMapping:
-    - dataConnectorName: data
-      dataConnectorObjectType: update_column_todo_text
-
----
-kind: TypePermissions
-version: v1
-definition:
-  typeName: update_column_todo_text
-  permissions:
-    - role: admin
-      output:
-        allowedFields:
-          - _set

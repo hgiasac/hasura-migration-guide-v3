@@ -62,7 +62,7 @@ definition:
   description: Update the 'user_id' column in the 'article' collection
   fields:
     - name: _set
-      type: uuid!
+      type: int4!
       description: Set the column to this value
   graphql:
     typeName: update_column_article_user_id
@@ -172,7 +172,7 @@ definition:
     dataConnectorCommand:
       procedure: v2_update_article_by_id
   graphql:
-    rootFieldName: v2_update_article_by_id
+    rootFieldName: update_article_by_id
     rootFieldKind: Mutation
   description: Update any row on the 'article' collection using the 'id' key
 
@@ -184,3 +184,22 @@ definition:
   permissions:
     - role: admin
       allowExecution: true
+    - role: user
+      allowExecution: true
+      argumentPresets:
+        - argument: pre_check
+          value:
+            booleanExpression:
+              fieldComparison:
+                field: user_id
+                operator: _eq
+                value:
+                  sessionVariable: x-hasura-user-id
+        - argument: post_check
+          value:
+            booleanExpression:
+              fieldComparison:
+                field: user_id
+                operator: _eq
+                value:
+                  sessionVariable: x-hasura-user-id

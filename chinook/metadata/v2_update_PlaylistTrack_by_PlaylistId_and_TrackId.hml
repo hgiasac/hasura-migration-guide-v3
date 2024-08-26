@@ -132,11 +132,13 @@ definition:
       type: int4!
     - name: post_check
       type: PlaylistTrack_bool_exp!
-      description: Update permission post-condition predicate over the 'PlaylistTrack'
+      description:
+        Update permission post-condition predicate over the 'PlaylistTrack'
         collection
     - name: pre_check
       type: PlaylistTrack_bool_exp!
-      description: Update permission pre-condition predicate over the 'PlaylistTrack'
+      description:
+        Update permission pre-condition predicate over the 'PlaylistTrack'
         collection
     - name: update_columns
       type: v2_update_PlaylistTrack_by_PlaylistId_and_TrackId_update_columns!
@@ -145,7 +147,7 @@ definition:
     dataConnectorCommand:
       procedure: v2_update_PlaylistTrack_by_PlaylistId_and_TrackId
   graphql:
-    rootFieldName: v2_update_PlaylistTrack_by_PlaylistId_and_TrackId
+    rootFieldName: update_PlaylistTrack_by_PlaylistId_and_TrackId
     rootFieldKind: Mutation
   description: Update any row on the 'PlaylistTrack' collection using the
     'PlaylistId' and 'TrackId' keys
@@ -158,4 +160,3 @@ definition:
   permissions:
     - role: admin
       allowExecution: true
-

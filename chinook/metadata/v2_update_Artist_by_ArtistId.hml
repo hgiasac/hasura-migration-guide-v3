@@ -140,7 +140,7 @@ definition:
     dataConnectorCommand:
       procedure: v2_update_Artist_by_ArtistId
   graphql:
-    rootFieldName: v2_update_Artist_by_ArtistId
+    rootFieldName: update_Artist_by_ArtistId
     rootFieldKind: Mutation
   description: Update any row on the 'Artist' collection using the 'ArtistId' key
 
@@ -152,4 +152,3 @@ definition:
   permissions:
     - role: admin
       allowExecution: true
-

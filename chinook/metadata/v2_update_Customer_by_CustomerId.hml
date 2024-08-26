@@ -492,7 +492,7 @@ definition:
     dataConnectorCommand:
       procedure: v2_update_Customer_by_CustomerId
   graphql:
-    rootFieldName: v2_update_Customer_by_CustomerId
+    rootFieldName: update_Customer_by_CustomerId
     rootFieldKind: Mutation
   description: Update any row on the 'Customer' collection using the 'CustomerId' key
 
@@ -504,4 +504,3 @@ definition:
   permissions:
     - role: admin
       allowExecution: true
-

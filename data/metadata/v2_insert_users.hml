@@ -6,8 +6,10 @@ definition:
   fields:
     - name: created_at
       type: timestamptz
+    - name: created_by
+      type: int4
     - name: id
-      type: uuid
+      type: int4
     - name: name
       type: String!
   graphql:
@@ -27,6 +29,7 @@ definition:
       output:
         allowedFields:
           - created_at
+          - created_by
           - id
           - name
 
@@ -79,7 +82,7 @@ definition:
     dataConnectorCommand:
       procedure: v2_insert_users
   graphql:
-    rootFieldName: v2_insert_users
+    rootFieldName: insert_users
     rootFieldKind: Mutation
   description: Insert into the users table
 

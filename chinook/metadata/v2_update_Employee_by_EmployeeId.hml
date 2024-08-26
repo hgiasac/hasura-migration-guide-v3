@@ -556,7 +556,7 @@ definition:
     dataConnectorCommand:
       procedure: v2_update_Employee_by_EmployeeId
   graphql:
-    rootFieldName: v2_update_Employee_by_EmployeeId
+    rootFieldName: update_Employee_by_EmployeeId
     rootFieldKind: Mutation
   description: Update any row on the 'Employee' collection using the 'EmployeeId' key
 
@@ -568,4 +568,3 @@ definition:
   permissions:
     - role: admin
       allowExecution: true
-

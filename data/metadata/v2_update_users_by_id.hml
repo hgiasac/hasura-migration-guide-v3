@@ -30,11 +30,39 @@ definition:
 kind: ObjectType
 version: v1
 definition:
+  name: update_column_users_created_by
+  description: Update the 'created_by' column in the 'users' collection
+  fields:
+    - name: _set
+      type: int4
+      description: Set the column to this value
+  graphql:
+    typeName: update_column_users_created_by
+    inputTypeName: update_column_users_created_by_input
+  dataConnectorTypeMapping:
+    - dataConnectorName: data
+      dataConnectorObjectType: update_column_users_created_by
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: update_column_users_created_by
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - _set
+
+---
+kind: ObjectType
+version: v1
+definition:
   name: update_column_users_id
   description: Update the 'id' column in the 'users' collection
   fields:
     - name: _set
-      type: uuid!
+      type: int4!
       description: Set the column to this value
   graphql:
     typeName: update_column_users_id
@@ -92,6 +120,9 @@ definition:
     - name: created_at
       type: update_column_users_created_at
       description: Update the 'created_at' column in the 'users' collection.
+    - name: created_by
+      type: update_column_users_created_by
+      description: Update the 'created_by' column in the 'users' collection.
     - name: id
       type: update_column_users_id
       description: Update the 'id' column in the 'users' collection.
@@ -115,6 +146,7 @@ definition:
       output:
         allowedFields:
           - created_at
+          - created_by
           - id
           - name
 
@@ -158,7 +190,7 @@ definition:
   outputType: v2_update_users_by_id_response!
   arguments:
     - name: key_id
-      type: uuid!
+      type: int4!
     - name: post_check
       type: users_bool_exp!
       description: Update permission post-condition predicate over the 'users' collection
@@ -172,7 +204,7 @@ definition:
     dataConnectorCommand:
       procedure: v2_update_users_by_id
   graphql:
-    rootFieldName: v2_update_users_by_id
+    rootFieldName: update_users_by_id
     rootFieldKind: Mutation
   description: Update any row on the 'users' collection using the 'id' key
 

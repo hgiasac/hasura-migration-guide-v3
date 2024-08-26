@@ -6,8 +6,10 @@ definition:
   fields:
     - name: created_at
       type: timestamptz!
+    - name: created_by
+      type: int4
     - name: id
-      type: uuid!
+      type: int4!
     - name: name
       type: String!
   graphql:
@@ -27,6 +29,7 @@ definition:
       output:
         allowedFields:
           - created_at
+          - created_by
           - id
           - name
 
@@ -40,6 +43,9 @@ definition:
   dataConnectorObjectType: users
   comparableFields:
     - fieldName: created_at
+      operators:
+        enableAll: true
+    - fieldName: created_by
       operators:
         enableAll: true
     - fieldName: id
@@ -63,6 +69,9 @@ definition:
   filterExpressionType: users_bool_exp
   orderableFields:
     - fieldName: created_at
+      orderByDirections:
+        enableAll: true
+    - fieldName: created_by
       orderByDirections:
         enableAll: true
     - fieldName: id
@@ -89,6 +98,14 @@ definition:
     - role: admin
       select:
         filter: null
+    - role: user
+      select:
+        filter:
+          fieldComparison:
+            field: id
+            operator: _eq
+            value:
+              sessionVariable: x-hasura-user-id
 
 ---
 kind: Relationship
@@ -125,3 +142,22 @@ definition:
       target:
         modelField:
           - fieldName: user_id
+
+---
+kind: Relationship
+version: v1
+definition:
+  name: albums
+  sourceType: users
+  target:
+    model:
+      subgraph: chinook
+      name: Album
+      relationshipType: Array
+  mapping:
+    - source:
+        fieldPath:
+          - fieldName: id
+      target:
+        modelField:
+          - fieldName: AlbumId
