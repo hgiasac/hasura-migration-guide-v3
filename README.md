@@ -875,8 +875,26 @@ ddn connector init -i --subgraph countries/subgraph.yaml --add-to-compose-file .
 
 Set the GraphQL API endpoint to [configuration.json](./countries/connector/countries/configuration.json) and introspect the schema.
 
+Add type prefix to the subgraph generator to avoid failed metadata builds.
+
+```yaml
+kind: Subgraph
+version: v2
+definition:
+  name: countries
+  generator:
+    rootPath: .
+    graphqlTypeNamePrefix: countries_
+```
+
 ```sh
 ddn connector introspect countries --subgraph ./countries/subgraph.yaml --add-all-resources
 ```
 
 Permissions and relationship have many improvements in Hasura v3 thanks to [Open DDS](https://github.com/hasura/open-data-domain-specification) specification. The configuration is similar to other connectors ([example](./countries/metadata/Countries.hml)).
+
+Finally, build the supergraph and have fun.
+
+```sh
+ddn supergraph build local
+```

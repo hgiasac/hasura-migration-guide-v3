@@ -7,8 +7,8 @@ definition:
     - name: code
       type: StringQueryOperatorInput
   graphql:
-    typeName: LanguageFilterInput
-    inputTypeName: LanguageFilterInputInput
+    typeName: countries_LanguageFilterInput
+    inputTypeName: countries_LanguageFilterInputInput
   dataConnectorTypeMapping:
     - dataConnectorName: countries
       dataConnectorObjectType: LanguageFilterInput

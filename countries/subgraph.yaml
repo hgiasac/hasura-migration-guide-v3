@@ -4,6 +4,8 @@ definition:
   name: countries
   generator:
     rootPath: .
+    namingConvention: none
+    graphqlTypeNamePrefix: countries_
   includePaths:
     - metadata
   envMapping:

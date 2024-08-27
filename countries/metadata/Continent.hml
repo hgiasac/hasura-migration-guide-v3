@@ -13,8 +13,8 @@ definition:
     - name: rtl
       type: Boolean!
   graphql:
-    typeName: Language
-    inputTypeName: LanguageInput
+    typeName: countries_Language
+    inputTypeName: countries_LanguageInput
   dataConnectorTypeMapping:
     - dataConnectorName: countries
       dataConnectorObjectType: Language
@@ -46,8 +46,8 @@ definition:
     - name: name
       type: String!
   graphql:
-    typeName: State
-    inputTypeName: StateInput
+    typeName: countries_State
+    inputTypeName: countries_StateInput
   dataConnectorTypeMapping:
     - dataConnectorName: countries
       dataConnectorObjectType: State
@@ -78,8 +78,8 @@ definition:
     - name: name
       type: String!
   graphql:
-    typeName: Subdivision
-    inputTypeName: SubdivisionInput
+    typeName: countries_Subdivision
+    inputTypeName: countries_SubdivisionInput
   dataConnectorTypeMapping:
     - dataConnectorName: countries
       dataConnectorObjectType: Subdivision
@@ -134,8 +134,8 @@ definition:
     - name: subdivisions
       type: "[Subdivision!]!"
   graphql:
-    typeName: Country
-    inputTypeName: CountryInput
+    typeName: countries_Country
+    inputTypeName: countries_CountryInput
   dataConnectorTypeMapping:
     - dataConnectorName: countries
       dataConnectorObjectType: Country
@@ -214,8 +214,8 @@ definition:
     - name: name
       type: String!
   graphql:
-    typeName: Continent
-    inputTypeName: ContinentInput
+    typeName: countries_Continent
+    inputTypeName: countries_ContinentInput
   dataConnectorTypeMapping:
     - dataConnectorName: countries
       dataConnectorObjectType: Continent
@@ -227,18 +227,6 @@ definition:
   typeName: Continent
   permissions:
     - role: admin
-      output:
-        allowedFields:
-          - code
-          - countries
-          - name
-    - role: user
-      output:
-        allowedFields:
-          - code
-          - countries
-          - name
-    - role: anonymous
       output:
         allowedFields:
           - code

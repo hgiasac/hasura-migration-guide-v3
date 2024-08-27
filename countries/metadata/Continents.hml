@@ -15,8 +15,8 @@ definition:
     - name: regex
       type: String
   graphql:
-    typeName: StringQueryOperatorInput
-    inputTypeName: StringQueryOperatorInputInput
+    typeName: countries_StringQueryOperatorInput
+    inputTypeName: countries_StringQueryOperatorInputInput
   dataConnectorTypeMapping:
     - dataConnectorName: countries
       dataConnectorObjectType: StringQueryOperatorInput
@@ -61,8 +61,8 @@ definition:
     - name: code
       type: StringQueryOperatorInput
   graphql:
-    typeName: ContinentFilterInput
-    inputTypeName: ContinentFilterInputInput
+    typeName: countries_ContinentFilterInput
+    inputTypeName: countries_ContinentFilterInputInput
   dataConnectorTypeMapping:
     - dataConnectorName: countries
       dataConnectorObjectType: ContinentFilterInput

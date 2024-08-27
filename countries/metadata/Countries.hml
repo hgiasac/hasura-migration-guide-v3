@@ -13,8 +13,8 @@ definition:
     - name: name
       type: StringQueryOperatorInput
   graphql:
-    typeName: CountryFilterInput
-    inputTypeName: CountryFilterInputInput
+    typeName: countries_CountryFilterInput
+    inputTypeName: countries_CountryFilterInputInput
   dataConnectorTypeMapping:
     - dataConnectorName: countries
       dataConnectorObjectType: CountryFilterInput

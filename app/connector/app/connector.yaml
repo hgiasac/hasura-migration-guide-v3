@@ -3,7 +3,7 @@ version: v2
 definition:
   name: app
   subgraph: app
-  source: hasura/nodejs:v1.5.0
+  source: hasura/nodejs:v1.6.0
   context: .
   envMapping:
     HASURA_CONNECTOR_PORT:
