@@ -8,7 +8,7 @@ definition:
       type: StringQueryOperatorInput
   graphql:
     typeName: countries_LanguageFilterInput
-    inputTypeName: countries_LanguageFilterInputInput
+    inputTypeName: countries_LanguageFilterInput_input
   dataConnectorTypeMapping:
     - dataConnectorName: countries
       dataConnectorObjectType: LanguageFilterInput
@@ -28,7 +28,7 @@ definition:
 kind: Command
 version: v1
 definition:
-  name: Languages
+  name: languages
   outputType: "[Language!]!"
   arguments:
     - name: filter
@@ -45,11 +45,8 @@ definition:
 kind: CommandPermissions
 version: v1
 definition:
-  commandName: Languages
+  commandName: languages
   permissions:
     - role: admin
       allowExecution: true
-    - role: user
-      allowExecution: true
-    - role: anonymous
-      allowExecution: true
+

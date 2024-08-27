@@ -2,7 +2,7 @@
 kind: Command
 version: v1
 definition:
-  name: Country
+  name: country
   outputType: Country
   arguments:
     - name: code
@@ -19,11 +19,8 @@ definition:
 kind: CommandPermissions
 version: v1
 definition:
-  commandName: Country
+  commandName: country
   permissions:
     - role: admin
       allowExecution: true
-    - role: user
-      allowExecution: true
-    - role: anonymous
-      allowExecution: true
+

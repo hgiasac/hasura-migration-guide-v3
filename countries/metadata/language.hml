@@ -2,7 +2,7 @@
 kind: Command
 version: v1
 definition:
-  name: Language
+  name: language
   outputType: Language
   arguments:
     - name: code
@@ -19,11 +19,8 @@ definition:
 kind: CommandPermissions
 version: v1
 definition:
-  commandName: Language
+  commandName: language
   permissions:
     - role: admin
       allowExecution: true
-    - role: user
-      allowExecution: true
-    - role: anonymous
-      allowExecution: true
+

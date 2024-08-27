@@ -14,7 +14,7 @@ definition:
       type: Boolean!
   graphql:
     typeName: countries_Language
-    inputTypeName: countries_LanguageInput
+    inputTypeName: countries_Language_input
   dataConnectorTypeMapping:
     - dataConnectorName: countries
       dataConnectorObjectType: Language
@@ -47,7 +47,7 @@ definition:
       type: String!
   graphql:
     typeName: countries_State
-    inputTypeName: countries_StateInput
+    inputTypeName: countries_State_input
   dataConnectorTypeMapping:
     - dataConnectorName: countries
       dataConnectorObjectType: State
@@ -79,7 +79,7 @@ definition:
       type: String!
   graphql:
     typeName: countries_Subdivision
-    inputTypeName: countries_SubdivisionInput
+    inputTypeName: countries_Subdivision_input
   dataConnectorTypeMapping:
     - dataConnectorName: countries
       dataConnectorObjectType: Subdivision
@@ -135,7 +135,7 @@ definition:
       type: "[Subdivision!]!"
   graphql:
     typeName: countries_Country
-    inputTypeName: countries_CountryInput
+    inputTypeName: countries_Country_input
   dataConnectorTypeMapping:
     - dataConnectorName: countries
       dataConnectorObjectType: Country
@@ -147,42 +147,6 @@ definition:
   typeName: Country
   permissions:
     - role: admin
-      output:
-        allowedFields:
-          - awsRegion
-          - capital
-          - code
-          - continent
-          - currencies
-          - currency
-          - emoji
-          - emojiU
-          - languages
-          - name
-          - native
-          - phone
-          - phones
-          - states
-          - subdivisions
-    - role: user
-      output:
-        allowedFields:
-          - awsRegion
-          - capital
-          - code
-          - continent
-          - currencies
-          - currency
-          - emoji
-          - emojiU
-          - languages
-          - name
-          - native
-          - phone
-          - phones
-          - states
-          - subdivisions
-    - role: anonymous
       output:
         allowedFields:
           - awsRegion
@@ -215,7 +179,7 @@ definition:
       type: String!
   graphql:
     typeName: countries_Continent
-    inputTypeName: countries_ContinentInput
+    inputTypeName: countries_Continent_input
   dataConnectorTypeMapping:
     - dataConnectorName: countries
       dataConnectorObjectType: Continent
@@ -237,7 +201,7 @@ definition:
 kind: Command
 version: v1
 definition:
-  name: Continent
+  name: continent
   outputType: Continent
   arguments:
     - name: code
@@ -254,11 +218,8 @@ definition:
 kind: CommandPermissions
 version: v1
 definition:
-  commandName: Continent
+  commandName: continent
   permissions:
     - role: admin
       allowExecution: true
-    - role: user
-      allowExecution: true
-    - role: anonymous
-      allowExecution: true
+

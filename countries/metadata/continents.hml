@@ -16,7 +16,7 @@ definition:
       type: String
   graphql:
     typeName: countries_StringQueryOperatorInput
-    inputTypeName: countries_StringQueryOperatorInputInput
+    inputTypeName: countries_StringQueryOperatorInput_input
   dataConnectorTypeMapping:
     - dataConnectorName: countries
       dataConnectorObjectType: StringQueryOperatorInput
@@ -35,22 +35,6 @@ definition:
           - ne
           - nin
           - regex
-    - role: user
-      output:
-        allowedFields:
-          - eq
-          - in
-          - ne
-          - nin
-          - regex
-    - role: anonymous
-      output:
-        allowedFields:
-          - eq
-          - in
-          - ne
-          - nin
-          - regex
 
 ---
 kind: ObjectType
@@ -62,7 +46,7 @@ definition:
       type: StringQueryOperatorInput
   graphql:
     typeName: countries_ContinentFilterInput
-    inputTypeName: countries_ContinentFilterInputInput
+    inputTypeName: countries_ContinentFilterInput_input
   dataConnectorTypeMapping:
     - dataConnectorName: countries
       dataConnectorObjectType: ContinentFilterInput
@@ -82,7 +66,7 @@ definition:
 kind: Command
 version: v1
 definition:
-  name: Continents
+  name: continents
   outputType: "[Continent!]!"
   arguments:
     - name: filter
@@ -99,11 +83,8 @@ definition:
 kind: CommandPermissions
 version: v1
 definition:
-  commandName: Continents
+  commandName: continents
   permissions:
     - role: admin
       allowExecution: true
-    - role: user
-      allowExecution: true
-    - role: anonymous
-      allowExecution: true
+
