@@ -2,7 +2,7 @@ actions:
   - name: hello
     definition:
       kind: ""
-      handler: http://api:8080/hello
+      handler: http://auth-hook:4200/hello
     permissions:
       - role: user
 custom_types:

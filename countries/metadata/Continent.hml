@@ -1,0 +1,276 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: Language
+  fields:
+    - name: code
+      type: ID!
+    - name: name
+      type: String!
+    - name: native
+      type: String!
+    - name: rtl
+      type: Boolean!
+  graphql:
+    typeName: Language
+    inputTypeName: LanguageInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: countries
+      dataConnectorObjectType: Language
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: Language
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - code
+          - name
+          - native
+          - rtl
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: State
+  fields:
+    - name: code
+      type: String
+    - name: country
+      type: Country!
+    - name: name
+      type: String!
+  graphql:
+    typeName: State
+    inputTypeName: StateInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: countries
+      dataConnectorObjectType: State
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: State
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - code
+          - country
+          - name
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: Subdivision
+  fields:
+    - name: code
+      type: ID!
+    - name: emoji
+      type: String
+    - name: name
+      type: String!
+  graphql:
+    typeName: Subdivision
+    inputTypeName: SubdivisionInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: countries
+      dataConnectorObjectType: Subdivision
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: Subdivision
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - code
+          - emoji
+          - name
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: Country
+  fields:
+    - name: awsRegion
+      type: String!
+    - name: capital
+      type: String
+    - name: code
+      type: ID!
+    - name: continent
+      type: Continent!
+    - name: currencies
+      type: "[String!]!"
+    - name: currency
+      type: String
+    - name: emoji
+      type: String!
+    - name: emojiU
+      type: String!
+    - name: languages
+      type: "[Language!]!"
+    - name: name
+      type: String!
+    - name: native
+      type: String!
+    - name: phone
+      type: String!
+    - name: phones
+      type: "[String!]!"
+    - name: states
+      type: "[State!]!"
+    - name: subdivisions
+      type: "[Subdivision!]!"
+  graphql:
+    typeName: Country
+    inputTypeName: CountryInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: countries
+      dataConnectorObjectType: Country
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: Country
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - awsRegion
+          - capital
+          - code
+          - continent
+          - currencies
+          - currency
+          - emoji
+          - emojiU
+          - languages
+          - name
+          - native
+          - phone
+          - phones
+          - states
+          - subdivisions
+    - role: user
+      output:
+        allowedFields:
+          - awsRegion
+          - capital
+          - code
+          - continent
+          - currencies
+          - currency
+          - emoji
+          - emojiU
+          - languages
+          - name
+          - native
+          - phone
+          - phones
+          - states
+          - subdivisions
+    - role: anonymous
+      output:
+        allowedFields:
+          - awsRegion
+          - capital
+          - code
+          - continent
+          - currencies
+          - currency
+          - emoji
+          - emojiU
+          - languages
+          - name
+          - native
+          - phone
+          - phones
+          - states
+          - subdivisions
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: Continent
+  fields:
+    - name: code
+      type: ID!
+    - name: countries
+      type: "[Country!]!"
+    - name: name
+      type: String!
+  graphql:
+    typeName: Continent
+    inputTypeName: ContinentInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: countries
+      dataConnectorObjectType: Continent
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: Continent
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - code
+          - countries
+          - name
+    - role: user
+      output:
+        allowedFields:
+          - code
+          - countries
+          - name
+    - role: anonymous
+      output:
+        allowedFields:
+          - code
+          - countries
+          - name
+
+---
+kind: Command
+version: v1
+definition:
+  name: Continent
+  outputType: Continent
+  arguments:
+    - name: code
+      type: ID!
+  source:
+    dataConnectorName: countries
+    dataConnectorCommand:
+      function: continent
+  graphql:
+    rootFieldName: continent
+    rootFieldKind: Query
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: Continent
+  permissions:
+    - role: admin
+      allowExecution: true
+    - role: user
+      allowExecution: true
+    - role: anonymous
+      allowExecution: true

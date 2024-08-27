@@ -6,3 +6,4 @@ definition:
     - data/subgraph.yaml
     - chinook/subgraph.yaml
     - app/subgraph.yaml
+    - countries/subgraph.yaml

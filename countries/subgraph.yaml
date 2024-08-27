@@ -1,0 +1,18 @@
+kind: Subgraph
+version: v2
+definition:
+  name: countries
+  generator:
+    rootPath: .
+  includePaths:
+    - metadata
+  envMapping:
+    COUNTRIES_COUNTRIES_AUTHORIZATION_HEADER:
+      fromEnv: COUNTRIES_COUNTRIES_AUTHORIZATION_HEADER
+    COUNTRIES_COUNTRIES_READ_URL:
+      fromEnv: COUNTRIES_COUNTRIES_READ_URL
+    COUNTRIES_COUNTRIES_WRITE_URL:
+      fromEnv: COUNTRIES_COUNTRIES_WRITE_URL
+  connectors:
+    - path: connector/countries/connector.yaml
+      connectorLinkName: countries

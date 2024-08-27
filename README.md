@@ -141,11 +141,9 @@ The specification of Hasura v3 generalizes Database engines and Action handlers 
 
 NDC specification is well written in the docs. for a quick glance, you should understand the following keywords:
 
-- Query: serves APIs for GraphQL query. There are 2 query types:
-  - Collection: represent a table or view in Hasura v2. The generated schema of collection enables filtering, sorting and pagination and aggregation for the model.
-  - Function: define custom read-only APIs such as native query and action handler for GraphQL query.
-- Command: serves APIs for GraphQL mutation. There is a command type:
-  - Procedure: define custom writable APIs such as insert, update, delete and action handler for GraphQL mutation.
+- Collection: represent a table or view in Hasura v2. The generated schema of collection enables filtering, sorting and pagination and aggregation for the model.
+- Function: define custom read-only APIs such as native query and action handler for GraphQL query.
+- Procedure: define custom writable APIs such as insert, update, delete and action handler for GraphQL mutation.
 
 However, those SDKs seem low-level and hard to use for most developers. Therefore the Hasura team has maintained some high-level frameworks for business logic development (Action):
 
@@ -763,7 +761,42 @@ definition:
 
 ![Action](./assets/action-v2.png)
 
-You need to port action webhooks to connectors for business logic. Currently, It's easier to port your source codes to frameworks that have the same programming languages.
+[Action handler](https://hasura.io/docs/2.0/actions/action-handlers/) webhooks in GraphQL Engine v2 have simple request and response payload structures. It's easy to integrate with any REST API framework. The schema definition of Hasura action is also in GraphQL format.
+
+```ts
+app.post("/hello", async (req, res) => {
+  // request input
+  // {
+  //   "action": {
+  //     "name": "hello"
+  //   },
+  //   "input": {
+  //     "name": "world"
+  //   },
+  //   "session_variables": {
+  //     "x-hasura-user-id": "1",
+  //     "x-hasura-role": "user"
+  //   }
+  // }
+  const { name } = req.body.input;
+
+  // run some business logic
+
+  /*
+  // In case of errors:
+  return res.status(400).json({
+    message: "error happened"
+  })
+  */
+
+  // success
+  return res.json({
+    reply: `hello ${name ?? "world"}`,
+  });
+});
+```
+
+The connector specs of Hasura v3 is more complicated. You need to generate [NDC schema](https://github.com/hasura/ndc-spec/blob/main/ndc-reference/tests/schema/expected.json) and handle nested body structure encoding and decoding ([example](https://github.com/hasura/ndc-spec/blob/main/ndc-reference/tests/mutation/delete_articles/request.json)). Therefore it's easier to use high-level NDC frameworks:
 
 - [NodeJS connector](https://hasura.io/docs/3.0/business-logic/typescript)
 - [Python Connector](https://hasura.io/docs/3.0/business-logic/python)
@@ -772,8 +805,8 @@ You need to port action webhooks to connectors for business logic. Currently, It
 This example uses NodeJS connector. Let's create a new subgraph.
 
 ```sh
-ddn subgraph init app --dir app --target-supergraph ./supergraph.yaml --add-to-compose-file ./compose.yaml
-ddn connector init -i --subgraph app/subgraph.yaml
+ddn subgraph init app --dir app --target-supergraph ./supergraph.yaml
+ddn connector init -i --subgraph app/subgraph.yaml --add-to-compose-file ./compose.yaml
 # ? Hub Connector hasura/nodejs
 # ? Connector Name app
 # ? Port 5646
@@ -781,8 +814,37 @@ ddn connector init -i --subgraph app/subgraph.yaml
 
 NodeJS connector generates a [default function](./app/connector/app/functions.ts). Modify the response type to be similar to the `hello` action.
 
+```ts
+/**
+ * @readonly Exposes the function as an NDC function (the function should only query data without making modifications)
+ */
+export function hello(name?: string) {
+  return {
+    reply: `hello ${name ?? "world"}`,
+  };
+}
+```
+
 ```sh
 ddn connector introspect app --subgraph ./app/subgraph.yaml --add-all-resources
+```
+
+Similar to Hasura Engine v2 permissions, you can allow execution for each role. Hasura v3 permissions are better with the `argumentPresets` setting to inject default argument values into the request payload.
+
+```yaml
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: Hello
+  permissions:
+    - role: admin
+      allowExecution: true
+    - role: user
+      allowExecution: true
+      argumentPresets:
+        - argument: name
+          value:
+            literal: foo
 ```
 
 ### Event Trigger
@@ -795,4 +857,26 @@ Currently, there isn't any plan to bring the Cron Trigger feature to Hasura v3. 
 
 ### Remote Schema
 
-TODO
+> [!NOTE]
+> The example uses [Countries API](https://countries.trevorblades.com).
+
+> [!NOTE]
+> GraphQL Connector is still in development.
+
+Create a new subgraph with a GraphQL connector.
+
+```sh
+ddn subgraph init countries --dir countries --target-supergraph ./supergraph.yaml
+ddn connector init -i --subgraph countries/subgraph.yaml --add-to-compose-file ./compose.yaml
+# ? Hub Connector hasura/graphql
+# ? Connector Name countries
+# ? Port 8395
+```
+
+Set the GraphQL API endpoint to [configuration.json](./countries/connector/countries/configuration.json) and introspect the schema.
+
+```sh
+ddn connector introspect countries --subgraph ./countries/subgraph.yaml --add-all-resources
+```
+
+Permissions and relationship have many improvements in Hasura v3 thanks to [Open DDS](https://github.com/hasura/open-data-domain-specification) specification. The configuration is similar to other connectors ([example](./countries/metadata/Countries.hml)).

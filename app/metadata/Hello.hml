@@ -49,4 +49,5 @@ definition:
   permissions:
     - role: admin
       allowExecution: true
-
+    - role: user
+      allowExecution: true

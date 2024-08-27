@@ -1,0 +1,30 @@
+---
+kind: DataConnectorScalarRepresentation
+version: v1
+definition:
+  dataConnectorName: countries
+  dataConnectorScalarType: ID
+  representation: ID
+  graphql:
+    comparisonExpressionTypeName: IdComparisonExp
+
+---
+kind: DataConnectorScalarRepresentation
+version: v1
+definition:
+  dataConnectorName: countries
+  dataConnectorScalarType: String
+  representation: String
+  graphql:
+    comparisonExpressionTypeName: StringComparisonExp
+
+---
+kind: DataConnectorScalarRepresentation
+version: v1
+definition:
+  dataConnectorName: countries
+  dataConnectorScalarType: Boolean
+  representation: Boolean
+  graphql:
+    comparisonExpressionTypeName: BooleanComparisonExp
+

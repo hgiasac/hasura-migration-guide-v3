@@ -1,0 +1,105 @@
+schema {
+  query: Query
+}
+
+"The `Boolean` scalar type represents `true` or `false`."
+scalar Boolean
+
+type Continent {
+  code: ID!
+  countries: [Country!]!
+  name: String!
+}
+
+input ContinentFilterInput {
+  code: StringQueryOperatorInput
+}
+
+type Country {
+  awsRegion: String!
+  capital: String
+  code: ID!
+  continent: Continent!
+  currencies: [String!]!
+  currency: String
+  emoji: String!
+  emojiU: String!
+  languages: [Language!]!
+  name(lang: String): String!
+  native: String!
+  phone: String!
+  phones: [String!]!
+  states: [State!]!
+  subdivisions: [Subdivision!]!
+}
+
+input CountryFilterInput {
+  code: StringQueryOperatorInput
+  continent: StringQueryOperatorInput
+  currency: StringQueryOperatorInput
+  name: StringQueryOperatorInput
+}
+
+"The `Float` scalar type represents signed double-precision fractional values as specified by [IEEE 754](https://en.wikipedia.org/wiki/IEEE_floating_point)."
+scalar Float
+
+"The `ID` scalar type represents a unique identifier, often used to refetch an object or as key for a cache. The ID type appears in a JSON response as a String; however, it is not intended to be human-readable. When expected as an input type, any string (such as `\"4\"`) or integer (such as `4`) input value will be accepted as an ID."
+scalar ID
+
+"The `Int` scalar type represents non-fractional signed whole numeric values. Int can represent values between -(2^31) and 2^31 - 1."
+scalar Int
+
+type Language {
+  code: ID!
+  name: String!
+  native: String!
+  rtl: Boolean!
+}
+
+input LanguageFilterInput {
+  code: StringQueryOperatorInput
+}
+
+type Query {
+  continent(code: ID!): Continent
+  continents(filter: ContinentFilterInput = "{}"): [Continent!]!
+  countries(filter: CountryFilterInput = "{}"): [Country!]!
+  country(code: ID!): Country
+  language(code: ID!): Language
+  languages(filter: LanguageFilterInput = "{}"): [Language!]!
+}
+
+type State {
+  code: String
+  country: Country!
+  name: String!
+}
+
+"The `String` scalar type represents textual data, represented as UTF-8 character sequences. The String type is most often used by GraphQL to represent free-form human-readable text."
+scalar String
+
+input StringQueryOperatorInput {
+  eq: String
+  in: [String!]
+  ne: String
+  nin: [String!]
+  regex: String
+}
+
+type Subdivision {
+  code: ID!
+  emoji: String
+  name: String!
+}
+
+"Marks an element of a GraphQL schema as no longer supported."
+directive @deprecated("Explains why this element was deprecated, usually also including a suggestion for how to access supported similar data. Formatted using the Markdown syntax, as specified by [CommonMark](https://commonmark.org/)." reason: String = "\"No longer supported\"") on ARGUMENT_DEFINITION | ENUM_VALUE | FIELD_DEFINITION | INPUT_FIELD_DEFINITION
+
+"Directs the executor to include this field or fragment only when the `if` argument is true."
+directive @include("Included when true." if: Boolean!) on FIELD | FRAGMENT_SPREAD | INLINE_FRAGMENT
+
+"Directs the executor to skip this field or fragment when the `if` argument is true."
+directive @skip("Skipped when true." if: Boolean!) on FIELD | FRAGMENT_SPREAD | INLINE_FRAGMENT
+
+"Exposes a URL that specifies the behavior of this scalar."
+directive @specifiedBy("The URL that specifies the behavior of this scalar." url: String!) on SCALAR

@@ -3,6 +3,7 @@ include:
   - path: app/connector/app/compose.yaml
   - path: data/connector/data/compose.yaml
   - path: chinook/connector/chinook/compose.yaml
+  - path: countries/connector/countries/compose.yaml
 services:
   engine:
     build:

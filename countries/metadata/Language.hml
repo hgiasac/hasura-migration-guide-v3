@@ -1,0 +1,29 @@
+---
+kind: Command
+version: v1
+definition:
+  name: Language
+  outputType: Language
+  arguments:
+    - name: code
+      type: ID!
+  source:
+    dataConnectorName: countries
+    dataConnectorCommand:
+      function: language
+  graphql:
+    rootFieldName: language
+    rootFieldKind: Query
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: Language
+  permissions:
+    - role: admin
+      allowExecution: true
+    - role: user
+      allowExecution: true
+    - role: anonymous
+      allowExecution: true

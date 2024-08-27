@@ -1,0 +1,109 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: StringQueryOperatorInput
+  fields:
+    - name: eq
+      type: String
+    - name: in
+      type: "[String!]"
+    - name: ne
+      type: String
+    - name: nin
+      type: "[String!]"
+    - name: regex
+      type: String
+  graphql:
+    typeName: StringQueryOperatorInput
+    inputTypeName: StringQueryOperatorInputInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: countries
+      dataConnectorObjectType: StringQueryOperatorInput
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: StringQueryOperatorInput
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - eq
+          - in
+          - ne
+          - nin
+          - regex
+    - role: user
+      output:
+        allowedFields:
+          - eq
+          - in
+          - ne
+          - nin
+          - regex
+    - role: anonymous
+      output:
+        allowedFields:
+          - eq
+          - in
+          - ne
+          - nin
+          - regex
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: ContinentFilterInput
+  fields:
+    - name: code
+      type: StringQueryOperatorInput
+  graphql:
+    typeName: ContinentFilterInput
+    inputTypeName: ContinentFilterInputInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: countries
+      dataConnectorObjectType: ContinentFilterInput
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: ContinentFilterInput
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - code
+
+---
+kind: Command
+version: v1
+definition:
+  name: Continents
+  outputType: "[Continent!]!"
+  arguments:
+    - name: filter
+      type: ContinentFilterInput
+  source:
+    dataConnectorName: countries
+    dataConnectorCommand:
+      function: continents
+  graphql:
+    rootFieldName: continents
+    rootFieldKind: Query
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: Continents
+  permissions:
+    - role: admin
+      allowExecution: true
+    - role: user
+      allowExecution: true
+    - role: anonymous
+      allowExecution: true
