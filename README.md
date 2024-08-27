@@ -3,6 +3,51 @@
 > [!NOTE]
 > The guide uses the DDN CLI v2.1.1.
 
+- [V3 migration guide for Hasura GraphQL Engine v2](#v3-migration-guide-for-hasura-graphql-engine-v2)
+  - [What you will miss in v2](#what-you-will-miss-in-v2)
+    - [A single all-in-one engine](#a-single-all-in-one-engine)
+    - [PostgreSQL migration tool](#postgresql-migration-tool)
+    - [Friendly database admin and metadata editor in web UI](#friendly-database-admin-and-metadata-editor-in-web-ui)
+    - [Dynamic metadata changes](#dynamic-metadata-changes)
+    - [Built-in admin secret authentication](#built-in-admin-secret-authentication)
+  - [So why Hasura v3?](#so-why-hasura-v3)
+    - [Open Specs, data connectors for free](#open-specs-data-connectors-for-free)
+    - [Static metadata, no PostgreSQL require](#static-metadata-no-postgresql-require)
+    - [Better versioning](#better-versioning)
+    - [Read replica support for free](#read-replica-support-for-free)
+    - [Free observability exporters](#free-observability-exporters)
+    - [Community contribution](#community-contribution)
+    - [Connector deployment support (Cloud)](#connector-deployment-support-cloud)
+    - [Multi-region support (Cloud)](#multi-region-support-cloud)
+    - [Observability Redesign (Cloud)](#observability-redesign-cloud)
+  - [Comparison](#comparison)
+    - [Architecture](#architecture)
+    - [Concepts](#concepts)
+    - [Features](#features)
+      - [Connector](#connector)
+      - [Remote Schema](#remote-schema)
+    - [Plugins](#plugins)
+  - [Migration guide](#migration-guide)
+    - [Prerequisites](#prerequisites)
+    - [Setup a new DDN project](#setup-a-new-ddn-project)
+    - [Database migration tool](#database-migration-tool)
+    - [Postgres connector](#postgres-connector)
+      - [Breaking changes](#breaking-changes)
+    - [Authentication](#authentication)
+    - [Permissions](#permissions)
+      - [Filter Permissions](#filter-permissions)
+      - [Column Permissions](#column-permissions)
+      - [Pre-check and Post-check](#pre-check-and-post-check)
+      - [Column Presets](#column-presets)
+      - [Aggregation queries permissions](#aggregation-queries-permissions)
+      - [Input Validation](#input-validation)
+      - [Limit number of rows](#limit-number-of-rows)
+    - [Relationships](#relationships)
+    - [Action](#action)
+    - [Event Trigger](#event-trigger)
+    - [Cron Trigger](#cron-trigger)
+    - [Remote Schema](#remote-schema-1)
+
 ## What you will miss in v2
 
 ### A single all-in-one engine
@@ -672,7 +717,7 @@ definition:
 ```
 
 > [!NOTE]
-> 
+>
 > `pre_check` and `post_check` are required arguments. If you want to make them optional you can set empty argument presets:
 >
 > ```yaml
