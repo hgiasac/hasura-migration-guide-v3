@@ -1,6 +1,13 @@
-actions: []
+actions:
+  - name: hello
+    definition:
+      kind: ""
+      handler: http://auth-hook:4200/hello
+    permissions:
+      - role: user
 custom_types:
   enums: []
   input_objects: []
-  objects: []
+  objects:
+    - name: HelloOutput
   scalars: []

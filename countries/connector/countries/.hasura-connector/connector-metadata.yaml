@@ -1,0 +1,15 @@
+packagingDefinition:
+  type: PrebuiltDockerImage
+  dockerImage: "ghcr.io/hasura/ndc-graphql:v0.1.3"
+supportedEnvironmentVariables:
+commands:
+  update: hasura-ndc-graphql update
+cliPlugin:
+  name: ndc-graphql
+  version: "v0.1.3"
+dockerComposeWatch:
+  - path: ./
+    target: /etc/connector
+    action: sync+restart
+
+

@@ -2,6 +2,9 @@ kind: AuthConfig
 version: v2
 definition:
   mode:
-    noAuth:
-      role: admin
-      sessionVariables: {}
+    webhook:
+      url: http://auth-hook:4200/validate-request
+      method: Get
+    # noAuth:
+    #   role: admin
+    #   sessionVariables: {}

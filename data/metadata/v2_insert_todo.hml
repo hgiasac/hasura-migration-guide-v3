@@ -11,21 +11,7 @@ definition:
     - name: task
       type: String!
     - name: user_id
-      type: uuid!
-    - name: bit
-      type: bit
-    - name: bpchar
-      type: bpchar
-    - name: date
-      type: date
-    - name: float4
-      type: float8
-    - name: float8
-      type: float8
-    - name: numeric
-      type: numeric
-    - name: text
-      type: String
+      type: int4!
   graphql:
     typeName: v2_insert_todo_object
     inputTypeName: v2_insert_todo_object_input
@@ -46,13 +32,6 @@ definition:
           - id
           - task
           - user_id
-          - bit
-          - bpchar
-          - date
-          - float4
-          - float8
-          - numeric
-          - text
 
 ---
 kind: ObjectType
@@ -103,7 +82,7 @@ definition:
     dataConnectorCommand:
       procedure: v2_insert_todo
   graphql:
-    rootFieldName: v2_insert_todo
+    rootFieldName: insert_todo
     rootFieldKind: Mutation
   description: Insert into the todo table
 

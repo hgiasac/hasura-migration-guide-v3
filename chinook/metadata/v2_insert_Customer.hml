@@ -109,7 +109,7 @@ definition:
     dataConnectorCommand:
       procedure: v2_insert_Customer
   graphql:
-    rootFieldName: v2_insert_Customer
+    rootFieldName: insert_Customer
     rootFieldKind: Mutation
   description: Insert into the Customer table
 
@@ -121,4 +121,3 @@ definition:
   permissions:
     - role: admin
       allowExecution: true
-

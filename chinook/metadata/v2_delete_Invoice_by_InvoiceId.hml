@@ -47,7 +47,7 @@ definition:
     dataConnectorCommand:
       procedure: v2_delete_Invoice_by_InvoiceId
   graphql:
-    rootFieldName: v2_delete_Invoice_by_InvoiceId
+    rootFieldName: delete_Invoice_by_InvoiceId
     rootFieldKind: Mutation
   description: Delete any row on the 'Invoice' collection using the 'InvoiceId' key
 
@@ -59,4 +59,3 @@ definition:
   permissions:
     - role: admin
       allowExecution: true
-

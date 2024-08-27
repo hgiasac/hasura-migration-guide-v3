@@ -1,0 +1,21 @@
+{
+  "$schema": "configuration.schema.json",
+  "introspection": {
+    "endpoint": {
+      "value": "https://countries.trevorblades.com"
+    },
+    "headers": {}
+  },
+  "execution": {
+    "endpoint": {
+      "value": "https://countries.trevorblades.com"
+    },
+    "headers": {}
+  },
+  "request": {
+    "forwardHeaders": []
+  },
+  "response": {
+    "forwardHeaders": []
+  }
+}

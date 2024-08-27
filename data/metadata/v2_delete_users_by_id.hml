@@ -38,7 +38,7 @@ definition:
   outputType: v2_delete_users_by_id_response!
   arguments:
     - name: key_id
-      type: uuid!
+      type: int4!
     - name: pre_check
       type: users_bool_exp!
       description: Delete permission predicate over the 'users' collection
@@ -47,7 +47,7 @@ definition:
     dataConnectorCommand:
       procedure: v2_delete_users_by_id
   graphql:
-    rootFieldName: v2_delete_users_by_id
+    rootFieldName: delete_users_by_id
     rootFieldKind: Mutation
   description: Delete any row on the 'users' collection using the 'id' key
 
@@ -59,4 +59,3 @@ definition:
   permissions:
     - role: admin
       allowExecution: true
-

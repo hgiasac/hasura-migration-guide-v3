@@ -47,7 +47,7 @@ definition:
     dataConnectorCommand:
       procedure: v2_delete_Customer_by_CustomerId
   graphql:
-    rootFieldName: v2_delete_Customer_by_CustomerId
+    rootFieldName: delete_Customer_by_CustomerId
     rootFieldKind: Mutation
   description: Delete any row on the 'Customer' collection using the 'CustomerId' key
 
@@ -59,4 +59,3 @@ definition:
   permissions:
     - role: admin
       allowExecution: true
-

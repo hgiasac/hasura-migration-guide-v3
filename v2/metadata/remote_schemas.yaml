@@ -1,1 +1,6 @@
-[]
+- name: countries
+  definition:
+    url: https://countries.trevorblades.com
+    timeout_seconds: 60
+    customization: {}
+  comment: ""

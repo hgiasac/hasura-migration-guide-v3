@@ -76,7 +76,7 @@ definition:
     dataConnectorCommand:
       procedure: v2_insert_Genre
   graphql:
-    rootFieldName: v2_insert_Genre
+    rootFieldName: insert_Genre
     rootFieldKind: Mutation
   description: Insert into the Genre table
 
@@ -88,4 +88,3 @@ definition:
   permissions:
     - role: admin
       allowExecution: true
-

@@ -76,7 +76,7 @@ definition:
     dataConnectorCommand:
       procedure: v2_insert_PlaylistTrack
   graphql:
-    rootFieldName: v2_insert_PlaylistTrack
+    rootFieldName: insert_PlaylistTrack
     rootFieldKind: Mutation
   description: Insert into the PlaylistTrack table
 
@@ -88,4 +88,3 @@ definition:
   permissions:
     - role: admin
       allowExecution: true
-

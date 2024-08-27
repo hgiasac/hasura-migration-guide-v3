@@ -172,7 +172,7 @@ definition:
     dataConnectorCommand:
       procedure: v2_update_Album_by_AlbumId
   graphql:
-    rootFieldName: v2_update_Album_by_AlbumId
+    rootFieldName: update_Album_by_AlbumId
     rootFieldKind: Mutation
   description: Update any row on the 'Album' collection using the 'AlbumId' key
 
@@ -184,4 +184,3 @@ definition:
   permissions:
     - role: admin
       allowExecution: true
-

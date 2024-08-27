@@ -76,7 +76,7 @@ definition:
     dataConnectorCommand:
       procedure: v2_insert_Artist
   graphql:
-    rootFieldName: v2_insert_Artist
+    rootFieldName: insert_Artist
     rootFieldKind: Mutation
   description: Insert into the Artist table
 
@@ -88,4 +88,3 @@ definition:
   permissions:
     - role: admin
       allowExecution: true
-

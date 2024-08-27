@@ -79,7 +79,7 @@ definition:
     dataConnectorCommand:
       procedure: v2_insert_Album
   graphql:
-    rootFieldName: v2_insert_Album
+    rootFieldName: insert_Album
     rootFieldKind: Mutation
   description: Insert into the Album table
 
@@ -91,4 +91,3 @@ definition:
   permissions:
     - role: admin
       allowExecution: true
-

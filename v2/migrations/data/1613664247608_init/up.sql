@@ -1,14 +1,19 @@
 CREATE TABLE public.users (
-    id UUID NOT NULL DEFAULT gen_random_uuid(),
+    id SERIAL NOT NULL,
     name text NOT NULL,
     created_at timestamp with time zone DEFAULT now() NOT NULL,
+    created_by INTEGER,
     PRIMARY KEY(id)
 );
+
+INSERT INTO public.users ("name") VALUES
+  ('user1'),
+  ('user2');
 
 CREATE TABLE public.article (
   id SERIAL NOT NULL,
   title text NOT NULL,
-  user_id UUID NOT NULL,
+  user_id INTEGER NOT NULL,
   PRIMARY KEY(id)
 );
 
@@ -19,7 +24,7 @@ CREATE TABLE public.todo (
   id SERIAL PRIMARY KEY,
   task text NOT NULL,
   completed boolean NOT NULL,
-  user_id UUID NOT NULL
+  user_id INTEGER NOT NULL
 );
 
 ALTER TABLE public.todo

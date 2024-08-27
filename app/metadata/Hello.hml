@@ -1,0 +1,53 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: HelloOutput
+  fields:
+    - name: reply
+      type: String!
+  graphql:
+    typeName: HelloOutput
+    inputTypeName: HelloOutputInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: app
+      dataConnectorObjectType: hello_output
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: HelloOutput
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - reply
+
+---
+kind: Command
+version: v1
+definition:
+  name: Hello
+  outputType: HelloOutput!
+  arguments:
+    - name: name
+      type: String
+  source:
+    dataConnectorName: app
+    dataConnectorCommand:
+      function: hello
+  graphql:
+    rootFieldName: hello
+    rootFieldKind: Query
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: Hello
+  permissions:
+    - role: admin
+      allowExecution: true
+    - role: user
+      allowExecution: true

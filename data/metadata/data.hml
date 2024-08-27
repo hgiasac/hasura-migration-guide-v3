@@ -1371,7 +1371,7 @@ definition:
             user_id:
               type:
                 type: named
-                name: uuid
+                name: int4
         data_types:
           fields:
             bit:
@@ -1484,64 +1484,22 @@ definition:
                   name: varchar
         todo:
           fields:
-            bit:
-              type:
-                type: nullable
-                underlying_type:
-                  type: named
-                  name: bit
-            bpchar:
-              type:
-                type: nullable
-                underlying_type:
-                  type: named
-                  name: bpchar
             completed:
               type:
                 type: named
                 name: bool
-            date:
-              type:
-                type: nullable
-                underlying_type:
-                  type: named
-                  name: date
-            float4:
-              type:
-                type: nullable
-                underlying_type:
-                  type: named
-                  name: float8
-            float8:
-              type:
-                type: nullable
-                underlying_type:
-                  type: named
-                  name: float8
             id:
               type:
                 type: named
                 name: int4
-            numeric:
-              type:
-                type: nullable
-                underlying_type:
-                  type: named
-                  name: numeric
             task:
               type:
                 type: named
                 name: text
-            text:
-              type:
-                type: nullable
-                underlying_type:
-                  type: named
-                  name: text
             user_id:
               type:
                 type: named
-                name: uuid
+                name: int4
         update_column_article_id:
           description: Update the 'id' column in the 'article' collection
           fields:
@@ -1565,27 +1523,7 @@ definition:
               description: Set the column to this value
               type:
                 type: named
-                name: uuid
-        update_column_todo_bit:
-          description: Update the 'bit' column in the 'todo' collection
-          fields:
-            _set:
-              description: Set the column to this value
-              type:
-                type: nullable
-                underlying_type:
-                  type: named
-                  name: bit
-        update_column_todo_bpchar:
-          description: Update the 'bpchar' column in the 'todo' collection
-          fields:
-            _set:
-              description: Set the column to this value
-              type:
-                type: nullable
-                underlying_type:
-                  type: named
-                  name: bpchar
+                name: int4
         update_column_todo_completed:
           description: Update the 'completed' column in the 'todo' collection
           fields:
@@ -1594,36 +1532,6 @@ definition:
               type:
                 type: named
                 name: bool
-        update_column_todo_date:
-          description: Update the 'date' column in the 'todo' collection
-          fields:
-            _set:
-              description: Set the column to this value
-              type:
-                type: nullable
-                underlying_type:
-                  type: named
-                  name: date
-        update_column_todo_float4:
-          description: Update the 'float4' column in the 'todo' collection
-          fields:
-            _set:
-              description: Set the column to this value
-              type:
-                type: nullable
-                underlying_type:
-                  type: named
-                  name: float8
-        update_column_todo_float8:
-          description: Update the 'float8' column in the 'todo' collection
-          fields:
-            _set:
-              description: Set the column to this value
-              type:
-                type: nullable
-                underlying_type:
-                  type: named
-                  name: float8
         update_column_todo_id:
           description: Update the 'id' column in the 'todo' collection
           fields:
@@ -1632,16 +1540,6 @@ definition:
               type:
                 type: named
                 name: int4
-        update_column_todo_numeric:
-          description: Update the 'numeric' column in the 'todo' collection
-          fields:
-            _set:
-              description: Set the column to this value
-              type:
-                type: nullable
-                underlying_type:
-                  type: named
-                  name: numeric
         update_column_todo_task:
           description: Update the 'task' column in the 'todo' collection
           fields:
@@ -1650,16 +1548,6 @@ definition:
               type:
                 type: named
                 name: text
-        update_column_todo_text:
-          description: Update the 'text' column in the 'todo' collection
-          fields:
-            _set:
-              description: Set the column to this value
-              type:
-                type: nullable
-                underlying_type:
-                  type: named
-                  name: text
         update_column_todo_user_id:
           description: Update the 'user_id' column in the 'todo' collection
           fields:
@@ -1667,7 +1555,7 @@ definition:
               description: Set the column to this value
               type:
                 type: named
-                name: uuid
+                name: int4
         update_column_users_created_at:
           description: Update the 'created_at' column in the 'users' collection
           fields:
@@ -1676,6 +1564,16 @@ definition:
               type:
                 type: named
                 name: timestamptz
+        update_column_users_created_by:
+          description: Update the 'created_by' column in the 'users' collection
+          fields:
+            _set:
+              description: Set the column to this value
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: int4
         update_column_users_id:
           description: Update the 'id' column in the 'users' collection
           fields:
@@ -1683,7 +1581,7 @@ definition:
               description: Set the column to this value
               type:
                 type: named
-                name: uuid
+                name: int4
         update_column_users_name:
           description: Update the 'name' column in the 'users' collection
           fields:
@@ -1698,10 +1596,16 @@ definition:
               type:
                 type: named
                 name: timestamptz
+            created_by:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: int4
             id:
               type:
                 type: named
-                name: uuid
+                name: int4
             name:
               type:
                 type: named
@@ -1766,7 +1670,7 @@ definition:
             user_id:
               type:
                 type: named
-                name: uuid
+                name: int4
         v2_insert_article_response:
           description: Responses from the 'v2_insert_article' procedure
           fields:
@@ -1909,66 +1813,24 @@ definition:
                   name: data_types
         v2_insert_todo_object:
           fields:
-            bit:
-              type:
-                type: nullable
-                underlying_type:
-                  type: named
-                  name: bit
-            bpchar:
-              type:
-                type: nullable
-                underlying_type:
-                  type: named
-                  name: bpchar
             completed:
               type:
                 type: named
                 name: bool
-            date:
-              type:
-                type: nullable
-                underlying_type:
-                  type: named
-                  name: date
-            float4:
-              type:
-                type: nullable
-                underlying_type:
-                  type: named
-                  name: float8
-            float8:
-              type:
-                type: nullable
-                underlying_type:
-                  type: named
-                  name: float8
             id:
               type:
                 type: nullable
                 underlying_type:
                   type: named
                   name: int4
-            numeric:
-              type:
-                type: nullable
-                underlying_type:
-                  type: named
-                  name: numeric
             task:
               type:
                 type: named
                 name: text
-            text:
-              type:
-                type: nullable
-                underlying_type:
-                  type: named
-                  name: text
             user_id:
               type:
                 type: named
-                name: uuid
+                name: int4
         v2_insert_todo_response:
           description: Responses from the 'v2_insert_todo' procedure
           fields:
@@ -1992,12 +1854,18 @@ definition:
                 underlying_type:
                   type: named
                   name: timestamptz
+            created_by:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: int4
             id:
               type:
                 type: nullable
                 underlying_type:
                   type: named
-                  name: uuid
+                  name: int4
             name:
               type:
                 type: named
@@ -2074,20 +1942,6 @@ definition:
         v2_update_todo_by_id_update_columns:
           description: Update the columns of the 'todo' collection
           fields:
-            bit:
-              description: Update the 'bit' column in the 'todo' collection.
-              type:
-                type: nullable
-                underlying_type:
-                  type: named
-                  name: update_column_todo_bit
-            bpchar:
-              description: Update the 'bpchar' column in the 'todo' collection.
-              type:
-                type: nullable
-                underlying_type:
-                  type: named
-                  name: update_column_todo_bpchar
             completed:
               description: Update the 'completed' column in the 'todo' collection.
               type:
@@ -2095,27 +1949,6 @@ definition:
                 underlying_type:
                   type: named
                   name: update_column_todo_completed
-            date:
-              description: Update the 'date' column in the 'todo' collection.
-              type:
-                type: nullable
-                underlying_type:
-                  type: named
-                  name: update_column_todo_date
-            float4:
-              description: Update the 'float4' column in the 'todo' collection.
-              type:
-                type: nullable
-                underlying_type:
-                  type: named
-                  name: update_column_todo_float4
-            float8:
-              description: Update the 'float8' column in the 'todo' collection.
-              type:
-                type: nullable
-                underlying_type:
-                  type: named
-                  name: update_column_todo_float8
             id:
               description: Update the 'id' column in the 'todo' collection.
               type:
@@ -2123,13 +1956,6 @@ definition:
                 underlying_type:
                   type: named
                   name: update_column_todo_id
-            numeric:
-              description: Update the 'numeric' column in the 'todo' collection.
-              type:
-                type: nullable
-                underlying_type:
-                  type: named
-                  name: update_column_todo_numeric
             task:
               description: Update the 'task' column in the 'todo' collection.
               type:
@@ -2137,13 +1963,6 @@ definition:
                 underlying_type:
                   type: named
                   name: update_column_todo_task
-            text:
-              description: Update the 'text' column in the 'todo' collection.
-              type:
-                type: nullable
-                underlying_type:
-                  type: named
-                  name: update_column_todo_text
             user_id:
               description: Update the 'user_id' column in the 'todo' collection.
               type:
@@ -2176,6 +1995,13 @@ definition:
                 underlying_type:
                   type: named
                   name: update_column_users_created_at
+            created_by:
+              description: Update the 'created_by' column in the 'users' collection.
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: update_column_users_created_by
             id:
               description: Update the 'id' column in the 'users' collection.
               type:
@@ -2266,7 +2092,7 @@ definition:
             key_id:
               type:
                 type: named
-                name: uuid
+                name: int4
             pre_check:
               description: Delete permission predicate over the 'users' collection
               type:
@@ -2397,7 +2223,7 @@ definition:
             key_id:
               type:
                 type: named
-                name: uuid
+                name: int4
             post_check:
               description: Update permission post-condition predicate over the 'users' collection
               type:

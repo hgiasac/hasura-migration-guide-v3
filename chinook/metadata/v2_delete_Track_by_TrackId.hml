@@ -47,7 +47,7 @@ definition:
     dataConnectorCommand:
       procedure: v2_delete_Track_by_TrackId
   graphql:
-    rootFieldName: v2_delete_Track_by_TrackId
+    rootFieldName: delete_Track_by_TrackId
     rootFieldKind: Mutation
   description: Delete any row on the 'Track' collection using the 'TrackId' key
 
@@ -59,4 +59,3 @@ definition:
   permissions:
     - role: admin
       allowExecution: true
-

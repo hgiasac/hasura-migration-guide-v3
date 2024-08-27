@@ -129,7 +129,8 @@ definition:
       type: int4!
     - name: post_check
       type: MediaType_bool_exp!
-      description: Update permission post-condition predicate over the 'MediaType'
+      description:
+        Update permission post-condition predicate over the 'MediaType'
         collection
     - name: pre_check
       type: MediaType_bool_exp!
@@ -141,7 +142,7 @@ definition:
     dataConnectorCommand:
       procedure: v2_update_MediaType_by_MediaTypeId
   graphql:
-    rootFieldName: v2_update_MediaType_by_MediaTypeId
+    rootFieldName: update_MediaType_by_MediaTypeId
     rootFieldKind: Mutation
   description: Update any row on the 'MediaType' collection using the 'MediaTypeId' key
 
@@ -153,4 +154,3 @@ definition:
   permissions:
     - role: admin
       allowExecution: true
-

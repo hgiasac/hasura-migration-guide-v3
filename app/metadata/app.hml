@@ -1,0 +1,52 @@
+kind: DataConnectorLink
+version: v1
+definition:
+  name: app
+  url:
+    readWriteUrls:
+      read:
+        valueFromEnv: APP_APP_READ_URL
+      write:
+        valueFromEnv: APP_APP_WRITE_URL
+  headers:
+    Authorization:
+      valueFromEnv: APP_APP_AUTHORIZATION_HEADER
+  schema:
+    version: v0.1
+    schema:
+      scalar_types:
+        String:
+          representation:
+            type: string
+          aggregate_functions: {}
+          comparison_operators:
+            _eq:
+              type: equal
+      object_types:
+        hello_output:
+          fields:
+            reply:
+              type:
+                type: named
+                name: String
+      collections: []
+      functions:
+        - name: hello
+          arguments:
+            name:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: String
+          result_type:
+            type: named
+            name: hello_output
+      procedures: []
+    capabilities:
+      version: 0.1.5
+      capabilities:
+        query:
+          variables: {}
+          nested_fields: {}
+        mutation: {}

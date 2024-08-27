@@ -1,0 +1,10 @@
+type Query {
+  hello(
+    name: String!
+  ): HelloOutput!
+}
+
+type HelloOutput {
+  reply: String!
+}
+

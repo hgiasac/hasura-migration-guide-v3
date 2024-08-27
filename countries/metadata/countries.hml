@@ -1,0 +1,423 @@
+---
+kind: DataConnectorLink
+version: v1
+definition:
+  name: countries
+  url:
+    readWriteUrls:
+      read:
+        valueFromEnv: COUNTRIES_COUNTRIES_READ_URL
+      write:
+        valueFromEnv: COUNTRIES_COUNTRIES_WRITE_URL
+  headers:
+    Authorization:
+      valueFromEnv: COUNTRIES_COUNTRIES_AUTHORIZATION_HEADER
+  schema:
+    version: v0.1
+    schema:
+      scalar_types:
+        Boolean:
+          aggregate_functions: {}
+          comparison_operators: {}
+        Float:
+          aggregate_functions: {}
+          comparison_operators: {}
+        ID:
+          aggregate_functions: {}
+          comparison_operators: {}
+        Int:
+          aggregate_functions: {}
+          comparison_operators: {}
+        String:
+          aggregate_functions: {}
+          comparison_operators: {}
+      object_types:
+        Continent:
+          fields:
+            code:
+              type:
+                type: named
+                name: ID
+            countries:
+              type:
+                type: array
+                element_type:
+                  type: named
+                  name: Country
+            name:
+              type:
+                type: named
+                name: String
+        ContinentFilterInput:
+          fields:
+            code:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: StringQueryOperatorInput
+        Country:
+          fields:
+            awsRegion:
+              type:
+                type: named
+                name: String
+            capital:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: String
+            code:
+              type:
+                type: named
+                name: ID
+            continent:
+              type:
+                type: named
+                name: Continent
+            currencies:
+              type:
+                type: array
+                element_type:
+                  type: named
+                  name: String
+            currency:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: String
+            emoji:
+              type:
+                type: named
+                name: String
+            emojiU:
+              type:
+                type: named
+                name: String
+            languages:
+              type:
+                type: array
+                element_type:
+                  type: named
+                  name: Language
+            name:
+              type:
+                type: named
+                name: String
+              arguments:
+                lang:
+                  type:
+                    type: nullable
+                    underlying_type:
+                      type: named
+                      name: String
+            native:
+              type:
+                type: named
+                name: String
+            phone:
+              type:
+                type: named
+                name: String
+            phones:
+              type:
+                type: array
+                element_type:
+                  type: named
+                  name: String
+            states:
+              type:
+                type: array
+                element_type:
+                  type: named
+                  name: State
+            subdivisions:
+              type:
+                type: array
+                element_type:
+                  type: named
+                  name: Subdivision
+        CountryFilterInput:
+          fields:
+            code:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: StringQueryOperatorInput
+            continent:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: StringQueryOperatorInput
+            currency:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: StringQueryOperatorInput
+            name:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: StringQueryOperatorInput
+        Language:
+          fields:
+            code:
+              type:
+                type: named
+                name: ID
+            name:
+              type:
+                type: named
+                name: String
+            native:
+              type:
+                type: named
+                name: String
+            rtl:
+              type:
+                type: named
+                name: Boolean
+        LanguageFilterInput:
+          fields:
+            code:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: StringQueryOperatorInput
+        State:
+          fields:
+            code:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: String
+            country:
+              type:
+                type: named
+                name: Country
+            name:
+              type:
+                type: named
+                name: String
+        StringQueryOperatorInput:
+          fields:
+            eq:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: String
+            in:
+              type:
+                type: nullable
+                underlying_type:
+                  type: array
+                  element_type:
+                    type: named
+                    name: String
+            ne:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: String
+            nin:
+              type:
+                type: nullable
+                underlying_type:
+                  type: array
+                  element_type:
+                    type: named
+                    name: String
+            regex:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: String
+        Subdivision:
+          fields:
+            code:
+              type:
+                type: named
+                name: ID
+            emoji:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: String
+            name:
+              type:
+                type: named
+                name: String
+      collections: []
+      functions:
+        - name: continent
+          arguments:
+            code:
+              type:
+                type: named
+                name: ID
+          result_type:
+            type: nullable
+            underlying_type:
+              type: named
+              name: Continent
+        - name: continents
+          arguments:
+            filter:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: ContinentFilterInput
+          result_type:
+            type: array
+            element_type:
+              type: named
+              name: Continent
+        - name: countries
+          arguments:
+            filter:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: CountryFilterInput
+          result_type:
+            type: array
+            element_type:
+              type: named
+              name: Country
+        - name: country
+          arguments:
+            code:
+              type:
+                type: named
+                name: ID
+          result_type:
+            type: nullable
+            underlying_type:
+              type: named
+              name: Country
+        - name: language
+          arguments:
+            code:
+              type:
+                type: named
+                name: ID
+          result_type:
+            type: nullable
+            underlying_type:
+              type: named
+              name: Language
+        - name: languages
+          arguments:
+            filter:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: LanguageFilterInput
+          result_type:
+            type: array
+            element_type:
+              type: named
+              name: Language
+      procedures: []
+    capabilities:
+      version: 0.1.4
+      capabilities:
+        query:
+          explain: {}
+          nested_fields: {}
+        mutation:
+          explain: {}
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: CountryFilterInput
+  fields:
+    - name: code
+      type: StringQueryOperatorInput
+    - name: continent
+      type: StringQueryOperatorInput
+    - name: currency
+      type: StringQueryOperatorInput
+    - name: name
+      type: StringQueryOperatorInput
+  graphql:
+    typeName: countries_CountryFilterInput
+    inputTypeName: countries_CountryFilterInput_input
+  dataConnectorTypeMapping:
+    - dataConnectorName: countries
+      dataConnectorObjectType: CountryFilterInput
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: CountryFilterInput
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - code
+          - continent
+          - currency
+          - name
+    - role: user
+      output:
+        allowedFields:
+          - code
+          - continent
+          - currency
+          - name
+    - role: anonymous
+      output:
+        allowedFields:
+          - code
+          - continent
+          - currency
+          - name
+
+---
+kind: Command
+version: v1
+definition:
+  name: countries
+  outputType: "[Country!]!"
+  arguments:
+    - name: filter
+      type: CountryFilterInput
+  source:
+    dataConnectorName: countries
+    dataConnectorCommand:
+      function: countries
+  graphql:
+    rootFieldName: countries
+    rootFieldKind: Query
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: countries
+  permissions:
+    - role: admin
+      allowExecution: true
+    - role: user
+      allowExecution: true
+    - role: anonymous
+      allowExecution: true

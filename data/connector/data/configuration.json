@@ -40,7 +40,7 @@
           "user_id": {
             "name": "user_id",
             "type": {
-              "scalarType": "uuid"
+              "scalarType": "int4"
             },
             "nullable": "nonNullable",
             "description": null
@@ -219,52 +219,12 @@
         "schemaName": "public",
         "tableName": "todo",
         "columns": {
-          "bit": {
-            "name": "bit",
-            "type": {
-              "scalarType": "bit"
-            },
-            "nullable": "nullable",
-            "description": null
-          },
-          "bpchar": {
-            "name": "bpchar",
-            "type": {
-              "scalarType": "bpchar"
-            },
-            "nullable": "nullable",
-            "description": null
-          },
           "completed": {
             "name": "completed",
             "type": {
               "scalarType": "bool"
             },
             "nullable": "nonNullable",
-            "description": null
-          },
-          "date": {
-            "name": "date",
-            "type": {
-              "scalarType": "date"
-            },
-            "nullable": "nullable",
-            "description": null
-          },
-          "float4": {
-            "name": "float4",
-            "type": {
-              "scalarType": "float8"
-            },
-            "nullable": "nullable",
-            "description": null
-          },
-          "float8": {
-            "name": "float8",
-            "type": {
-              "scalarType": "float8"
-            },
-            "nullable": "nullable",
             "description": null
           },
           "id": {
@@ -276,14 +236,6 @@
             "hasDefault": "hasDefault",
             "description": null
           },
-          "numeric": {
-            "name": "numeric",
-            "type": {
-              "scalarType": "numeric"
-            },
-            "nullable": "nullable",
-            "description": null
-          },
           "task": {
             "name": "task",
             "type": {
@@ -292,18 +244,10 @@
             "nullable": "nonNullable",
             "description": null
           },
-          "text": {
-            "name": "text",
-            "type": {
-              "scalarType": "text"
-            },
-            "nullable": "nullable",
-            "description": null
-          },
           "user_id": {
             "name": "user_id",
             "type": {
-              "scalarType": "uuid"
+              "scalarType": "int4"
             },
             "nullable": "nonNullable",
             "description": null
@@ -338,10 +282,18 @@
             "hasDefault": "hasDefault",
             "description": null
           },
+          "created_by": {
+            "name": "created_by",
+            "type": {
+              "scalarType": "int4"
+            },
+            "nullable": "nullable",
+            "description": null
+          },
           "id": {
             "name": "id",
             "type": {
-              "scalarType": "uuid"
+              "scalarType": "int4"
             },
             "nullable": "nonNullable",
             "hasDefault": "hasDefault",

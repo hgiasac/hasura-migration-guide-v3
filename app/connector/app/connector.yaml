@@ -1,0 +1,16 @@
+kind: Connector
+version: v2
+definition:
+  name: app
+  subgraph: app
+  source: hasura/nodejs:v1.6.0
+  context: .
+  envMapping:
+    HASURA_CONNECTOR_PORT:
+      fromEnv: APP_APP_HASURA_CONNECTOR_PORT
+    HASURA_SERVICE_TOKEN_SECRET:
+      fromEnv: APP_APP_HASURA_SERVICE_TOKEN_SECRET
+    OTEL_EXPORTER_OTLP_TRACES_ENDPOINT:
+      fromEnv: APP_APP_OTEL_EXPORTER_OTLP_TRACES_ENDPOINT
+    OTEL_SERVICE_NAME:
+      fromEnv: APP_APP_OTEL_SERVICE_NAME

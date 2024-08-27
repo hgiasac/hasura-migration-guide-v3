@@ -140,7 +140,7 @@ definition:
     dataConnectorCommand:
       procedure: v2_update_Genre_by_GenreId
   graphql:
-    rootFieldName: v2_update_Genre_by_GenreId
+    rootFieldName: update_Genre_by_GenreId
     rootFieldKind: Mutation
   description: Update any row on the 'Genre' collection using the 'GenreId' key
 
@@ -152,4 +152,3 @@ definition:
   permissions:
     - role: admin
       allowExecution: true
-

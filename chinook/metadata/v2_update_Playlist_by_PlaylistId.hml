@@ -140,7 +140,7 @@ definition:
     dataConnectorCommand:
       procedure: v2_update_Playlist_by_PlaylistId
   graphql:
-    rootFieldName: v2_update_Playlist_by_PlaylistId
+    rootFieldName: update_Playlist_by_PlaylistId
     rootFieldKind: Mutation
   description: Update any row on the 'Playlist' collection using the 'PlaylistId' key
 
@@ -152,4 +152,3 @@ definition:
   permissions:
     - role: admin
       allowExecution: true
-

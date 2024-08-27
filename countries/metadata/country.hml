@@ -1,0 +1,29 @@
+---
+kind: Command
+version: v1
+definition:
+  name: country
+  outputType: Country
+  arguments:
+    - name: code
+      type: ID!
+  source:
+    dataConnectorName: countries
+    dataConnectorCommand:
+      function: country
+  graphql:
+    rootFieldName: country
+    rootFieldKind: Query
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: country
+  permissions:
+    - role: admin
+      allowExecution: true
+    - role: user
+      allowExecution: true
+    - role: anonymous
+      allowExecution: true

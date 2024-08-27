@@ -364,7 +364,7 @@ definition:
     dataConnectorCommand:
       procedure: v2_update_Track_by_TrackId
   graphql:
-    rootFieldName: v2_update_Track_by_TrackId
+    rootFieldName: update_Track_by_TrackId
     rootFieldKind: Mutation
   description: Update any row on the 'Track' collection using the 'TrackId' key
 
@@ -376,4 +376,3 @@ definition:
   permissions:
     - role: admin
       allowExecution: true
-

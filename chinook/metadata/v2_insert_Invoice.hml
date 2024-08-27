@@ -97,7 +97,7 @@ definition:
     dataConnectorCommand:
       procedure: v2_insert_Invoice
   graphql:
-    rootFieldName: v2_insert_Invoice
+    rootFieldName: insert_Invoice
     rootFieldKind: Mutation
   description: Insert into the Invoice table
 
@@ -109,4 +109,3 @@ definition:
   permissions:
     - role: admin
       allowExecution: true
-

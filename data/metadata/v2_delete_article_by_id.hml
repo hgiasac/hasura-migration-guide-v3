@@ -47,7 +47,7 @@ definition:
     dataConnectorCommand:
       procedure: v2_delete_article_by_id
   graphql:
-    rootFieldName: v2_delete_article_by_id
+    rootFieldName: delete_article_by_id
     rootFieldKind: Mutation
   description: Delete any row on the 'article' collection using the 'id' key
 
@@ -59,4 +59,3 @@ definition:
   permissions:
     - role: admin
       allowExecution: true
-
