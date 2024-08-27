@@ -377,6 +377,20 @@ definition:
           - continent
           - currency
           - name
+    - role: user
+      output:
+        allowedFields:
+          - code
+          - continent
+          - currency
+          - name
+    - role: anonymous
+      output:
+        allowedFields:
+          - code
+          - continent
+          - currency
+          - name
 
 ---
 kind: Command
@@ -403,4 +417,7 @@ definition:
   permissions:
     - role: admin
       allowExecution: true
-
+    - role: user
+      allowExecution: true
+    - role: anonymous
+      allowExecution: true

@@ -35,6 +35,22 @@ definition:
           - ne
           - nin
           - regex
+    - role: user
+      output:
+        allowedFields:
+          - eq
+          - in
+          - ne
+          - nin
+          - regex
+    - role: anonymous
+      output:
+        allowedFields:
+          - eq
+          - in
+          - ne
+          - nin
+          - regex
 
 ---
 kind: ObjectType
@@ -58,6 +74,14 @@ definition:
   typeName: ContinentFilterInput
   permissions:
     - role: admin
+      output:
+        allowedFields:
+          - code
+    - role: user
+      output:
+        allowedFields:
+          - code
+    - role: anonymous
       output:
         allowedFields:
           - code
@@ -87,4 +111,7 @@ definition:
   permissions:
     - role: admin
       allowExecution: true
-
+    - role: user
+      allowExecution: true
+    - role: anonymous
+      allowExecution: true

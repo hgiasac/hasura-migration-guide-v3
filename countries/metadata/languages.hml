@@ -23,6 +23,14 @@ definition:
       output:
         allowedFields:
           - code
+    - role: user
+      output:
+        allowedFields:
+          - code
+    - role: anonymous
+      output:
+        allowedFields:
+          - code
 
 ---
 kind: Command
@@ -49,4 +57,7 @@ definition:
   permissions:
     - role: admin
       allowExecution: true
-
+    - role: user
+      allowExecution: true
+    - role: anonymous
+      allowExecution: true

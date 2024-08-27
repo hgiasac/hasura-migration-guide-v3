@@ -32,6 +32,20 @@ definition:
           - name
           - native
           - rtl
+    - role: user
+      output:
+        allowedFields:
+          - code
+          - name
+          - native
+          - rtl
+    - role: anonymous
+      output:
+        allowedFields:
+          - code
+          - name
+          - native
+          - rtl
 
 ---
 kind: ObjectType
@@ -64,6 +78,18 @@ definition:
           - code
           - country
           - name
+    - role: user
+      output:
+        allowedFields:
+          - code
+          - country
+          - name
+    - role: anonymous
+      output:
+        allowedFields:
+          - code
+          - country
+          - name
 
 ---
 kind: ObjectType
@@ -91,6 +117,18 @@ definition:
   typeName: Subdivision
   permissions:
     - role: admin
+      output:
+        allowedFields:
+          - code
+          - emoji
+          - name
+    - role: user
+      output:
+        allowedFields:
+          - code
+          - emoji
+          - name
+    - role: anonymous
       output:
         allowedFields:
           - code
@@ -164,6 +202,42 @@ definition:
           - phones
           - states
           - subdivisions
+    - role: user
+      output:
+        allowedFields:
+          - awsRegion
+          - capital
+          - code
+          - continent
+          - currencies
+          - currency
+          - emoji
+          - emojiU
+          - languages
+          - name
+          - native
+          - phone
+          - phones
+          - states
+          - subdivisions
+    - role: anonymous
+      output:
+        allowedFields:
+          - awsRegion
+          - capital
+          - code
+          - continent
+          - currencies
+          - currency
+          - emoji
+          - emojiU
+          - languages
+          - name
+          - native
+          - phone
+          - phones
+          - states
+          - subdivisions
 
 ---
 kind: ObjectType
@@ -196,6 +270,18 @@ definition:
           - code
           - countries
           - name
+    - role: user
+      output:
+        allowedFields:
+          - code
+          - countries
+          - name
+    - role: anonymous
+      output:
+        allowedFields:
+          - code
+          - countries
+          - name
 
 ---
 kind: Command
@@ -222,4 +308,7 @@ definition:
   permissions:
     - role: admin
       allowExecution: true
-
+    - role: user
+      allowExecution: true
+    - role: anonymous
+      allowExecution: true
