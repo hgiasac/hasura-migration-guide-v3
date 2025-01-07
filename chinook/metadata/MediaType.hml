@@ -28,24 +28,6 @@ definition:
           - Name
 
 ---
-kind: ObjectBooleanExpressionType
-version: v1
-definition:
-  name: MediaType_bool_exp
-  objectType: MediaType
-  dataConnectorName: chinook
-  dataConnectorObjectType: MediaType
-  comparableFields:
-    - fieldName: MediaTypeId
-      operators:
-        enableAll: true
-    - fieldName: Name
-      operators:
-        enableAll: true
-  graphql:
-    typeName: chinook_MediaType_bool_exp
-
----
 kind: Model
 version: v1
 definition:
@@ -65,11 +47,21 @@ definition:
   graphql:
     selectMany:
       queryRootField: MediaType
+      subscription:
+        rootField: MediaType
     selectUniques:
       - queryRootField: MediaType_by_MediaTypeId
         uniqueIdentifier:
           - MediaTypeId
+        subscription:
+          rootField: MediaType_by_MediaTypeId
     orderByExpressionType: chinook_MediaType_order_by
+    filterInputTypeName: chinook_MediaType_filter_input
+    aggregate:
+      queryRootField: MediaType_aggregate
+      subscription:
+        rootField: MediaType_aggregate
+  aggregateExpression: MediaType_agg_exp
 
 ---
 kind: ModelPermissions
@@ -80,6 +72,7 @@ definition:
     - role: admin
       select:
         filter: null
+        allowSubscriptions: true
 
 ---
 kind: Relationship
@@ -98,4 +91,43 @@ definition:
       target:
         modelField:
           - fieldName: MediaTypeId
+
+---
+kind: BooleanExpressionType
+version: v1
+definition:
+  name: MediaType_bool_exp
+  operand:
+    object:
+      type: MediaType
+      comparableFields:
+        - fieldName: MediaTypeId
+          booleanExpressionType: int4_bool_exp
+        - fieldName: Name
+          booleanExpressionType: varchar_bool_exp
+      comparableRelationships: []
+  logicalOperators:
+    enable: true
+  isNull:
+    enable: true
+  graphql:
+    typeName: chinook_MediaType_bool_exp
+
+---
+kind: AggregateExpression
+version: v1
+definition:
+  name: MediaType_agg_exp
+  operand:
+    object:
+      aggregatedType: MediaType
+      aggregatableFields:
+        - fieldName: MediaTypeId
+          aggregateExpression: int4_agg_exp
+        - fieldName: Name
+          aggregateExpression: varchar_agg_exp
+  count:
+    enable: true
+  graphql:
+    selectTypeName: chinook_MediaType_agg_exp
 

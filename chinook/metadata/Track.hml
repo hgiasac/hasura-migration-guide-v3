@@ -49,45 +49,6 @@ definition:
           - UnitPrice
 
 ---
-kind: ObjectBooleanExpressionType
-version: v1
-definition:
-  name: Track_bool_exp
-  objectType: Track
-  dataConnectorName: chinook
-  dataConnectorObjectType: Track
-  comparableFields:
-    - fieldName: AlbumId
-      operators:
-        enableAll: true
-    - fieldName: Bytes
-      operators:
-        enableAll: true
-    - fieldName: Composer
-      operators:
-        enableAll: true
-    - fieldName: GenreId
-      operators:
-        enableAll: true
-    - fieldName: MediaTypeId
-      operators:
-        enableAll: true
-    - fieldName: Milliseconds
-      operators:
-        enableAll: true
-    - fieldName: Name
-      operators:
-        enableAll: true
-    - fieldName: TrackId
-      operators:
-        enableAll: true
-    - fieldName: UnitPrice
-      operators:
-        enableAll: true
-  graphql:
-    typeName: chinook_Track_bool_exp
-
----
 kind: Model
 version: v1
 definition:
@@ -128,11 +89,21 @@ definition:
   graphql:
     selectMany:
       queryRootField: Track
+      subscription:
+        rootField: Track
     selectUniques:
       - queryRootField: Track_by_TrackId
         uniqueIdentifier:
           - TrackId
+        subscription:
+          rootField: Track_by_TrackId
     orderByExpressionType: chinook_Track_order_by
+    filterInputTypeName: chinook_Track_filter_input
+    aggregate:
+      queryRootField: Track_aggregate
+      subscription:
+        rootField: Track_aggregate
+  aggregateExpression: Track_agg_exp
 
 ---
 kind: ModelPermissions
@@ -143,6 +114,7 @@ definition:
     - role: admin
       select:
         filter: null
+        allowSubscriptions: true
 
 ---
 kind: Relationship
@@ -233,4 +205,71 @@ definition:
       target:
         modelField:
           - fieldName: MediaTypeId
+
+---
+kind: BooleanExpressionType
+version: v1
+definition:
+  name: Track_bool_exp
+  operand:
+    object:
+      type: Track
+      comparableFields:
+        - fieldName: AlbumId
+          booleanExpressionType: int4_bool_exp
+        - fieldName: Bytes
+          booleanExpressionType: int4_bool_exp
+        - fieldName: Composer
+          booleanExpressionType: varchar_bool_exp
+        - fieldName: GenreId
+          booleanExpressionType: int4_bool_exp
+        - fieldName: MediaTypeId
+          booleanExpressionType: int4_bool_exp
+        - fieldName: Milliseconds
+          booleanExpressionType: int4_bool_exp
+        - fieldName: Name
+          booleanExpressionType: varchar_bool_exp
+        - fieldName: TrackId
+          booleanExpressionType: int4_bool_exp
+        - fieldName: UnitPrice
+          booleanExpressionType: numeric_bool_exp
+      comparableRelationships: []
+  logicalOperators:
+    enable: true
+  isNull:
+    enable: true
+  graphql:
+    typeName: chinook_Track_bool_exp
+
+---
+kind: AggregateExpression
+version: v1
+definition:
+  name: Track_agg_exp
+  operand:
+    object:
+      aggregatedType: Track
+      aggregatableFields:
+        - fieldName: AlbumId
+          aggregateExpression: int4_agg_exp
+        - fieldName: Bytes
+          aggregateExpression: int4_agg_exp
+        - fieldName: Composer
+          aggregateExpression: varchar_agg_exp
+        - fieldName: GenreId
+          aggregateExpression: int4_agg_exp
+        - fieldName: MediaTypeId
+          aggregateExpression: int4_agg_exp
+        - fieldName: Milliseconds
+          aggregateExpression: int4_agg_exp
+        - fieldName: Name
+          aggregateExpression: varchar_agg_exp
+        - fieldName: TrackId
+          aggregateExpression: int4_agg_exp
+        - fieldName: UnitPrice
+          aggregateExpression: numeric_agg_exp
+  count:
+    enable: true
+  graphql:
+    selectTypeName: chinook_Track_agg_exp
 

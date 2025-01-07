@@ -3,7 +3,7 @@ version: v2
 definition:
   name: chinook
   subgraph: chinook
-  source: hasura/postgres:v1.1.1
+  source: hasura/postgres:v1.2.0
   context: .
   envMapping:
     CONNECTION_URI:

@@ -2,13 +2,11 @@ services:
   chinook_chinook:
     build:
       context: .
-      dockerfile_inline: |-
-        FROM ghcr.io/hasura/ndc-postgres:v1.1.1
-        COPY ./ /etc/connector
+      dockerfile: .hasura-connector/Dockerfile.chinook
     develop:
       watch:
-        - path: ./
-          action: sync+restart
+        - action: sync+restart
+          path: ./
           target: /etc/connector
     environment:
       CONNECTION_URI: $CHINOOK_CHINOOK_CONNECTION_URI
@@ -19,6 +17,6 @@ services:
       - local.hasura.dev=host-gateway
     ports:
       - mode: ingress
-        target: 8080
-        published: "8166"
         protocol: tcp
+        published: "8166"
+        target: 8080

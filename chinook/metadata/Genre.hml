@@ -28,24 +28,6 @@ definition:
           - Name
 
 ---
-kind: ObjectBooleanExpressionType
-version: v1
-definition:
-  name: Genre_bool_exp
-  objectType: Genre
-  dataConnectorName: chinook
-  dataConnectorObjectType: Genre
-  comparableFields:
-    - fieldName: GenreId
-      operators:
-        enableAll: true
-    - fieldName: Name
-      operators:
-        enableAll: true
-  graphql:
-    typeName: chinook_Genre_bool_exp
-
----
 kind: Model
 version: v1
 definition:
@@ -65,11 +47,21 @@ definition:
   graphql:
     selectMany:
       queryRootField: Genre
+      subscription:
+        rootField: Genre
     selectUniques:
       - queryRootField: Genre_by_GenreId
         uniqueIdentifier:
           - GenreId
+        subscription:
+          rootField: Genre_by_GenreId
     orderByExpressionType: chinook_Genre_order_by
+    filterInputTypeName: chinook_Genre_filter_input
+    aggregate:
+      queryRootField: Genre_aggregate
+      subscription:
+        rootField: Genre_aggregate
+  aggregateExpression: Genre_agg_exp
 
 ---
 kind: ModelPermissions
@@ -80,6 +72,7 @@ definition:
     - role: admin
       select:
         filter: null
+        allowSubscriptions: true
 
 ---
 kind: Relationship
@@ -98,4 +91,43 @@ definition:
       target:
         modelField:
           - fieldName: GenreId
+
+---
+kind: BooleanExpressionType
+version: v1
+definition:
+  name: Genre_bool_exp
+  operand:
+    object:
+      type: Genre
+      comparableFields:
+        - fieldName: GenreId
+          booleanExpressionType: int4_bool_exp
+        - fieldName: Name
+          booleanExpressionType: varchar_bool_exp
+      comparableRelationships: []
+  logicalOperators:
+    enable: true
+  isNull:
+    enable: true
+  graphql:
+    typeName: chinook_Genre_bool_exp
+
+---
+kind: AggregateExpression
+version: v1
+definition:
+  name: Genre_agg_exp
+  operand:
+    object:
+      aggregatedType: Genre
+      aggregatableFields:
+        - fieldName: GenreId
+          aggregateExpression: int4_agg_exp
+        - fieldName: Name
+          aggregateExpression: varchar_agg_exp
+  count:
+    enable: true
+  graphql:
+    selectTypeName: chinook_Genre_agg_exp
 

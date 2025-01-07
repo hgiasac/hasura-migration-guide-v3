@@ -34,30 +34,6 @@ definition:
           - user_id
 
 ---
-kind: ObjectBooleanExpressionType
-version: v1
-definition:
-  name: todo_bool_exp
-  objectType: todo
-  dataConnectorName: data
-  dataConnectorObjectType: todo
-  comparableFields:
-    - fieldName: completed
-      operators:
-        enableAll: true
-    - fieldName: id
-      operators:
-        enableAll: true
-    - fieldName: task
-      operators:
-        enableAll: true
-    - fieldName: user_id
-      operators:
-        enableAll: true
-  graphql:
-    typeName: todo_bool_exp
-
----
 kind: Model
 version: v1
 definition:
@@ -83,11 +59,21 @@ definition:
   graphql:
     selectMany:
       queryRootField: todo
+      subscription:
+        rootField: todo
     selectUniques:
       - queryRootField: todo_by_id
         uniqueIdentifier:
           - id
+        subscription:
+          rootField: todo_by_id
     orderByExpressionType: todo_order_by
+    filterInputTypeName: todo_filter_input
+    aggregate:
+      queryRootField: todo_aggregate
+      subscription:
+        rootField: todo_aggregate
+  aggregateExpression: todo_agg_exp
 
 ---
 kind: ModelPermissions
@@ -98,6 +84,7 @@ definition:
     - role: admin
       select:
         filter: null
+        allowSubscriptions: true
 
 ---
 kind: Relationship
@@ -116,4 +103,51 @@ definition:
       target:
         modelField:
           - fieldName: id
+
+---
+kind: BooleanExpressionType
+version: v1
+definition:
+  name: todo_bool_exp
+  operand:
+    object:
+      type: todo
+      comparableFields:
+        - fieldName: completed
+          booleanExpressionType: bool_bool_exp
+        - fieldName: id
+          booleanExpressionType: int4_bool_exp
+        - fieldName: task
+          booleanExpressionType: text_bool_exp
+        - fieldName: user_id
+          booleanExpressionType: int4_bool_exp
+      comparableRelationships: []
+  logicalOperators:
+    enable: true
+  isNull:
+    enable: true
+  graphql:
+    typeName: todo_bool_exp
+
+---
+kind: AggregateExpression
+version: v1
+definition:
+  name: todo_agg_exp
+  operand:
+    object:
+      aggregatedType: todo
+      aggregatableFields:
+        - fieldName: completed
+          aggregateExpression: bool_agg_exp
+        - fieldName: id
+          aggregateExpression: int4_agg_exp
+        - fieldName: task
+          aggregateExpression: text_agg_exp
+        - fieldName: user_id
+          aggregateExpression: int4_agg_exp
+  count:
+    enable: true
+  graphql:
+    selectTypeName: todo_agg_exp
 

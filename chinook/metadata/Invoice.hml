@@ -49,45 +49,6 @@ definition:
           - Total
 
 ---
-kind: ObjectBooleanExpressionType
-version: v1
-definition:
-  name: Invoice_bool_exp
-  objectType: Invoice
-  dataConnectorName: chinook
-  dataConnectorObjectType: Invoice
-  comparableFields:
-    - fieldName: BillingAddress
-      operators:
-        enableAll: true
-    - fieldName: BillingCity
-      operators:
-        enableAll: true
-    - fieldName: BillingCountry
-      operators:
-        enableAll: true
-    - fieldName: BillingPostalCode
-      operators:
-        enableAll: true
-    - fieldName: BillingState
-      operators:
-        enableAll: true
-    - fieldName: CustomerId
-      operators:
-        enableAll: true
-    - fieldName: InvoiceDate
-      operators:
-        enableAll: true
-    - fieldName: InvoiceId
-      operators:
-        enableAll: true
-    - fieldName: Total
-      operators:
-        enableAll: true
-  graphql:
-    typeName: chinook_Invoice_bool_exp
-
----
 kind: Model
 version: v1
 definition:
@@ -128,11 +89,21 @@ definition:
   graphql:
     selectMany:
       queryRootField: Invoice
+      subscription:
+        rootField: Invoice
     selectUniques:
       - queryRootField: Invoice_by_InvoiceId
         uniqueIdentifier:
           - InvoiceId
+        subscription:
+          rootField: Invoice_by_InvoiceId
     orderByExpressionType: chinook_Invoice_order_by
+    filterInputTypeName: chinook_Invoice_filter_input
+    aggregate:
+      queryRootField: Invoice_aggregate
+      subscription:
+        rootField: Invoice_aggregate
+  aggregateExpression: Invoice_agg_exp
 
 ---
 kind: ModelPermissions
@@ -143,6 +114,7 @@ definition:
     - role: admin
       select:
         filter: null
+        allowSubscriptions: true
 
 ---
 kind: Relationship
@@ -179,4 +151,71 @@ definition:
       target:
         modelField:
           - fieldName: InvoiceId
+
+---
+kind: BooleanExpressionType
+version: v1
+definition:
+  name: Invoice_bool_exp
+  operand:
+    object:
+      type: Invoice
+      comparableFields:
+        - fieldName: BillingAddress
+          booleanExpressionType: varchar_bool_exp
+        - fieldName: BillingCity
+          booleanExpressionType: varchar_bool_exp
+        - fieldName: BillingCountry
+          booleanExpressionType: varchar_bool_exp
+        - fieldName: BillingPostalCode
+          booleanExpressionType: varchar_bool_exp
+        - fieldName: BillingState
+          booleanExpressionType: varchar_bool_exp
+        - fieldName: CustomerId
+          booleanExpressionType: int4_bool_exp
+        - fieldName: InvoiceDate
+          booleanExpressionType: timestamp_bool_exp
+        - fieldName: InvoiceId
+          booleanExpressionType: int4_bool_exp
+        - fieldName: Total
+          booleanExpressionType: numeric_bool_exp
+      comparableRelationships: []
+  logicalOperators:
+    enable: true
+  isNull:
+    enable: true
+  graphql:
+    typeName: chinook_Invoice_bool_exp
+
+---
+kind: AggregateExpression
+version: v1
+definition:
+  name: Invoice_agg_exp
+  operand:
+    object:
+      aggregatedType: Invoice
+      aggregatableFields:
+        - fieldName: BillingAddress
+          aggregateExpression: varchar_agg_exp
+        - fieldName: BillingCity
+          aggregateExpression: varchar_agg_exp
+        - fieldName: BillingCountry
+          aggregateExpression: varchar_agg_exp
+        - fieldName: BillingPostalCode
+          aggregateExpression: varchar_agg_exp
+        - fieldName: BillingState
+          aggregateExpression: varchar_agg_exp
+        - fieldName: CustomerId
+          aggregateExpression: int4_agg_exp
+        - fieldName: InvoiceDate
+          aggregateExpression: timestamp_agg_exp
+        - fieldName: InvoiceId
+          aggregateExpression: int4_agg_exp
+        - fieldName: Total
+          aggregateExpression: numeric_agg_exp
+  count:
+    enable: true
+  graphql:
+    selectTypeName: chinook_Invoice_agg_exp
 

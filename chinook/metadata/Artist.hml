@@ -28,24 +28,6 @@ definition:
           - Name
 
 ---
-kind: ObjectBooleanExpressionType
-version: v1
-definition:
-  name: Artist_bool_exp
-  objectType: Artist
-  dataConnectorName: chinook
-  dataConnectorObjectType: Artist
-  comparableFields:
-    - fieldName: ArtistId
-      operators:
-        enableAll: true
-    - fieldName: Name
-      operators:
-        enableAll: true
-  graphql:
-    typeName: chinook_Artist_bool_exp
-
----
 kind: Model
 version: v1
 definition:
@@ -65,11 +47,21 @@ definition:
   graphql:
     selectMany:
       queryRootField: Artist
+      subscription:
+        rootField: Artist
     selectUniques:
       - queryRootField: Artist_by_ArtistId
         uniqueIdentifier:
           - ArtistId
+        subscription:
+          rootField: Artist_by_ArtistId
     orderByExpressionType: chinook_Artist_order_by
+    filterInputTypeName: chinook_Artist_filter_input
+    aggregate:
+      queryRootField: Artist_aggregate
+      subscription:
+        rootField: Artist_aggregate
+  aggregateExpression: Artist_agg_exp
 
 ---
 kind: ModelPermissions
@@ -80,6 +72,7 @@ definition:
     - role: admin
       select:
         filter: null
+        allowSubscriptions: true
 
 ---
 kind: Relationship
@@ -98,4 +91,43 @@ definition:
       target:
         modelField:
           - fieldName: ArtistId
+
+---
+kind: BooleanExpressionType
+version: v1
+definition:
+  name: Artist_bool_exp
+  operand:
+    object:
+      type: Artist
+      comparableFields:
+        - fieldName: ArtistId
+          booleanExpressionType: int4_bool_exp
+        - fieldName: Name
+          booleanExpressionType: varchar_bool_exp
+      comparableRelationships: []
+  logicalOperators:
+    enable: true
+  isNull:
+    enable: true
+  graphql:
+    typeName: chinook_Artist_bool_exp
+
+---
+kind: AggregateExpression
+version: v1
+definition:
+  name: Artist_agg_exp
+  operand:
+    object:
+      aggregatedType: Artist
+      aggregatableFields:
+        - fieldName: ArtistId
+          aggregateExpression: int4_agg_exp
+        - fieldName: Name
+          aggregateExpression: varchar_agg_exp
+  count:
+    enable: true
+  graphql:
+    selectTypeName: chinook_Artist_agg_exp
 

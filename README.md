@@ -944,4 +944,5 @@ Finally, build the supergraph and have fun.
 
 ```sh
 ddn supergraph build local
+ddn run docker-start
 ```

@@ -28,24 +28,6 @@ definition:
           - TrackId
 
 ---
-kind: ObjectBooleanExpressionType
-version: v1
-definition:
-  name: PlaylistTrack_bool_exp
-  objectType: PlaylistTrack
-  dataConnectorName: chinook
-  dataConnectorObjectType: PlaylistTrack
-  comparableFields:
-    - fieldName: PlaylistId
-      operators:
-        enableAll: true
-    - fieldName: TrackId
-      operators:
-        enableAll: true
-  graphql:
-    typeName: chinook_PlaylistTrack_bool_exp
-
----
 kind: Model
 version: v1
 definition:
@@ -65,12 +47,22 @@ definition:
   graphql:
     selectMany:
       queryRootField: PlaylistTrack
+      subscription:
+        rootField: PlaylistTrack
     selectUniques:
       - queryRootField: PlaylistTrack_by_PK_PlaylistTrack
         uniqueIdentifier:
           - PlaylistId
           - TrackId
+        subscription:
+          rootField: PlaylistTrack_by_PK_PlaylistTrack
     orderByExpressionType: chinook_PlaylistTrack_order_by
+    filterInputTypeName: chinook_PlaylistTrack_filter_input
+    aggregate:
+      queryRootField: PlaylistTrack_aggregate
+      subscription:
+        rootField: PlaylistTrack_aggregate
+  aggregateExpression: PlaylistTrack_agg_exp
 
 ---
 kind: ModelPermissions
@@ -81,6 +73,7 @@ definition:
     - role: admin
       select:
         filter: null
+        allowSubscriptions: true
 
 ---
 kind: Relationship
@@ -117,4 +110,43 @@ definition:
       target:
         modelField:
           - fieldName: TrackId
+
+---
+kind: BooleanExpressionType
+version: v1
+definition:
+  name: PlaylistTrack_bool_exp
+  operand:
+    object:
+      type: PlaylistTrack
+      comparableFields:
+        - fieldName: PlaylistId
+          booleanExpressionType: int4_bool_exp
+        - fieldName: TrackId
+          booleanExpressionType: int4_bool_exp
+      comparableRelationships: []
+  logicalOperators:
+    enable: true
+  isNull:
+    enable: true
+  graphql:
+    typeName: chinook_PlaylistTrack_bool_exp
+
+---
+kind: AggregateExpression
+version: v1
+definition:
+  name: PlaylistTrack_agg_exp
+  operand:
+    object:
+      aggregatedType: PlaylistTrack
+      aggregatableFields:
+        - fieldName: PlaylistId
+          aggregateExpression: int4_agg_exp
+        - fieldName: TrackId
+          aggregateExpression: int4_agg_exp
+  count:
+    enable: true
+  graphql:
+    selectTypeName: chinook_PlaylistTrack_agg_exp
 

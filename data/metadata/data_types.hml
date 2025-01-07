@@ -76,72 +76,6 @@ definition:
           - varchar
 
 ---
-kind: ObjectBooleanExpressionType
-version: v1
-definition:
-  name: data_types_bool_exp
-  objectType: data_types
-  dataConnectorName: data
-  dataConnectorObjectType: data_types
-  comparableFields:
-    - fieldName: bit
-      operators:
-        enableAll: true
-    - fieldName: bool
-      operators:
-        enableAll: true
-    - fieldName: bpchar
-      operators:
-        enableAll: true
-    - fieldName: char
-      operators:
-        enableAll: true
-    - fieldName: date
-      operators:
-        enableAll: true
-    - fieldName: float4
-      operators:
-        enableAll: true
-    - fieldName: float8
-      operators:
-        enableAll: true
-    - fieldName: int2
-      operators:
-        enableAll: true
-    - fieldName: int4
-      operators:
-        enableAll: true
-    - fieldName: int8
-      operators:
-        enableAll: true
-    - fieldName: numeric
-      operators:
-        enableAll: true
-    - fieldName: text
-      operators:
-        enableAll: true
-    - fieldName: time
-      operators:
-        enableAll: true
-    - fieldName: timestamp
-      operators:
-        enableAll: true
-    - fieldName: timestamptz
-      operators:
-        enableAll: true
-    - fieldName: timetz
-      operators:
-        enableAll: true
-    - fieldName: uuid
-      operators:
-        enableAll: true
-    - fieldName: varchar
-      operators:
-        enableAll: true
-  graphql:
-    typeName: data_types_bool_exp
-
----
 kind: Model
 version: v1
 definition:
@@ -209,8 +143,16 @@ definition:
   graphql:
     selectMany:
       queryRootField: data_types
+      subscription:
+        rootField: data_types
     selectUniques: []
     orderByExpressionType: data_types_order_by
+    filterInputTypeName: data_types_filter_input
+    aggregate:
+      queryRootField: data_types_aggregate
+      subscription:
+        rootField: data_types_aggregate
+  aggregateExpression: data_types_agg_exp
 
 ---
 kind: ModelPermissions
@@ -221,4 +163,108 @@ definition:
     - role: admin
       select:
         filter: null
+        allowSubscriptions: true
+
+---
+kind: BooleanExpressionType
+version: v1
+definition:
+  name: data_types_bool_exp
+  operand:
+    object:
+      type: data_types
+      comparableFields:
+        - fieldName: bit
+          booleanExpressionType: bit_bool_exp
+        - fieldName: bool
+          booleanExpressionType: bool_bool_exp
+        - fieldName: bpchar
+          booleanExpressionType: bpchar_bool_exp
+        - fieldName: char
+          booleanExpressionType: bpchar_bool_exp
+        - fieldName: date
+          booleanExpressionType: date_bool_exp
+        - fieldName: float4
+          booleanExpressionType: float4_bool_exp
+        - fieldName: float8
+          booleanExpressionType: float8_bool_exp
+        - fieldName: int2
+          booleanExpressionType: int2_bool_exp
+        - fieldName: int4
+          booleanExpressionType: int4_bool_exp
+        - fieldName: int8
+          booleanExpressionType: int8_bool_exp
+        - fieldName: numeric
+          booleanExpressionType: numeric_bool_exp
+        - fieldName: text
+          booleanExpressionType: text_bool_exp
+        - fieldName: time
+          booleanExpressionType: time_bool_exp
+        - fieldName: timestamp
+          booleanExpressionType: timestamp_bool_exp
+        - fieldName: timestamptz
+          booleanExpressionType: timestamptz_bool_exp
+        - fieldName: timetz
+          booleanExpressionType: timetz_bool_exp
+        - fieldName: uuid
+          booleanExpressionType: uuid_bool_exp
+        - fieldName: varchar
+          booleanExpressionType: varchar_bool_exp
+      comparableRelationships: []
+  logicalOperators:
+    enable: true
+  isNull:
+    enable: true
+  graphql:
+    typeName: data_types_bool_exp
+
+---
+kind: AggregateExpression
+version: v1
+definition:
+  name: data_types_agg_exp
+  operand:
+    object:
+      aggregatedType: data_types
+      aggregatableFields:
+        - fieldName: bit
+          aggregateExpression: bit_agg_exp
+        - fieldName: bool
+          aggregateExpression: bool_agg_exp
+        - fieldName: bpchar
+          aggregateExpression: bpchar_agg_exp
+        - fieldName: char
+          aggregateExpression: bpchar_agg_exp
+        - fieldName: date
+          aggregateExpression: date_agg_exp
+        - fieldName: float4
+          aggregateExpression: float4_agg_exp
+        - fieldName: float8
+          aggregateExpression: float8_agg_exp
+        - fieldName: int2
+          aggregateExpression: int2_agg_exp
+        - fieldName: int4
+          aggregateExpression: int4_agg_exp
+        - fieldName: int8
+          aggregateExpression: int8_agg_exp
+        - fieldName: numeric
+          aggregateExpression: numeric_agg_exp
+        - fieldName: text
+          aggregateExpression: text_agg_exp
+        - fieldName: time
+          aggregateExpression: time_agg_exp
+        - fieldName: timestamp
+          aggregateExpression: timestamp_agg_exp
+        - fieldName: timestamptz
+          aggregateExpression: timestamptz_agg_exp
+        - fieldName: timetz
+          aggregateExpression: timetz_agg_exp
+        - fieldName: uuid
+          aggregateExpression: uuid_agg_exp
+        - fieldName: varchar
+          aggregateExpression: varchar_agg_exp
+  count:
+    enable: true
+  graphql:
+    selectTypeName: data_types_agg_exp
 

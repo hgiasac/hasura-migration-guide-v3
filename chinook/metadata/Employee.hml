@@ -67,63 +67,6 @@ definition:
           - Title
 
 ---
-kind: ObjectBooleanExpressionType
-version: v1
-definition:
-  name: Employee_bool_exp
-  objectType: Employee
-  dataConnectorName: chinook
-  dataConnectorObjectType: Employee
-  comparableFields:
-    - fieldName: Address
-      operators:
-        enableAll: true
-    - fieldName: BirthDate
-      operators:
-        enableAll: true
-    - fieldName: City
-      operators:
-        enableAll: true
-    - fieldName: Country
-      operators:
-        enableAll: true
-    - fieldName: Email
-      operators:
-        enableAll: true
-    - fieldName: EmployeeId
-      operators:
-        enableAll: true
-    - fieldName: Fax
-      operators:
-        enableAll: true
-    - fieldName: FirstName
-      operators:
-        enableAll: true
-    - fieldName: HireDate
-      operators:
-        enableAll: true
-    - fieldName: LastName
-      operators:
-        enableAll: true
-    - fieldName: Phone
-      operators:
-        enableAll: true
-    - fieldName: PostalCode
-      operators:
-        enableAll: true
-    - fieldName: ReportsTo
-      operators:
-        enableAll: true
-    - fieldName: State
-      operators:
-        enableAll: true
-    - fieldName: Title
-      operators:
-        enableAll: true
-  graphql:
-    typeName: chinook_Employee_bool_exp
-
----
 kind: Model
 version: v1
 definition:
@@ -182,11 +125,21 @@ definition:
   graphql:
     selectMany:
       queryRootField: Employee
+      subscription:
+        rootField: Employee
     selectUniques:
       - queryRootField: Employee_by_EmployeeId
         uniqueIdentifier:
           - EmployeeId
+        subscription:
+          rootField: Employee_by_EmployeeId
     orderByExpressionType: chinook_Employee_order_by
+    filterInputTypeName: chinook_Employee_filter_input
+    aggregate:
+      queryRootField: Employee_aggregate
+      subscription:
+        rootField: Employee_aggregate
+  aggregateExpression: Employee_agg_exp
 
 ---
 kind: ModelPermissions
@@ -197,6 +150,7 @@ definition:
     - role: admin
       select:
         filter: null
+        allowSubscriptions: true
 
 ---
 kind: Relationship
@@ -251,4 +205,95 @@ definition:
       target:
         modelField:
           - fieldName: ReportsTo
+
+---
+kind: BooleanExpressionType
+version: v1
+definition:
+  name: Employee_bool_exp
+  operand:
+    object:
+      type: Employee
+      comparableFields:
+        - fieldName: Address
+          booleanExpressionType: varchar_bool_exp
+        - fieldName: BirthDate
+          booleanExpressionType: timestamp_bool_exp
+        - fieldName: City
+          booleanExpressionType: varchar_bool_exp
+        - fieldName: Country
+          booleanExpressionType: varchar_bool_exp
+        - fieldName: Email
+          booleanExpressionType: varchar_bool_exp
+        - fieldName: EmployeeId
+          booleanExpressionType: int4_bool_exp
+        - fieldName: Fax
+          booleanExpressionType: varchar_bool_exp
+        - fieldName: FirstName
+          booleanExpressionType: varchar_bool_exp
+        - fieldName: HireDate
+          booleanExpressionType: timestamp_bool_exp
+        - fieldName: LastName
+          booleanExpressionType: varchar_bool_exp
+        - fieldName: Phone
+          booleanExpressionType: varchar_bool_exp
+        - fieldName: PostalCode
+          booleanExpressionType: varchar_bool_exp
+        - fieldName: ReportsTo
+          booleanExpressionType: int4_bool_exp
+        - fieldName: State
+          booleanExpressionType: varchar_bool_exp
+        - fieldName: Title
+          booleanExpressionType: varchar_bool_exp
+      comparableRelationships: []
+  logicalOperators:
+    enable: true
+  isNull:
+    enable: true
+  graphql:
+    typeName: chinook_Employee_bool_exp
+
+---
+kind: AggregateExpression
+version: v1
+definition:
+  name: Employee_agg_exp
+  operand:
+    object:
+      aggregatedType: Employee
+      aggregatableFields:
+        - fieldName: Address
+          aggregateExpression: varchar_agg_exp
+        - fieldName: BirthDate
+          aggregateExpression: timestamp_agg_exp
+        - fieldName: City
+          aggregateExpression: varchar_agg_exp
+        - fieldName: Country
+          aggregateExpression: varchar_agg_exp
+        - fieldName: Email
+          aggregateExpression: varchar_agg_exp
+        - fieldName: EmployeeId
+          aggregateExpression: int4_agg_exp
+        - fieldName: Fax
+          aggregateExpression: varchar_agg_exp
+        - fieldName: FirstName
+          aggregateExpression: varchar_agg_exp
+        - fieldName: HireDate
+          aggregateExpression: timestamp_agg_exp
+        - fieldName: LastName
+          aggregateExpression: varchar_agg_exp
+        - fieldName: Phone
+          aggregateExpression: varchar_agg_exp
+        - fieldName: PostalCode
+          aggregateExpression: varchar_agg_exp
+        - fieldName: ReportsTo
+          aggregateExpression: int4_agg_exp
+        - fieldName: State
+          aggregateExpression: varchar_agg_exp
+        - fieldName: Title
+          aggregateExpression: varchar_agg_exp
+  count:
+    enable: true
+  graphql:
+    selectTypeName: chinook_Employee_agg_exp
 

@@ -3,7 +3,7 @@ version: v2
 definition:
   name: data
   subgraph: data
-  source: hasura/postgres:v1.1.0
+  source: hasura/postgres:v1.2.0
   context: .
   envMapping:
     CONNECTION_URI:

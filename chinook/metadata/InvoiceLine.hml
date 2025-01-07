@@ -37,33 +37,6 @@ definition:
           - UnitPrice
 
 ---
-kind: ObjectBooleanExpressionType
-version: v1
-definition:
-  name: InvoiceLine_bool_exp
-  objectType: InvoiceLine
-  dataConnectorName: chinook
-  dataConnectorObjectType: InvoiceLine
-  comparableFields:
-    - fieldName: InvoiceId
-      operators:
-        enableAll: true
-    - fieldName: InvoiceLineId
-      operators:
-        enableAll: true
-    - fieldName: Quantity
-      operators:
-        enableAll: true
-    - fieldName: TrackId
-      operators:
-        enableAll: true
-    - fieldName: UnitPrice
-      operators:
-        enableAll: true
-  graphql:
-    typeName: chinook_InvoiceLine_bool_exp
-
----
 kind: Model
 version: v1
 definition:
@@ -92,11 +65,21 @@ definition:
   graphql:
     selectMany:
       queryRootField: InvoiceLine
+      subscription:
+        rootField: InvoiceLine
     selectUniques:
       - queryRootField: InvoiceLine_by_InvoiceLineId
         uniqueIdentifier:
           - InvoiceLineId
+        subscription:
+          rootField: InvoiceLine_by_InvoiceLineId
     orderByExpressionType: chinook_InvoiceLine_order_by
+    filterInputTypeName: chinook_InvoiceLine_filter_input
+    aggregate:
+      queryRootField: InvoiceLine_aggregate
+      subscription:
+        rootField: InvoiceLine_aggregate
+  aggregateExpression: InvoiceLine_agg_exp
 
 ---
 kind: ModelPermissions
@@ -107,6 +90,7 @@ definition:
     - role: admin
       select:
         filter: null
+        allowSubscriptions: true
 
 ---
 kind: Relationship
@@ -143,4 +127,55 @@ definition:
       target:
         modelField:
           - fieldName: TrackId
+
+---
+kind: BooleanExpressionType
+version: v1
+definition:
+  name: InvoiceLine_bool_exp
+  operand:
+    object:
+      type: InvoiceLine
+      comparableFields:
+        - fieldName: InvoiceId
+          booleanExpressionType: int4_bool_exp
+        - fieldName: InvoiceLineId
+          booleanExpressionType: int4_bool_exp
+        - fieldName: Quantity
+          booleanExpressionType: int4_bool_exp
+        - fieldName: TrackId
+          booleanExpressionType: int4_bool_exp
+        - fieldName: UnitPrice
+          booleanExpressionType: numeric_bool_exp
+      comparableRelationships: []
+  logicalOperators:
+    enable: true
+  isNull:
+    enable: true
+  graphql:
+    typeName: chinook_InvoiceLine_bool_exp
+
+---
+kind: AggregateExpression
+version: v1
+definition:
+  name: InvoiceLine_agg_exp
+  operand:
+    object:
+      aggregatedType: InvoiceLine
+      aggregatableFields:
+        - fieldName: InvoiceId
+          aggregateExpression: int4_agg_exp
+        - fieldName: InvoiceLineId
+          aggregateExpression: int4_agg_exp
+        - fieldName: Quantity
+          aggregateExpression: int4_agg_exp
+        - fieldName: TrackId
+          aggregateExpression: int4_agg_exp
+        - fieldName: UnitPrice
+          aggregateExpression: numeric_agg_exp
+  count:
+    enable: true
+  graphql:
+    selectTypeName: chinook_InvoiceLine_agg_exp
 

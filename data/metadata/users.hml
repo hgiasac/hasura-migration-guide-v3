@@ -34,30 +34,6 @@ definition:
           - name
 
 ---
-kind: ObjectBooleanExpressionType
-version: v1
-definition:
-  name: users_bool_exp
-  objectType: users
-  dataConnectorName: data
-  dataConnectorObjectType: users
-  comparableFields:
-    - fieldName: created_at
-      operators:
-        enableAll: true
-    - fieldName: created_by
-      operators:
-        enableAll: true
-    - fieldName: id
-      operators:
-        enableAll: true
-    - fieldName: name
-      operators:
-        enableAll: true
-  graphql:
-    typeName: users_bool_exp
-
----
 kind: Model
 version: v1
 definition:
@@ -83,11 +59,21 @@ definition:
   graphql:
     selectMany:
       queryRootField: users
+      subscription:
+        rootField: users
     selectUniques:
       - queryRootField: users_by_id
         uniqueIdentifier:
           - id
+        subscription:
+          rootField: users_by_id
     orderByExpressionType: users_order_by
+    filterInputTypeName: users_filter_input
+    aggregate:
+      queryRootField: users_aggregate
+      subscription:
+        rootField: users_aggregate
+  aggregateExpression: users_agg_exp
 
 ---
 kind: ModelPermissions
@@ -98,6 +84,7 @@ definition:
     - role: admin
       select:
         filter: null
+        allowSubscriptions: true
     - role: user
       select:
         filter:
@@ -161,3 +148,51 @@ definition:
       target:
         modelField:
           - fieldName: AlbumId
+
+---
+kind: BooleanExpressionType
+version: v1
+definition:
+  name: users_bool_exp
+  operand:
+    object:
+      type: users
+      comparableFields:
+        - fieldName: created_at
+          booleanExpressionType: timestamptz_bool_exp
+        - fieldName: created_by
+          booleanExpressionType: int4_bool_exp
+        - fieldName: id
+          booleanExpressionType: int4_bool_exp
+        - fieldName: name
+          booleanExpressionType: text_bool_exp
+      comparableRelationships: []
+  logicalOperators:
+    enable: true
+  isNull:
+    enable: true
+  graphql:
+    typeName: users_bool_exp
+
+---
+kind: AggregateExpression
+version: v1
+definition:
+  name: users_agg_exp
+  operand:
+    object:
+      aggregatedType: users
+      aggregatableFields:
+        - fieldName: created_at
+          aggregateExpression: timestamptz_agg_exp
+        - fieldName: created_by
+          aggregateExpression: int4_agg_exp
+        - fieldName: id
+          aggregateExpression: int4_agg_exp
+        - fieldName: name
+          aggregateExpression: text_agg_exp
+  count:
+    enable: true
+  graphql:
+    selectTypeName: users_agg_exp
+

@@ -37,27 +37,6 @@ definition:
           - user_id
 
 ---
-kind: ObjectBooleanExpressionType
-version: v1
-definition:
-  name: article_bool_exp
-  objectType: article
-  dataConnectorName: data
-  dataConnectorObjectType: article
-  comparableFields:
-    - fieldName: id
-      operators:
-        enableAll: true
-    - fieldName: title
-      operators:
-        enableAll: true
-    - fieldName: user_id
-      operators:
-        enableAll: true
-  graphql:
-    typeName: article_bool_exp
-
----
 kind: Model
 version: v1
 definition:
@@ -80,11 +59,21 @@ definition:
   graphql:
     selectMany:
       queryRootField: article
+      subscription:
+        rootField: article
     selectUniques:
       - queryRootField: article_by_id
         uniqueIdentifier:
           - id
+        subscription:
+          rootField: article_by_id
     orderByExpressionType: article_order_by
+    filterInputTypeName: article_filter_input
+    aggregate:
+      queryRootField: article_aggregate
+      subscription:
+        rootField: article_aggregate
+  aggregateExpression: article_agg_exp
 
 ---
 kind: ModelPermissions
@@ -95,6 +84,7 @@ definition:
     - role: admin
       select:
         filter: null
+        allowSubscriptions: true
     - role: user
       select:
         filter:
@@ -121,3 +111,47 @@ definition:
       target:
         modelField:
           - fieldName: id
+
+---
+kind: BooleanExpressionType
+version: v1
+definition:
+  name: article_bool_exp
+  operand:
+    object:
+      type: article
+      comparableFields:
+        - fieldName: id
+          booleanExpressionType: int4_bool_exp
+        - fieldName: title
+          booleanExpressionType: text_bool_exp
+        - fieldName: user_id
+          booleanExpressionType: int4_bool_exp
+      comparableRelationships: []
+  logicalOperators:
+    enable: true
+  isNull:
+    enable: true
+  graphql:
+    typeName: article_bool_exp
+
+---
+kind: AggregateExpression
+version: v1
+definition:
+  name: article_agg_exp
+  operand:
+    object:
+      aggregatedType: article
+      aggregatableFields:
+        - fieldName: id
+          aggregateExpression: int4_agg_exp
+        - fieldName: title
+          aggregateExpression: text_agg_exp
+        - fieldName: user_id
+          aggregateExpression: int4_agg_exp
+  count:
+    enable: true
+  graphql:
+    selectTypeName: article_agg_exp
+

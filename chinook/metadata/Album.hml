@@ -31,27 +31,6 @@ definition:
           - Title
 
 ---
-kind: ObjectBooleanExpressionType
-version: v1
-definition:
-  name: Album_bool_exp
-  objectType: Album
-  dataConnectorName: chinook
-  dataConnectorObjectType: Album
-  comparableFields:
-    - fieldName: AlbumId
-      operators:
-        enableAll: true
-    - fieldName: ArtistId
-      operators:
-        enableAll: true
-    - fieldName: Title
-      operators:
-        enableAll: true
-  graphql:
-    typeName: chinook_Album_bool_exp
-
----
 kind: Model
 version: v1
 definition:
@@ -74,11 +53,21 @@ definition:
   graphql:
     selectMany:
       queryRootField: Album
+      subscription:
+        rootField: Album
     selectUniques:
       - queryRootField: Album_by_AlbumId
         uniqueIdentifier:
           - AlbumId
+        subscription:
+          rootField: Album_by_AlbumId
     orderByExpressionType: chinook_Album_order_by
+    filterInputTypeName: chinook_Album_filter_input
+    aggregate:
+      queryRootField: Album_aggregate
+      subscription:
+        rootField: Album_aggregate
+  aggregateExpression: Album_agg_exp
 
 ---
 kind: ModelPermissions
@@ -89,6 +78,7 @@ definition:
     - role: admin
       select:
         filter: null
+        allowSubscriptions: true
 
 ---
 kind: Relationship
@@ -125,4 +115,47 @@ definition:
       target:
         modelField:
           - fieldName: AlbumId
+
+---
+kind: BooleanExpressionType
+version: v1
+definition:
+  name: Album_bool_exp
+  operand:
+    object:
+      type: Album
+      comparableFields:
+        - fieldName: AlbumId
+          booleanExpressionType: int4_bool_exp
+        - fieldName: ArtistId
+          booleanExpressionType: int4_bool_exp
+        - fieldName: Title
+          booleanExpressionType: varchar_bool_exp
+      comparableRelationships: []
+  logicalOperators:
+    enable: true
+  isNull:
+    enable: true
+  graphql:
+    typeName: chinook_Album_bool_exp
+
+---
+kind: AggregateExpression
+version: v1
+definition:
+  name: Album_agg_exp
+  operand:
+    object:
+      aggregatedType: Album
+      aggregatableFields:
+        - fieldName: AlbumId
+          aggregateExpression: int4_agg_exp
+        - fieldName: ArtistId
+          aggregateExpression: int4_agg_exp
+        - fieldName: Title
+          aggregateExpression: varchar_agg_exp
+  count:
+    enable: true
+  graphql:
+    selectTypeName: chinook_Album_agg_exp
 

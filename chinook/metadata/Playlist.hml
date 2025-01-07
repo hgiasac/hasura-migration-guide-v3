@@ -28,24 +28,6 @@ definition:
           - PlaylistId
 
 ---
-kind: ObjectBooleanExpressionType
-version: v1
-definition:
-  name: Playlist_bool_exp
-  objectType: Playlist
-  dataConnectorName: chinook
-  dataConnectorObjectType: Playlist
-  comparableFields:
-    - fieldName: Name
-      operators:
-        enableAll: true
-    - fieldName: PlaylistId
-      operators:
-        enableAll: true
-  graphql:
-    typeName: chinook_Playlist_bool_exp
-
----
 kind: Model
 version: v1
 definition:
@@ -65,11 +47,21 @@ definition:
   graphql:
     selectMany:
       queryRootField: Playlist
+      subscription:
+        rootField: Playlist
     selectUniques:
       - queryRootField: Playlist_by_PlaylistId
         uniqueIdentifier:
           - PlaylistId
+        subscription:
+          rootField: Playlist_by_PlaylistId
     orderByExpressionType: chinook_Playlist_order_by
+    filterInputTypeName: chinook_Playlist_filter_input
+    aggregate:
+      queryRootField: Playlist_aggregate
+      subscription:
+        rootField: Playlist_aggregate
+  aggregateExpression: Playlist_agg_exp
 
 ---
 kind: ModelPermissions
@@ -80,6 +72,7 @@ definition:
     - role: admin
       select:
         filter: null
+        allowSubscriptions: true
 
 ---
 kind: Relationship
@@ -98,4 +91,43 @@ definition:
       target:
         modelField:
           - fieldName: PlaylistId
+
+---
+kind: BooleanExpressionType
+version: v1
+definition:
+  name: Playlist_bool_exp
+  operand:
+    object:
+      type: Playlist
+      comparableFields:
+        - fieldName: Name
+          booleanExpressionType: varchar_bool_exp
+        - fieldName: PlaylistId
+          booleanExpressionType: int4_bool_exp
+      comparableRelationships: []
+  logicalOperators:
+    enable: true
+  isNull:
+    enable: true
+  graphql:
+    typeName: chinook_Playlist_bool_exp
+
+---
+kind: AggregateExpression
+version: v1
+definition:
+  name: Playlist_agg_exp
+  operand:
+    object:
+      aggregatedType: Playlist
+      aggregatableFields:
+        - fieldName: Name
+          aggregateExpression: varchar_agg_exp
+        - fieldName: PlaylistId
+          aggregateExpression: int4_agg_exp
+  count:
+    enable: true
+  graphql:
+    selectTypeName: chinook_Playlist_agg_exp
 

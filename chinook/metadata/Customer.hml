@@ -61,57 +61,6 @@ definition:
           - SupportRepId
 
 ---
-kind: ObjectBooleanExpressionType
-version: v1
-definition:
-  name: Customer_bool_exp
-  objectType: Customer
-  dataConnectorName: chinook
-  dataConnectorObjectType: Customer
-  comparableFields:
-    - fieldName: Address
-      operators:
-        enableAll: true
-    - fieldName: City
-      operators:
-        enableAll: true
-    - fieldName: Company
-      operators:
-        enableAll: true
-    - fieldName: Country
-      operators:
-        enableAll: true
-    - fieldName: CustomerId
-      operators:
-        enableAll: true
-    - fieldName: Email
-      operators:
-        enableAll: true
-    - fieldName: Fax
-      operators:
-        enableAll: true
-    - fieldName: FirstName
-      operators:
-        enableAll: true
-    - fieldName: LastName
-      operators:
-        enableAll: true
-    - fieldName: Phone
-      operators:
-        enableAll: true
-    - fieldName: PostalCode
-      operators:
-        enableAll: true
-    - fieldName: State
-      operators:
-        enableAll: true
-    - fieldName: SupportRepId
-      operators:
-        enableAll: true
-  graphql:
-    typeName: chinook_Customer_bool_exp
-
----
 kind: Model
 version: v1
 definition:
@@ -164,11 +113,21 @@ definition:
   graphql:
     selectMany:
       queryRootField: Customer
+      subscription:
+        rootField: Customer
     selectUniques:
       - queryRootField: Customer_by_CustomerId
         uniqueIdentifier:
           - CustomerId
+        subscription:
+          rootField: Customer_by_CustomerId
     orderByExpressionType: chinook_Customer_order_by
+    filterInputTypeName: chinook_Customer_filter_input
+    aggregate:
+      queryRootField: Customer_aggregate
+      subscription:
+        rootField: Customer_aggregate
+  aggregateExpression: Customer_agg_exp
 
 ---
 kind: ModelPermissions
@@ -179,6 +138,7 @@ definition:
     - role: admin
       select:
         filter: null
+        allowSubscriptions: true
 
 ---
 kind: Relationship
@@ -215,4 +175,87 @@ definition:
       target:
         modelField:
           - fieldName: CustomerId
+
+---
+kind: BooleanExpressionType
+version: v1
+definition:
+  name: Customer_bool_exp
+  operand:
+    object:
+      type: Customer
+      comparableFields:
+        - fieldName: Address
+          booleanExpressionType: varchar_bool_exp
+        - fieldName: City
+          booleanExpressionType: varchar_bool_exp
+        - fieldName: Company
+          booleanExpressionType: varchar_bool_exp
+        - fieldName: Country
+          booleanExpressionType: varchar_bool_exp
+        - fieldName: CustomerId
+          booleanExpressionType: int4_bool_exp
+        - fieldName: Email
+          booleanExpressionType: varchar_bool_exp
+        - fieldName: Fax
+          booleanExpressionType: varchar_bool_exp
+        - fieldName: FirstName
+          booleanExpressionType: varchar_bool_exp
+        - fieldName: LastName
+          booleanExpressionType: varchar_bool_exp
+        - fieldName: Phone
+          booleanExpressionType: varchar_bool_exp
+        - fieldName: PostalCode
+          booleanExpressionType: varchar_bool_exp
+        - fieldName: State
+          booleanExpressionType: varchar_bool_exp
+        - fieldName: SupportRepId
+          booleanExpressionType: int4_bool_exp
+      comparableRelationships: []
+  logicalOperators:
+    enable: true
+  isNull:
+    enable: true
+  graphql:
+    typeName: chinook_Customer_bool_exp
+
+---
+kind: AggregateExpression
+version: v1
+definition:
+  name: Customer_agg_exp
+  operand:
+    object:
+      aggregatedType: Customer
+      aggregatableFields:
+        - fieldName: Address
+          aggregateExpression: varchar_agg_exp
+        - fieldName: City
+          aggregateExpression: varchar_agg_exp
+        - fieldName: Company
+          aggregateExpression: varchar_agg_exp
+        - fieldName: Country
+          aggregateExpression: varchar_agg_exp
+        - fieldName: CustomerId
+          aggregateExpression: int4_agg_exp
+        - fieldName: Email
+          aggregateExpression: varchar_agg_exp
+        - fieldName: Fax
+          aggregateExpression: varchar_agg_exp
+        - fieldName: FirstName
+          aggregateExpression: varchar_agg_exp
+        - fieldName: LastName
+          aggregateExpression: varchar_agg_exp
+        - fieldName: Phone
+          aggregateExpression: varchar_agg_exp
+        - fieldName: PostalCode
+          aggregateExpression: varchar_agg_exp
+        - fieldName: State
+          aggregateExpression: varchar_agg_exp
+        - fieldName: SupportRepId
+          aggregateExpression: int4_agg_exp
+  count:
+    enable: true
+  graphql:
+    selectTypeName: chinook_Customer_agg_exp
 
