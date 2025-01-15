@@ -938,7 +938,7 @@ definition:
 ddn connector introspect countries --subgraph ./countries/subgraph.yaml --add-all-resources
 ```
 
-Permissions and relationship have many improvements in Hasura v3 thanks to [Open DDS](https://github.com/hasura/open-data-domain-specification) specification. The configuration is similar to other connectors ([example](./countries/metadata/Countries.hml)).
+Permissions and relationships have many improvements in Hasura v3 thanks to [Open DDS](https://github.com/hasura/open-data-domain-specification) specification. The configuration is similar to other connectors ([example](./countries/metadata/Countries.hml)).
 
 Finally, build the supergraph and have fun.
 
@@ -946,3 +946,12 @@ Finally, build the supergraph and have fun.
 ddn supergraph build local
 ddn run docker-start
 ```
+
+### Observability
+
+In the microservices architecture, troubleshooting issues across services are very complicated. A distributed tracing observability system is recommended nowadays to monitor the performance and reliability of the backend. 
+
+In Hasura DDN, every component exports traces to a centralized OpenTelemetry Collector before sending them to external observability services. The OpenTelemetry Collector helps us authorize, transform data to a compatible format as well as export to multiple services at once. The default boilerplate is configured to send traces to Hasura DDN. The Hasura Cloud platform gives you 15 minutes of free metrics data for development (require login to DDN CLI to get the personal access token). You can export trace data to other services as well.
+
+![Observability](https://github.com/user-attachments/assets/52a098d8-45a6-4038-9d07-0e69f188e17a)
+
